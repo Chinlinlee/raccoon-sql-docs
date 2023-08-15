@@ -37,7 +37,7 @@
 - 官方概略定義: [STOW-RS](https://www.dicomstandard.org/using/dicomweb/store-stow-rs)
 - 官方詳細定義: [Store Transaction](https://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_10.5)
 
-:::important[Important title]
+:::important[注意事項]
 STOW-RS 使用的 headers.Content-Type 必須為 multipart/related，而非 multipart/form-data。
 
 **Raccoon 目前使用 `multipart/*` 進行過濾，沒有嚴謹依照此規則，所以可用 multipart/form-data 上傳**
@@ -85,7 +85,7 @@ Ym9keSBvZiB0aGUgbWVzc2FnZS48L3A+CiAgPC9ib2R5Pgo8L2h0bWw+Cg==
 
 ### WADO-RS: 調閱影像
 
-:::important[Important title]
+:::important[注意事項]
 WADO-RS 回傳資料的 headers.Content-Type 為 multipart/related，必須自行解析，可參照 [dcmjs/src/utilities/Message.js](https://github.com/dcmjs-org/dcmjs/blob/f844e025f86055a918c13269f6d762a711f3a4bf/src/utilities/Message.js#L164)
 :::
 
