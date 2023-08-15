@@ -8,9 +8,25 @@ const config = defineConfig({
       theme: defaultTheme({
         navbar: [
           // Add your navbar configs here
+          {
+            "title": "Guide",
+            "to": "/guide/developer/foundation/"
+          }
         ],
         sidebar: {
           // Add your sidebar configs here
+          "/guide/": [
+            {
+              title: "開發人員",
+              collapsible: true,
+              items: [
+                {
+                  title: "基礎觀念",
+                  to: "/guide/developer/foundation/"
+                }
+              ]
+            }
+          ]
         },
         github: 'https://github.com/Chinlinlee/raccoon-dicom',
         logo: '/raccoon.png',
