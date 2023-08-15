@@ -23,6 +23,14 @@ const config = defineConfig({
                 {
                   title: "基礎觀念",
                   to: "/guide/developer/foundation/"
+                },
+                {
+                  title: "影像處理相關",
+                  to: "/guide/developer/image-processing/"
+                },
+                {
+                  title: "node-java-bridge",
+                  to: "/guide/developer/node-java-bridge/"
                 }
               ]
             }
