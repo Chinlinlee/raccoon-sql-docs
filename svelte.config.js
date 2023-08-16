@@ -11,6 +11,9 @@ const config = {
     adapter: adapter({
       pages: 'dist',
     }),
+    alias: {
+      $components: "src/components"
+    }
   },
 }
 
