@@ -31,6 +31,10 @@ const config = defineConfig({
                 {
                   title: "node-java-bridge",
                   to: "/guide/developer/node-java-bridge/"
+                },
+                {
+                  title: "Mongoose Schema",
+                  to: "/guide/developer/mongoose-schema/"
                 }
               ]
             }
