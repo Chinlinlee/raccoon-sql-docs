@@ -141,3 +141,67 @@ chore：其他，並且也不會修改原始碼或是測試，例如：storybook
     - 其中 x 為主要版本，通常有大更新 (breaking change) 時才會修改 x
     - y 為次要版本，通常有小更新 (feature) 時才會修改 y
     - z 為 patch 版本，通常有 bug fix 時才會修改 z
+
+## Coding Style
+- **不使用 var ，請使用 let 或 const**
+- **不使用 var ，請使用 let 或 const**
+- **不使用 var ，請使用 let 或 const**
+- 最後面一定要有`分號;`結尾
+- 縮排為 4 個空白 (indent: 4 space)
+- 字串以`雙引號""`為主
+- 若可以，非常建議寫 jsdoc
+### 變數命名
+- 請使用英文小寫開頭 (`localCamelCase`) 後續以大寫英文連接，e.g. `user`, `item`, `foo`, `bar`, `getUser`
+
+### Class
+- Class, Interface, typedef 請使用英文大寫開頭 (`UpperCamelCase`)
+
+### Methods / Functions
+- 函式的寫法請使用英文小寫開頭 (`localCamelCase`)，`@private` 的函式必須以底線`_`結尾，e.g. `stop_()`
+- 函式都必須是以動詞(動作)作為命名方式，e.g. `sendMessage` 和 `stop_`
+- Getter 和 Setter 請用這種方式命名 getItem (可能也會是用於 boolean 值的 isItem 或 hasItem)，以及用於 Setter 的 setItem 
+
+### 大括號
+- if, for 的大括號請與 if, for 同一行
+
+:::warning[不建議]
+```js
+if(flag) 
+{
+    //...
+}
+
+for(let i = 0 ; i < 10 ; i++)
+{
+    //...
+}
+```
+:::
+
+:::tip[建議]
+
+```js
+if(flag) {
+    //...
+}
+
+for(let i = 0 ; i < 10 ; i++) {
+    //...
+}
+```
+:::
+
+### 變數名稱連接法
+:::note
+以下參考用，目前 Raccoon，通常沒使用此命名法
+:::
+- 你可能聽過 IPv6, iOS, DICOM, FHIR，在這裡建議你使用第一個單字大寫後面小寫當作單一單詞的方式來命名
+- 除非遇到原先定義在其他程式碼或較多命名如: UID 等，就請自行決定要命名為 UID 或 Uid
+- 以下是一些範例
+
+Prose form | 正確 | 錯誤
+---------|----------|---------|
+ "XML HTTP request" | XmlHttpRequest | XMLHTTPRequest
+ "new customer ID" | newCustomerId | newCustomerID |
+ "inner stopwatch" | supportsIpv6OnIos | supportsIPv6OnIOS|
+ "YouTube importer" | YouTubeImporter| YoutubeImporter
