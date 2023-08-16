@@ -35,6 +35,10 @@ const config = defineConfig({
                 {
                   title: "Mongoose Schema",
                   to: "/guide/developer/mongoose-schema/"
+                },
+                {
+                  title: "相依專案",
+                  to: "/guide/developer/deps-projects/"
                 }
               ]
             }
