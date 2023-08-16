@@ -19,9 +19,9 @@
     - `DICOM`: 放置 DICOM 資料處理的地方，裡面關係到資料庫處理的主要資料庫為 MongoDB
         - `dcm4che`: 放置 dcm4che 相關以及 node-java-bridge 程式碼的地方
         - `dcmtk`: 目前已棄用
-- `FHIR`: 放置 DICOM 轉 FHIR 相關操作的資料夾
-- `magick`: 放置使用 imagemagick 執行影像處理的資料夾
-- `mongodb`: 放置 mongodb 資料庫連接、基礎 schema 定義、主要 schema 定義以及相關操作的資料夾
+    - `FHIR`: 放置 DICOM 轉 FHIR 相關操作的資料夾
+    - `magick`: 放置使用 imagemagick 執行影像處理的資料夾
+    - `mongodb`: 放置 mongodb 資料庫連接、基礎 schema 定義、主要 schema 定義以及相關操作的資料夾
 - `plugins`: 放置插件的資料夾
 - `services`: 放置全局服務的資料夾 (目前無使用)
 - `tempUploadFiles`: 執行上傳時，暫存上傳檔案的資料夾
