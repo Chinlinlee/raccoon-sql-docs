@@ -98,6 +98,22 @@ WADO-RS 回傳資料的 headers.Content-Type 為 multipart/related，必須自�
 
 - 官方詳細定義: [Retrieve DICOM Instance Transaction](https://dicom.nema.org/medical/dicom/current/output/html/part18.html#sect_9.4)
 
+## Controller 流程
+- 在使用 Raccoon 的 Web API 時，會進到 controller 進行相關操作，而 controller 有 3 個主要流程會執行，如下圖
+<figure>
+    <img src="/foundation/controller-flow.png" class="rounded-t h-72 w-full object-scale-down">
+    <figcaption>
+        <p
+            class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">
+            Controller 流程圖
+        </p>
+    </figcaption>
+</figure>
+
+- Pre Process: 會執行 plugins 內 enable 以及 before 被設為 true 且 route path 符合的 plugin
+- Main Process: 會執行此 route 的主要邏輯操作
+- Post Process: 會執行 plugins 內 enable 以及 after 被設為 true 且 route path 符合的 plugin (無 await)
+
 ## Git message 規範
 由於 git message 大家寫法都不同，若你是開發者，請參考以下的 git message 寫法規範的文章
 - [\[note\] git conventional commit](https://pjchender.dev/npm/note-git-conventional-commit/)
