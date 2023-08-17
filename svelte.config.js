@@ -9,7 +9,7 @@ const config = {
   preprocess: [vitePreprocess()],
   kit: {
     adapter: adapter({
-      pages: 'dist',
+      pages: 'docs',
     }),
     paths: {
       base: process.env.NODE_ENV === "production" ? "/raccoon-sql-docs" : ""
