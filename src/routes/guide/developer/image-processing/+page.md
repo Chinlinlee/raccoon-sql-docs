@@ -143,7 +143,18 @@ Raccoon 的一些影像處理如: 裁切、jpeg 影像品質、iccprofile 都是
 #### 原圖
 
 這是測試所用的原圖
-<img src="/image-processing/original.jpg" class="w-xl block m-auto">
+<div class="my-2 rounded dark:shadow-gray-900 duration-300 hover:-translate-y-1 bg-transparent">
+    <figure>
+        <img src="/image-processing/original.jpg" alt="Test Original Image" class="rounded-t h-72 w-full object-cover">
+        <figcaption>
+            <p
+                class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">
+                <!-- Post Title -->
+                測試原圖
+            </p>
+        </figcaption>
+    </figure>
+</div>
 
 下面將使用以下 iccprofile 的參數進行測試
 
