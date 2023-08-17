@@ -9,8 +9,7 @@
                 <img src="{item.src}" alt="{item.title}" class="rounded-t h-72 w-full object-cover">
                 <figcaption>
                     <p
-                        class="text-center text-lg mb-4 font-bold leading-relaxed text-gray-800 dark:text-gray-300"
-                        x-text="post.title">
+                        class="text-center text-lg mb-4 font-bold leading-relaxed text-gray-800 dark:text-gray-300">
                         <!-- Post Title -->
                         {item.title}
                     </p>
