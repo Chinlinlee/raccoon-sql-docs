@@ -39,6 +39,10 @@ const config = defineConfig({
                 {
                   title: "相依專案",
                   to: "/guide/developer/deps-projects/"
+                },
+                {
+                  title: "Swagger API Docs",
+                  to: "/guide/developer/swagger/"
                 }
               ]
             }
