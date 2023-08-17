@@ -1,6 +1,6 @@
 ---
 title: Welcome to Raccoon
-heroImage: /raccoon.png
+heroImage: raccoon.png
 tagline: A lightweight, flexible mini-PACS, easy to used in research level or production.
 actions:
   - label: View on github
@@ -27,3 +27,16 @@ features:
       collection: vscode-icons
       name: file-type-node
 ---
+
+
+<script>
+    import { base } from "$app/paths";
+    import { onMount } from "svelte";
+
+    let heroImage = `${base}/raccoon.png`;
+
+    onMount(() => {
+        let heroImageEl = document.querySelector(".hero-image > img:nth-child(1)");
+        heroImageEl.setAttribute("src", heroImage);
+    });
+</script>

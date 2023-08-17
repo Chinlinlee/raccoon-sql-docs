@@ -1,79 +1,80 @@
 <script>
+    import { base } from "$app/paths";
     import CardList from "$components/card-list.svelte";
 
     let dcm4cheJpegs = [
         {
             title: "yes",
-            src: "/image-processing/dcm4che.jpg"
+            src: base + "/image-processing/dcm4che.jpg"
         },
         {
             title: "srgb",
-            src: "/image-processing/dcm4che-srgb.jpg"
+            src: base + "/image-processing/dcm4che-srgb.jpg"
         },
         {
             title: "adobergb",
-            src: "/image-processing/dcm4che-adobergb.jpg"
+            src: base + "/image-processing/dcm4che-adobergb.jpg"
         },
         {
             title: "rommrgb",
-            src: "/image-processing/dcm4che-rommrgb.jpg"
+            src: base + "/image-processing/dcm4che-rommrgb.jpg"
         }
     ];
 
     let sharpJpegs = [
         {
             title: "yes",
-            src: "/QQ.avif"
+            src: base + "/QQ.avif"
         },
         {
             title: "srgb",
-            src: "/image-processing/sharp-srgb.jpg"
+            src: base + "/image-processing/sharp-srgb.jpg"
         },
         {
             title: "adobergb",
-            src: "/image-processing/sharp-adobergb.jpg"
+            src: base + "/image-processing/sharp-adobergb.jpg"
         },
         {
             title: "rommrgb",
-            src: "/image-processing/sharp-rommrgb.jpg"
+            src: base + "/image-processing/sharp-rommrgb.jpg"
         }
     ];
 
     let raccoonJpegs = [
         {
             title: "yes",
-            src: "/image-processing/raccoon-dicom-yes.jpeg"
+            src: base + "/image-processing/raccoon-dicom-yes.jpeg"
         },
         {
             title: "srgb",
-            src: "/image-processing/raccoon-dicom-srgb.jpg"
+            src: base + "/image-processing/raccoon-dicom-srgb.jpg"
         },
         {
             title: "adobergb",
-            src: "/image-processing/raccoon-dicom-adobergb.jpeg"
+            src: base + "/image-processing/raccoon-dicom-adobergb.jpeg"
         },
         {
             title: "rommrgb",
-            src: "/image-processing/raccoon-dicom-rommrgb.jpg"
+            src: base + "/image-processing/raccoon-dicom-rommrgb.jpg"
         }
     ];
 
     let gimpJpegs = [
         {
             title: "yes",
-            src: "/image-processing/GIMP-yes.jpg"
+            src: base + "/image-processing/GIMP-yes.jpg"
         },
         {
             title: "srgb",
-            src: "/image-processing/GIMP-srgb.jpg"
+            src: base + "/image-processing/GIMP-srgb.jpg"
         },
         {
             title: "adobergb",
-            src: "/image-processing/GIMP-adobergb.jpg"
+            src: base + "/image-processing/GIMP-adobergb.jpg"
         },
         {
             title: "rommrgb",
-            src: "/image-processing/GIMP-rommrgb.jpg"
+            src: base + "/image-processing/GIMP-rommrgb.jpg"
         }
     ];
 </script>
@@ -145,7 +146,7 @@ Raccoon 的一些影像處理如: 裁切、jpeg 影像品質、iccprofile 都是
 這是測試所用的原圖
 <div class="my-2 rounded dark:shadow-gray-900 duration-300 hover:-translate-y-1 bg-transparent">
     <figure>
-        <img src="/image-processing/original.jpg" alt="Test Original Image" class="rounded-t h-72 w-full object-cover">
+        <img src="{base}/image-processing/original.jpg" alt="Test Original Image" class="rounded-t h-72 w-full object-cover">
         <figcaption>
             <p
                 class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">

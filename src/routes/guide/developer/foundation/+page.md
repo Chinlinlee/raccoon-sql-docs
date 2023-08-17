@@ -1,4 +1,6 @@
-
+<script>
+    import { base } from "$app/paths";
+</script>
 # 基礎觀念
 
 此為開發者的基礎觀念介紹，讓你知道如何去開發 Raccoon
@@ -101,7 +103,7 @@ WADO-RS 回傳資料的 headers.Content-Type 為 multipart/related，必須自�
 ## Controller 流程
 - 在使用 Raccoon 的 Web API 時，會進到 controller 進行相關操作，而 controller 有 3 個主要流程會執行，如下圖
 <figure>
-    <img src="/foundation/controller-flow.png" class="rounded-t h-72 w-full object-scale-down">
+    <img src="{base}/foundation/controller-flow.png" class="rounded-t h-72 w-full object-scale-down">
     <figcaption>
         <p
             class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">

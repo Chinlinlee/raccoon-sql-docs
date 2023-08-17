@@ -1,3 +1,7 @@
+<script>
+    import { base } from "$app/paths";
+</script>
+
 # node-java-bridge
 
 Raccoon 目前有一些功能是與 java 混和撰寫而成。
@@ -113,7 +117,12 @@ const generator = new TypescriptBulkDefinitionGenerator();
 </Tabs>
 
 - 產生結果
-![java-ts-gen產生結果](/node-java-bridge/generate-result.png)
+<div class="duration-300 hover:-translate-y-1 bg-transparent">
+    <figure>
+        <img src="{base}/node-java-bridge/generate-result.png" alt="Test Original Image" class="rounded-t h-16 w-auto object-cover">
+    </figure>
+</div>
+
 - `Dcm2JpgExecutor` 的定義檔可至 `output/org/github/chinlinlee/dcm2jpg` 查看
 
 ### 編譯成 javascript
@@ -128,7 +137,12 @@ tsc --init
 tsc --build
 ```
 - 編譯後得到的 js 檔案
-![ts-to-js result](/node-java-bridge/ts-to-js.png)
+<div class="duration-300 hover:-translate-y-1 bg-transparent">
+    <figure>
+        <img src="{base}/node-java-bridge/ts-to-js.png" alt="Test Original Image" class="rounded-t h-16 w-auto object-contain">
+    </figure>
+</div>
+
 - 之後你就可以把這些 js 檔案放到專案中使用囉！
 
 ### 使用案例

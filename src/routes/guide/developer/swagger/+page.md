@@ -1,3 +1,6 @@
+<script>
+    import { base } from "$app/paths";
+</script>
 # Swagger
 Raccoon 使用 [swagger-jsdoc](https://www.npmjs.com/package/swagger-jsdoc) 所提供的功能來產生 Swagger API 文檔
 
@@ -53,7 +56,7 @@ node get-swagger.js
 - Raccoon 的 repo 有設定 docs 的位置，可以在 [API Documentation](https://chinlinlee.github.io/raccoon-dicom/) 找到
 <div class="my-2 rounded shadow-lg shadow-gray-200 dark:shadow-gray-900 duration-300 hover:-translate-y-1 bg-transparent">
     <figure>
-        <img src="/swagger/swagger-ui.png" alt="Raccoon Swagger UI" class="rounded-t h-72 w-full object-cover">
+        <img src="{base}/swagger/swagger-ui.png" alt="Raccoon Swagger UI" class="rounded-t h-72 w-full object-cover">
         <figcaption>
             <p
                 class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">

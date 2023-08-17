@@ -11,6 +11,9 @@ const config = {
     adapter: adapter({
       pages: 'dist',
     }),
+    paths: {
+      base: process.env.NODE_ENV === "production" ? "/raccoon-sql-docs" : ""
+    },
     alias: {
       $components: "src/components"
     }

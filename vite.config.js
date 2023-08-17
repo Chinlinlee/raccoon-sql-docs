@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite'
 import { sveltepress } from '@sveltepress/vite'
 import { defaultTheme } from '@sveltepress/theme-default'
+const base = process.env.NODE_ENV === "production" ? "/raccoon-sql-docs" : "";
 
 const config = defineConfig({
   plugins: [
@@ -10,12 +11,12 @@ const config = defineConfig({
           // Add your navbar configs here
           {
             "title": "Guide",
-            "to": "/guide/developer/foundation/"
+            "to": `${base}/guide/developer/foundation/`
           }
         ],
         sidebar: {
           // Add your sidebar configs here
-          "/guide/": [
+          [`${base}/guide/`]: [
             {
               title: "開發人員",
               collapsible: true,
@@ -53,7 +54,7 @@ const config = defineConfig({
           ]
         },
         github: 'https://github.com/Chinlinlee/raccoon-dicom',
-        logo: '/raccoon.png',
+        logo: `${base}/raccoon.png`,
         preBuildIconifyIcons: {
           'vscode-icons': ['file-type-mongo', 'file-type-docker2', 'file-type-node']
         }
