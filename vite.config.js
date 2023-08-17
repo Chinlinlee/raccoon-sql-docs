@@ -43,6 +43,10 @@ const config = defineConfig({
                 {
                   title: "Swagger API Docs",
                   to: "/guide/developer/swagger/"
+                },
+                {
+                  title: "SQL",
+                  to: "/guide/developer/sql/"
                 }
               ]
             }
