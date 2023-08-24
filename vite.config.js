@@ -48,6 +48,10 @@ const config = defineConfig({
                 {
                   title: "SQL",
                   to: "/guide/developer/sql/"
+                },
+                {
+                  title: "DIMSE 服務",
+                  to: "/guide/developer/dimse/"
                 }
               ]
             }
