@@ -1,5 +1,5 @@
 import adapter from '@sveltejs/adapter-static'
-import { vitePreprocess } from '@sveltejs/kit/vite'
+import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
 
 /**
  * @type {import('@sveltejs/kit').Config}
@@ -16,6 +16,14 @@ const config = {
     },
     alias: {
       $components: "src/components"
+    },
+    prerender: {
+      handleHttpError: ({ path, referrer, message }) => {
+        if (path.includes("github.com")) {
+          return
+        }
+        throw new Error(message)
+      }
     }
   },
 }
