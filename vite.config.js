@@ -52,6 +52,10 @@ const config = defineConfig({
                 {
                   title: "DIMSE 服務",
                   to: "/guide/developer/dimse/"
+                },
+                {
+                  title: "Logging System",
+                  to: "/guide/developer/logging-system/"
                 }
               ]
             }
