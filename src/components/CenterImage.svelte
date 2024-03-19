@@ -6,16 +6,24 @@
     export let alt;
     export let title;
     export let titleClass;
-    export let zoomOptions = undefined;
+    export let zoomOptions;
 
-    const initialTitleClass = "text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300";
+    const initialTitleClass =
+        "text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300";
     const initialImgClass = "rounded-t h-72 w-full object-scale-down";
 
     let zoom = undefined;
 
     function getZoom() {
         if (!zoom) {
-            zoom = mediumZoom(zoomOptions)
+            zoom = mediumZoom(zoomOptions);
+            zoom.on("open", e => {
+                e.target.className = cn(e.target.className, "object-none");
+            });
+
+            zoom.on("closed", e => {
+                e.target.className = cn(e.target.className, "object-scale-down");
+            });
         }
 
         return zoom;
@@ -32,16 +40,19 @@
             destroy() {
                 zoom.detach();
             }
-        }
+        };
     }
 </script>
 
-<figure  {...$$restProps}>
-    <img {src} class={cn($$props.class, initialImgClass)} {alt} use:attachZoom={zoomOptions}>
+<figure {...$$restProps}>
+    <img
+        {src}
+        class={cn($$props.class, initialImgClass)}
+        {alt}
+        use:attachZoom={zoomOptions}
+    />
     <figcaption>
-        <p
-            class={cn(initialTitleClass, titleClass)}
-        >
+        <p class={cn(initialTitleClass, titleClass)}>
             {title}
         </p>
     </figcaption>
