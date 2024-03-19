@@ -18,7 +18,7 @@
         if (!zoom) {
             zoom = mediumZoom(zoomOptions);
             zoom.on("open", e => {
-                e.target.className = cn(e.target.className, "object-none");
+                e.target.classList.remove("object-scale-down");
             });
 
             zoom.on("closed", e => {
