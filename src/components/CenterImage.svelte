@@ -18,11 +18,11 @@
         if (!zoom) {
             zoom = mediumZoom(zoomOptions);
             zoom.on("open", e => {
-                e.target.classList.remove("object-scale-down");
+                e.target.classList.remove("h-72");
             });
 
             zoom.on("closed", e => {
-                e.target.className = cn(e.target.className, "object-scale-down");
+                e.target.className = cn(e.target.className, "h-72");
             });
         }
 
