@@ -1,5 +1,6 @@
 <script>
     import { base } from "$app/paths";
+    import CenterImage from "$components/CenterImage.svelte";
 </script>
 # 基礎觀念
 
@@ -102,15 +103,12 @@ WADO-RS 回傳資料的 headers.Content-Type 為 multipart/related，必須自�
 
 ## Controller 流程
 - 在使用 Raccoon 的 Web API 時，會進到 controller 進行相關操作，而 controller 有 3 個主要流程會執行，如下圖
-<figure>
-    <img src="{base}/foundation/controller-flow.png" class="rounded-t h-72 w-full object-scale-down" alt="controller-flow">
-    <figcaption>
-        <p
-            class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">
-            Controller 流程圖
-        </p>
-    </figcaption>
-</figure>
+
+<CenterImage
+src="{base}/foundation/controller-flow.png"
+alt="controller-flow"
+title="Controller 流程圖">
+</CenterImage>
 
 - Pre Process: 會執行 plugins 內 enable 以及 before 被設為 true 且 route path 符合的 plugin
 - Main Process: 會執行此 route 的主要邏輯操作

@@ -1,20 +1,13 @@
 <script>
     import { base } from "$app/paths";
+    import CenterImage from "$components/CenterImage.svelte";
 </script>
 
 # Logging System
 Raccoon 原先使用 [log4js](https://www.npmjs.com/package/log4js) 進行 log，不過 log4js 雖然能輸出漂亮的 log，但是卻無法簡單地進行分析，所以在後續的版本已經更換為 [winston](https://www.npmjs.com/package/winston) 輸出結構化 (json) 的 log。
 
 ## 架構圖
-<figure>
-    <img src="{base}/logging-system/logging-system-arch-diagram.svg" alt="架構圖" class="rounded-t h-72 w-full object-scale-down">
-    <figcaption>
-        <p
-            class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">
-            Logging System 架構圖
-        </p>
-    </figcaption>
-</figure>
+<CenterImage src="{base}/logging-system/logging-system-arch-diagram.svg" alt="架構圖" title="Logging System 架構圖"></CenterImage>
 
 ## Fluent Bit
 [Fluent Bit](https://fluentbit.io/) 是一款開源且高性能的日誌 (log)處理器與轉發器，專為日志收集與統一處理設計。它支持多種數據輸入和輸出插件，可以輕鬆與其他日志系統集成，提供輕量級的日志收集解決方案。

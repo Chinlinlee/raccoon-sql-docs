@@ -1,5 +1,6 @@
 <script>
     import { base } from "$app/paths";
+    import CenterImage from "$components/CenterImage.svelte";
 </script>
 
 # SQL Version
@@ -41,12 +42,4 @@ java -jar schemaspy-6.2.4.jar -t pgsql11 -dp postgresql-42.6.0.jar -db dbName -h
 :::
 
 #### 產生結果
-<figure>
-    <img src="{base}/sql/sql-schemaspy-result.png" class="rounded-t h-72 w-full object-scale-down" alt="controller-flow">
-    <figcaption>
-        <p
-            class="text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300">
-            schemaspy 產生結果
-        </p>
-    </figcaption>
-</figure>
+<CenterImage src="{base}/sql/sql-schemaspy-result.png" alt="sql schemaspy result" title="schemaspy 產生結果"></CenterImage>

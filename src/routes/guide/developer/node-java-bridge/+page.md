@@ -1,5 +1,6 @@
 <script>
     import { base } from "$app/paths";
+    import CenterImage from "$components/CenterImage.svelte";
 </script>
 
 # node-java-bridge
