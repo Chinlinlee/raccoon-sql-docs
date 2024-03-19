@@ -15,7 +15,8 @@ const config = {
       base: process.env.NODE_ENV === "production" ? "/raccoon-sql-docs" : ""
     },
     alias: {
-      $components: "src/components"
+      $components: "src/components",
+      $libs: "src/libs",
     },
     prerender: {
       handleHttpError: ({ path, referrer, message }) => {

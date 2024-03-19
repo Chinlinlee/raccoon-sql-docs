@@ -16,5 +16,10 @@
     "vite": "^5.0.12"
   },
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "clsx": "^2.1.0",
+    "medium-zoom": "^1.1.0",
+    "tailwind-merge": "^2.2.2"
+  }
 }
