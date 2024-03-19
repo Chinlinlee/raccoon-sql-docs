@@ -56,6 +56,10 @@ const config = defineConfig({
                 {
                   title: "Logging System",
                   to: "/guide/developer/logging-system/"
+                },
+                {
+                  title: "OAuth 串接",
+                  to: "/guide/developer/oauth/"
                 }
               ]
             }
