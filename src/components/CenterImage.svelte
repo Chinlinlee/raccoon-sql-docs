@@ -6,7 +6,9 @@
     export let alt;
     export let title;
     export let titleClass;
-    export let zoomOptions;
+    export let zoomOptions = {
+        background: "#050505"
+    };
 
     const initialTitleClass =
         "text-center text-sm m-1 font-bold leading-relaxed text-gray-800 dark:text-gray-300";
@@ -19,6 +21,7 @@
             zoom = mediumZoom(zoomOptions);
             zoom.on("open", e => {
                 e.target.classList.remove("h-72");
+                e.target.classList.add("z-1001");
             });
 
             zoom.on("closed", e => {
