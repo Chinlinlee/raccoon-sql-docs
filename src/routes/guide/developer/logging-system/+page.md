@@ -9,8 +9,8 @@ Raccoon 原先使用 [log4js](https://www.npmjs.com/package/log4js) 進行 log�
 ## 架構圖
 <CenterImage src="{base}/logging-system/logging-system-arch-diagram.svg" alt="架構圖" title="Logging System 架構圖"></CenterImage>
 
-## Fluent Bit
-[Fluent Bit](https://fluentbit.io/) 是一款開源且高性能的日誌 (log)處理器與轉發器，專為日志收集與統一處理設計。它支持多種數據輸入和輸出插件，可以輕鬆與其他日志系統集成，提供輕量級的日志收集解決方案。
+## Fluentd
+[Fluentd](https://www.fluentd.org/) 是一款開源且高性能的日誌 (log)處理器與轉發器，專為日志收集與統一處理設計。它支持多種數據輸入和輸出插件，可以輕鬆與其他日志系統集成，提供輕量級的日志收集解決方案。
 
 ### 基本概念
 大部分日誌處理器都將系統大致分為輸入、緩衝區以及輸出三個部分，輸入負責採集日誌，採集後會放在緩衝區中，緩衝區中的日誌會在輸出時再轉發到其他系統。
@@ -23,126 +23,151 @@ Fluent Bit 將這三大部分又在細分成: 輸入、解析、過濾、緩衝�
 - 輸出將日誌真正轉發出去
 
 ### Raccoon 基本設定
-Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且副檔名都為 `.log`，所以我們可以直接對 Fluent Bit 設定監聽這些檔案
+Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且副檔名都為 `.log`，所以我們可以直接對 Fluentd 設定監聽這些檔案
 <details>
-    <summary>設定檔</summary>
+    <summary>Mongodb 作為 output 的設定檔</summary>
 
-```text
-[SERVICE]
-    # Flush
-    # =====
-    # set an interval of seconds before to flush records to a destination
-    flush        1
+```ini
+<source>
+  @type tail
+  path /var/log/raccoon/*.log
+  exclude_path ["/var/log/raccoon/raccoon.log", "/var/log/raccoon/raccoon-formatted-audit.log"]
+  pos_file /var/log/raccoon/fluentd.pos
+  tag mongo.raccoon
+  read_from_head  true
 
-    # Daemon
-    # ======
-    # instruct Fluent Bit to run in foreground or background mode.
-    daemon       Off
+  <parse>
+    @type json
+  </parse>
+</source>
 
-    # Log_Level
-    # =========
-    # Set the verbosity level of the service, values can be:
-    #
-    # - error
-    # - warning
-    # - info
-    # - debug
-    # - trace
-    #
-    # by default 'info' is set, that means it includes 'error' and 'warning'.
-    log_level    info
+# for formatted audit log
+<source>
+  @type tail
+  path /var/log/raccoon/raccoon-formatted-audit.log
+  pos_file /var/log/raccoon/fluentd-audit.pos
+  tag mongo.raccoon-audit
+  read_from_head true
 
-    # Parsers File
-    # ============
-    # specify an optional 'Parsers' configuration file
-    parsers_file parsers.conf
+  <parse>
+    @type json
+  </parse>
+</source>
 
-    # Plugins File
-    # ============
-    # specify an optional 'Plugins' configuration file to load external plugins.
-    plugins_file plugins.conf
+<source>
+  @type tail
+  path /var/log/raccoon/raccoon.log
+  pos_file /var/log/raccoon/fluentd-dcm4che.pos
+  tag mongo.raccoon-dcm4che
+  read_from_head  true
+  follow_inodes true
+  
+  <parse>
+    @type multiline
+    format_firstline /^\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}/
+    format1 /^(?<time>\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) \[(?<thread>.*)\] (?<level>[^\s]+) (?<message>[\s\S]*)$/
+  </parse>
+</source>
 
-    # HTTP Server
-    # ===========
-    # Enable/Disable the built-in HTTP Server for metrics
-    http_server  Off
-    http_listen  0.0.0.0
-    http_port    2020
+<match mongo.**>
+  @type mongo
+  collection ${tag[1]}-log
+  
+  connection_string mongodb://root:root@fluentd-mongo:27017/raccoon-logs?authSource=admin
+  
+  <buffer tag,time>
+    timekey        1
+    timekey_wait   0
+  </buffer>
+  # make sure to include the time key
+  <inject>
+    time_key time
+  </inject>
+</match>
 
-    # Storage
-    # =======
-    # Fluent Bit can use memory and filesystem buffering based mechanisms
-    #
-    # - https://docs.fluentbit.io/manual/administration/buffering-and-storage
-    #
-    # storage metrics
-    # ---------------
-    # publish storage pipeline metrics in '/api/v1/storage'. The metrics are
-    # exported only if the 'http_server' option is enabled.
-    #
-    storage.metrics on
-
-    # storage.path
-    # ------------
-    # absolute file system path to store filesystem data buffers (chunks).
-    #
-    # storage.path /tmp/storage
-
-    # storage.sync
-    # ------------
-    # configure the synchronization mode used to store the data into the
-    # filesystem. It can take the values normal or full.
-    #
-    # storage.sync normal
-
-    # storage.checksum
-    # ----------------
-    # enable the data integrity check when writing and reading data from the
-    # filesystem. The storage layer uses the CRC32 algorithm.
-    #
-    # storage.checksum off
-
-    # storage.backlog.mem_limit
-    # -------------------------
-    # if storage.path is set, Fluent Bit will look for data chunks that were
-    # not delivered and are still in the storage layer, these are called
-    # backlog data. This option configure a hint of maximum value of memory
-    # to use when processing these records.
-    #
-    # storage.backlog.mem_limit 5M
-
-[INPUT]
-    Name         tail
-    Path         raccoon/pm2log/*.log
-    Parser       json
-    Tag          raccoon
-
-[OUTPUT]
-    Name         es
-    Match        *
-    Host  127.0.0.1
-    Port  9200
-    HTTP_User elastic
-    HTTP_Passwd elastic
-    Trace_Error On
-    Index           <fluent-bit-{now/d}>
-    Replace_Dots    On
-    tls               On
-    tls.verify        Off
-    tls.crt_file      /elasticsearch-8.12.2/config/certs/http_ca.crt
-    Suppress_Type_Name On
 ```
 :::important[重要事項]
-- 請記得一定要設定 `HTTP_User` 以及 `HTTP_Passwd`
-- 請記得一定要設定 `Suppress_Type_Name` 為 `On`
-    - 這個設定於 Elasticsearch 7.0 後的版本一定要設定
-- 請記得要開啟 tls，除非你的 elasticsearch 沒有設定要透過 https 連線
+- 請記得一定要設定 `connection_string`
 :::
 </details>
 
-## Elasticsearch
-為進行 log 日誌的分析，我們選擇了 [Elasticsearch](https://www.elastic.co/cn/elasticsearch) 作為我們的分析日誌系統，以及其生態系統內的 [kibana](https://www.elastic.co/cn/kibana) 作為視覺化以及 debug 的工具。
+<details>
+    <summary>Elasticsearch 作為 output 的設定檔</summary>
 
+```ini
+<source>
+  @type tail
+  path /var/log/raccoon/*.log
+  exclude_path ["/var/log/raccoon/raccoon.log", "/var/log/raccoon/raccoon-formatted-audit.log"]
+  pos_file /var/log/raccoon/fluentd.pos
+  tag es.raccoon
+  read_from_head  true
+
+  <parse>
+    @type json
+  </parse>
+</source>
+
+# for formatted audit log
+<source>
+  @type tail
+  path /var/log/raccoon/raccoon-formatted-audit.log
+  pos_file /var/log/raccoon/fluentd-audit.pos
+  tag es.raccoon-audit
+  read_from_head true
+
+  <parse>
+    @type json
+  </parse>
+</source>
+
+<source>
+  @type tail
+  path /var/log/raccoon/raccoon.log
+  pos_file /var/log/raccoon/fluentd-dcm4che.pos
+  tag es.raccoon-dcm4che
+  read_from_head  true
+  follow_inodes true
+  
+  <parse>
+    @type multiline
+    format_firstline /^\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}/
+    format1 /^(?<time>\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) \[(?<thread>.*)\] (?<level>[^\s]+) (?<message>[\s\S]*)$/
+  </parse>
+</source>
+
+
+<match es.**>
+  @type elasticsearch
+  index_name ${tag[1]}-log
+  
+  scheme https
+  host 127.0.0.1
+  port 9200
+  # use `%{}` placeholders to escape for URL encoding characters
+  user %{elastic}
+  # don't use password that contain '+'
+  password %{elastic}
+  ssl_verify false
+
+  <buffer tag,time>
+    timekey        1
+    timekey_wait   0
+  </buffer>
+  # make sure to include the time key
+  <inject>
+    time_key time
+  </inject>
+</match>
+```
+</details>
+
+## Log 分析
+### MongoDB
+MongoDB 目前將會以 API 的方式進行分析，此 API 將會以 Plugin 的方式存在，你可以在實驗室的 Gitlab 上找到它，路徑為: `plugins/statistic-mongodb`。
+
+### Elasticsearch
+為進行 log 日誌的分析，我們可以使用 [Elasticsearch](https://www.elastic.co/cn/elasticsearch) 作為我們的分析日誌系統，以及其生態系統內的 [kibana](https://www.elastic.co/cn/kibana) 作為視覺化以及 debug 的工具。
 
 
 ## Audit message
