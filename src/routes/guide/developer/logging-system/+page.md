@@ -22,6 +22,44 @@ Fluent Bit 將這三大部分又在細分成: 輸入、解析、過濾、緩衝�
 - 路由將會決定緩衝區的日誌要發送到哪些輸出
 - 輸出將日誌真正轉發出去
 
+### 安裝 Fluentd
+1. 首先，更新你的套件索引：
+
+```bash
+sudo apt update
+```
+
+2. 然後，安裝 Fluentd：
+
+```bash
+# fluent-package 5 (LTS)
+curl -fsSL https://toolbelt.treasuredata.com/sh/install-debian-bookworm-fluent-package5-lts.sh | sh
+```
+
+3. 啟動 Fluentd：
+
+```bash
+sudo systemctl start fluentd.service
+```
+
+4. 安裝依賴套件
+
+```bash
+sudo apt install -y --no-install-recommends make gcc g++ libc-dev
+```
+
+5. 安裝 mongo plugin
+
+```bash
+sudo ./fluent-gem install fluent-plugin-mongo
+```
+
+6. 新增設定檔
+
+```bash
+sudo fluentd --setup /etc/fluent
+```
+
 ### Raccoon 基本設定
 Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且副檔名都為 `.log`，所以我們可以直接對 Fluentd 設定監聽這些檔案
 <details>
