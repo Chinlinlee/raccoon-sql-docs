@@ -202,7 +202,28 @@ Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且�
 
 ## Log 分析
 ### MongoDB
-MongoDB 目前將會以 API 的方式進行分析，此 API 將會以 Plugin 的方式存在，你可以在實驗室的 Gitlab 上找到它，路徑為: `plugins/statistic-mongodb`。
+MongoDB 目前將會以 API 的方式進行分析，此 API 以 Plugin 的方式存在，你可以在實驗室的 Gitlab 上找到它，路徑為: `plugins/statistic-mongodb`。
+
+設定內容如下
+```js
+module.exports.pluginsConfig = {
+    // 省略...
+    "statistic-mongodb": {
+        enable: true, // true 為啟動
+        before: true, // 不動
+        routers: [],
+        mongodb: {
+            hosts: ["127.0.0.1"], // mongodb 的連接位址，必填
+            ports: [27017], // mongodb 的連接位址對應的 port，必填
+            dbName: "raccoon-logs", // mongodb 連接的資料庫名稱
+            urlOptions: "", // mongodb 連接的參數
+            user: "root", // mongodb 連接的使用者帳號，必填
+            password: "root", // mongodb 連接的使用者密碼，必填
+            authSource: "admin" // mongodb 驗證帳號密碼的資料庫來源
+        }
+    }
+}
+```
 
 ### Elasticsearch
 為進行 log 日誌的分析，我們可以使用 [Elasticsearch](https://www.elastic.co/cn/elasticsearch) 作為我們的分析日誌系統，以及其生態系統內的 [kibana](https://www.elastic.co/cn/kibana) 作為視覺化以及 debug 的工具。
