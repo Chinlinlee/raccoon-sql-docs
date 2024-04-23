@@ -43,3 +43,123 @@ java -jar schemaspy-6.2.4.jar -t pgsql11 -dp postgresql-42.6.0.jar -db dbName -h
 
 #### 產生結果
 <CenterImage src="{base}/sql/sql-schemaspy-result.png" alt="sql schemaspy result" title="schemaspy 產生結果"></CenterImage>
+
+## SQL Migration
+- SQL 在訂版後還是會有修改的時機，通常不是很建議透過 `sequelize.sync` 當中的 alter 或 force 進行修改
+- sequelize 原本就有提供 migration 的工具，不過跟原本的專案架構對不上
+- 這裡採用 [knex](https://knexjs.org/guide/migrations.html) 來實作 SQL migration
+- 現在 SQL migration 的檔案都放在 `models/sql-migrations` 資料夾當中
+- migration 從 1adb99ad877d28163198c6069241fe2495175776 版本開始實施
+
+### 設定
+- 設定檔位置: `models/sql-migrations/knexfile.js`
+- 你可以複製 `models/sql-migrations/knexfile.example.js` 進行修改
+```js
+// Update with your config settings.
+
+/**
+ * @type { Object.<string, import("knex").Knex.Config> }
+ */
+module.exports = {
+    development: {
+        client: 'postgresql',
+        connection: {
+            database: 'raccoon',
+            user: 'username',
+            password: 'password',
+            host: 'host'
+        },
+        pool: {
+            min: 2,
+            max: 10
+        }
+    },
+
+    staging: {
+        client: 'postgresql',
+        connection: {
+            database: 'raccoon',
+            user: 'username',
+            password: 'password',
+            host: 'host'
+        },
+        pool: {
+            min: 2,
+            max: 10
+        },
+        migrations: {
+            tableName: 'knex_migrations'
+        }
+    },
+
+    production: {
+        client: 'postgresql',
+        connection: {
+            database: 'raccoon',
+            user: 'username',
+            password: 'password',
+            host: 'host'
+        },
+        pool: {
+            min: 2,
+            max: 10
+        },
+        migrations: {
+            tableName: 'knex_migrations'
+        }
+    }
+
+};
+```
+
+### migration 指令
+完成編寫 migration 後，您可以通過以下方式根據 NODE_ENV 更新資料庫：
+
+```bash
+knex migrate:latest
+```
+
+你還可以傳遞 --env 標誌或設置 NODE_ENV 來選擇替代環境：
+```bash
+knex migrate:latest --env production
+
+# 或者
+
+NODE_ENV=production knex migrate:latest
+```
+
+要回滾 (rollback) 最後一批遷移 (migration)：
+```bash
+knex migrate:rollback
+```
+
+要回滾 (rollback) 所有已完成的遷移 (migration)：
+```bash
+knex migrate:rollback --all
+```
+
+要執行尚未執行的下一個遷移 (migration)
+
+```bash
+knex migrate:up
+```
+
+要執行尚未執行的指定遷移 (migration)
+```bash
+knex migrate:up 001_migration_name.js
+```
+撤消上次執行的最後一個遷移 (migration)
+
+```bash
+knex migrate:down
+```
+
+撤消已執行的指定遷移 (migration)
+```bash
+knex migrate:down 001_migration_name.js
+```
+
+列出已完成和待處理的所有遷移 (migration)：
+```bash
+knex migrate:list
+```
