@@ -1,7 +1,6 @@
 <script>
-    import CenterImage from "$components/CenterImage.svelte";
-
     import { base } from "$app/paths";
+    import CenterImage from "$components/CenterImage.svelte";
 
     let host = "{host}";
 </script>

@@ -23,7 +23,7 @@ const config = defineConfig({
               items: [
                 {
                   title: "Installation",
-                  to: `${base}/guide/getting-started/installation/`
+                  to: `/guide/getting-started/installation/`
                 }
               ]
             },
