@@ -331,7 +331,7 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 
 ### OAuth
 :::tip[tip]
-OAuth Server 的架設可以參考 [OAuth Keycloak 架設](#OAuth-Keycloak-架設) 章節
+OAuth Server 的架設可以參考 [OAuth Keycloak 架設](#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD) 章節
 :::
 - plugin 名稱: `oauth`
 

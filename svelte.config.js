@@ -24,7 +24,8 @@ const config = {
           return
         }
         throw new Error(message)
-      }
+      },
+      handleMissingId: "warn"
     }
   },
 }
