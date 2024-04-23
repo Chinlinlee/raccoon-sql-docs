@@ -18,6 +18,16 @@ const config = defineConfig({
           // Add your sidebar configs here
           [`${base}/guide/`]: [
             {
+              title: "Getting Started",
+              collapsible: true,
+              items: [
+                {
+                  title: "Installation",
+                  to: `${base}/guide/getting-started/installation/`
+                }
+              ]
+            },
+            {
               title: "開發人員",
               collapsible: true,
               items: [
