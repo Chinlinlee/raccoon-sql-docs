@@ -708,7 +708,7 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
     alt="Keycloak Create Client Scope Step 2"
 />
 
-### 為 Client 加入 Client scope
+#### 為 Client 加入 Client scope
 - 選擇左邊 `Clients` 並選擇要加入 scope 的 Client 名稱 (這裡以 account 為例)
 <CenterImage
     src="{base}/getting-started/installation/keycloak-add-scope-for-client-step1.png"
@@ -727,6 +727,66 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
     title="Keycloak Add Scope For Client Step 3"
     alt="Keycloak Add Scope For Client Step 3"
 />
+
+### 將 realm_access 的資訊暴露到 token
+- 在驗證是否是 admin 時，我們會需要 `realm_access` 這個欄位
+- 我們可以透過開啟 `Full scope allowed` 以便我們可以看到所有欄位
+
+#### 只暴露 realm_access
+:::important[注意事項]
+請使用自己創建的 client，不要使用內建的 client
+:::
+1. 點擊左邊 `Clients` -> 點擊自己創建的 Client (這裡是 `raccoon`)
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step1.png"
+    title="Keycloak Expose Roles in Token Step 1"
+    alt="Keycloak Expose Roles in Token Step 1"
+/>
+
+2. 點擊 `Client scopes` -> 點擊 `raccoon-dedicated`
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step2.png"
+    title="Keycloak Expose Roles in Token Step 2"
+    alt="Keycloak Expose Roles in Token Step 2"
+/>
+
+3. 點擊 `Add mapper` 並打勾 -> 點擊 `Add`
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step3.png"
+    title="Keycloak Expose Roles in Token Step 3"
+    alt="Keycloak Expose Roles in Token Step 3"
+/>
+
+4. 找到 `realm roles` 打勾 -> 點擊 `Add`
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step4.png"
+    title="Keycloak Expose Roles in Token Step 4"
+    alt="Keycloak Expose Roles in Token Step 4"
+/>
+
+#### 暴力法 (將所有 scope 暴露)
+1. 點擊左邊 `Clients` -> 點擊 `account`
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-token-expose-roles-1.png"
+    title="Keycloak Expose All Scopes in Token Step 1"
+    alt="Keycloak Expose All Scopes in Token Step 1"
+/>
+
+2. 點擊 `Clients scopes` -> 點擊 `account-dedicated`
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-token-expose-roles-2.png"
+    title="Keycloak Expose All Scopes in Token Step 2"
+    alt="Keycloak Expose All Scopes in Token Step 2"
+/>
+
+3. 點擊 `Scope` -> 將 `Full scope allowed` 開啟
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-token-expose-roles-3.png"
+    title="Keycloak Expose All Scopes in Token Step 3"
+    alt="Keycloak Expose All Scopes in Token Step 3"
+/>
+
+
 
 ### Keycloak 常用的 API endpoint
 - 來源: https://www.keycloak.org/docs/latest/securing_apps/#available-endpoints
