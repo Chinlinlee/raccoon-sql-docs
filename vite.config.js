@@ -22,8 +22,8 @@ const config = defineConfig({
               collapsible: true,
               items: [
                 {
-                  title: "Installation",
-                  to: `/guide/getting-started/installation/`
+                  title: "Installation - Debian Linux",
+                  to: `/guide/getting-started/installation-debian/`
                 }
               ]
             },
