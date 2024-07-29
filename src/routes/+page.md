@@ -13,7 +13,7 @@ features:
     icon: 
       type: iconify
       collection: vscode-icons
-      name: file-type-mongo
+      name: file-type-sequelize
   - title: Build with Docker
     description: To help to quickly setup your raccoon mini-PACS.
     icon:

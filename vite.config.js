@@ -78,7 +78,7 @@ const config = defineConfig({
         github: 'https://github.com/Chinlinlee/raccoon-dicom',
         logo: `${base}/raccoon.png`,
         preBuildIconifyIcons: {
-          'vscode-icons': ['file-type-mongo', 'file-type-docker2', 'file-type-node']
+          'vscode-icons': ['file-type-mongo', 'file-type-docker2', 'file-type-node', 'file-type-sequelize']
         },
         highlighter: {
           languages: ['svelte', 'sh', 'js', 'html', 'ts', 'md', 'css', 'scss', 'yaml']
