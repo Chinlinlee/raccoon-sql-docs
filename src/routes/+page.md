@@ -5,11 +5,11 @@ tagline: A lightweight, flexible mini-PACS, easy to used in research level or pr
 actions:
   - label: View on github
     type: primary
-    to: https://github.com/Chinlinlee/raccoon-dicom
+    to: "https://github.com/Chinlinlee/raccoon-dicom"
     external: true
 features:
-  - title: NoSQL-based
-    description: Use MongoDB to support more dicom JSON field queries and more flexible.
+  - title: SQL ORM based
+    description: Use sequelize, a powerful ORM for Node.js.
     icon: 
       type: iconify
       collection: vscode-icons

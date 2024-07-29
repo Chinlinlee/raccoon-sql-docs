@@ -79,11 +79,14 @@ const config = defineConfig({
         logo: `${base}/raccoon.png`,
         preBuildIconifyIcons: {
           'vscode-icons': ['file-type-mongo', 'file-type-docker2', 'file-type-node']
+        },
+        highlighter: {
+          languages: ['svelte', 'sh', 'js', 'html', 'ts', 'md', 'css', 'scss', 'yaml']
         }
       }),
       siteConfig: {
         title: 'Raccoon',
-        description: 'NoSQL-MongoDB-based mini-PACS for the healthcare',
+        description: 'mini-PACS for the healthcare',
       },
     }),
   ],

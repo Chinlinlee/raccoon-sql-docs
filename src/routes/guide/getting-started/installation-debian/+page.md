@@ -799,6 +799,85 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
 node server.js
 ```
 
+# 使用 docker-compose
+:::important[注意事項]
+以下使用的 compose file 並無 keycloak，請自行上網參閱
+:::
+
+- 請確保一開始的檔案目錄結構長這樣
+```bash
+.
+└───raccoon-dicom
+```
+- 複製 raccoon-dicom 裡的`docker-compose.fluent.example.yaml`到當前檔案目錄並命名為`docker-compose.yaml`
+- 複製後的檔案目錄應該長這樣
+```bash
+.
+│   docker-compose.yaml
+│
+└───raccoon-dicom
+```
+
+## 創建 .env 檔案
+- 在目錄下創建`.env`檔案，此檔案是給 docker-compose 使用的
+- 創建後，檔案目錄如下
+```bash
+.
+│   .env
+│   docker-compose.yaml
+│
+└───raccoon-dicom
+```
+- 內容輸入如下
+:::important[注意事項]
+此為 example，在真實使用上請務必更動成安全的帳號密碼設定
+:::
+```sh
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+FLUENT_MONGODB_USER=root
+FLUENT_MONGODB_PASSWORD=root
+```
+## 設定 raccoon.env
+- 複製 `raccoon-dicom` 內的 `.env.template` 檔案至當前目錄且命名為 `raccoon.env`
+- 複製後，檔案目錄如下
+```sh
+.
+│   .env
+│   docker-compose.yaml
+│   raccoon.env
+│
+└───raccoon-dicom
+```
+- 修改 `raccoon.env` 檔案，原先的檔案沒有`FLUENT_MONGODB_USER`以及`FLUENT_MONGODB_PASSWORD`，請務必自行加入這兩個設定，其餘設定請按照自己的需求修改
+```sh
+# ...省略
+FLUENT_MONGODB_USER=root
+FLUENT_MONGODB_PASSWORD=root
+# ...省略
+```
+
+## 設定 raccoon-plugins.config.js
+- 複製`raccoon-dicom/plugins/config.example.js` 到當前目錄，並命名為`raccoon-plugins.config.js`
+- 複製後，檔案目錄如下
+```sh
+.
+│   .env
+│   docker-compose.yaml
+│   raccoon-plugins.config.js
+│   raccoon.env
+│
+└───raccoon-dicom
+```
+- 請依照自己的需求修改 `raccoon-plugins.config.js` 檔案
+
+## docker compose 部屬
+- 上面的檔案都設定完之後，請執行以下指令以 docker compose 啟動 raccoon
+```sh
+sudo docker compose up
+```
+
+
 # 額外閱讀
 
 ## 允許 postgresql 接受外部 ip 連接
