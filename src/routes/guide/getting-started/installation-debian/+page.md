@@ -836,7 +836,11 @@ services:
       - source: raccoon-plugins
         target: /nodejs/raccoon/plugins/config.js
     volumes :
+      # 當使用 gitlab 的 Image 時，請記得修改 raccoon-storage 的權限
+      # 第一種 sudo chmod -R 777 raccoon-storage
+      # 第二種 sudo chown -R 999:999 raccoon-storage
       - ./raccoon-storage:/dicomFiles
+      # 當使用 gitlab 的 Image 時，可刪除下面的 volumes
       - raccoon_modules:/nodejs/raccoon/node_modules
     ports:
       - 8081:8081
