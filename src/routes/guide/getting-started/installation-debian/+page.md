@@ -3,6 +3,10 @@
     import CenterImage from "$components/CenterImage.svelte";
 
     let host = "{host}";
+
+    let pathname = `${base}/getting-started/installation-debian`;
+    let hashTagOAuthKeycloakSetup = `${pathname}#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD`;
+    let hashTagLoggingSystem = `${pathname}#Logging-System`;
 </script>
 
 # Installation
@@ -301,7 +305,7 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 
 ### OAuth
 :::tip[tip]
-OAuth Server 的架設可以參考 [OAuth Keycloak 架設](#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD) 章節
+OAuth Server 的架設可以參考 [OAuth Keycloak 架設]({hashTagOAuthKeycloakSetup}) 章節
 :::
 - plugin 名稱: `oauth`
 
@@ -343,7 +347,7 @@ OAuth Server 的架設可以參考 [OAuth Keycloak 架設](#OAuth-Keycloak-%E6%9
 
 ### Staticstic mongodb (使用量分析) 設定
 :::important[注意事項]
-📢 若你需要使用量分析的功能，請先參考 [Logging System](#Logging-System) 的安裝方式，讓 log 同步到資料庫才能進行使用量分析
+📢 若你需要使用量分析的功能，請先參考 [Logging System]({hashTagLoggingSystem}) 的安裝方式，讓 log 同步到資料庫才能進行使用量分析
 :::
 
 - plugin name: `statistic-mongodb`
