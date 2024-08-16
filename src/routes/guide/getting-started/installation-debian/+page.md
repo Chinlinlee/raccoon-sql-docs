@@ -299,36 +299,6 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 - 你可以參考 `config.template.js` 進行修改
 - **如果你不需要使用 plugin，你可以直接複製 `config.template.js`並命名為 `config.js` 即可**
 
-### User plugin (本地驗證) 設定
-
-- User plugin 名稱: `local-auth`
-
-| 欄位名稱 | 描述 |
-| --- | --- |
-| routers.[x].path | 要套用到的 router path (可以使用星號 “*” 代表所有路徑) |
-| routers.[x].method | 要套用的 router method，可接受 get, post, put, delete |
-| admin.username | admin 的帳號 |
-| admin.password | admin 的密碼 |
-| adminRouters.[x].path | 要套用到的 router path (可以使用星號 “*” 代表所有路徑) |
-| adminRouters.[x].method | 要套用的 router method，可接受 get, post, put, delete | |
-
-```js
-  "local-auth": {
-      enable: false,
-      before: true,
-      routers: [
-          {
-              path: "*",
-              method: "get"
-          }
-      ],
-      admin: {
-          username: "admin",
-          password: "admin"
-      }
-  }
-```
-
 ### OAuth
 :::tip[tip]
 OAuth Server 的架設可以參考 [OAuth Keycloak 架設](#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD) 章節
