@@ -34,9 +34,13 @@ features:
     import { onMount } from "svelte";
 
     let heroImage = `${base}/raccoon.png`;
+    let github = "https://github.com/Chinlinlee/raccoon-dicom";
 
     onMount(() => {
         let heroImageEl = document.querySelector(".hero-image > img:nth-child(1)");
         heroImageEl.setAttribute("src", heroImage);
+
+        let viewOnGithub = document.querySelector(".actions > a");
+        viewOnGithub.setAttribute("href", github);
     });
 </script>

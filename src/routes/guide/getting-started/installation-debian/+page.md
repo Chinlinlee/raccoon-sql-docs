@@ -810,6 +810,89 @@ node server.js
 └───raccoon-dicom
 ```
 - 複製 raccoon-dicom 裡的`docker-compose.fluent.example.yaml`到當前檔案目錄並命名為`docker-compose.yaml`
+- 其內容如下
+```yaml
+name: raccoon
+
+volumes:
+  raccoon_modules:
+
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: 50m
+    max-file: 3
+
+networks:
+  db:
+    driver: bridge
+  backend:
+    driver: bridge
+
+configs:
+  raccoon-plugins:
+    file: ./raccoon-plugins.config.js
+
+services:
+  raccoon-postgres:
+    image: postgres:16-alpine
+    container_name : raccoon-postgres
+    restart: unless-stopped
+    ports:
+      - 5432:5432
+    volumes:
+      - ./raccoon-postgres:/var/lib/postgresql/data
+    environment:
+      # provide your credentials here
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      TZ: Asia/Taipei
+    networks:
+      - db
+    logging: *logging
+    
+  raccoon:
+    build:
+      context : ./raccoon-dicom
+      dockerfile : Dockerfile-fluent
+    container_name: raccoon
+    # 若你擁有 gitlab.dicom.tw 的權限
+    # 可以更改把 image 成 gitlab-registry.dicom.tw/a5566qq123/raccoon-dicom:2.2.0
+    # 也請記得將 build 區塊刪除
+    image: raccoon:2.2.0
+    env_file:
+      - ./raccoon.env
+    configs:
+      - source: raccoon-plugins
+        target: /nodejs/raccoon/plugins/config.js
+    volumes :
+      - ./raccoon-storage:/dicomFiles
+      - raccoon_modules:/nodejs/raccoon/node_modules
+    ports:
+      - 8081:8081
+      - 11112:11112
+    depends_on:
+      - raccoon-postgres
+    restart: unless-stopped
+    networks:
+      - db
+      - backend
+    logging: *logging
+
+  fluentd-mongo:
+    image: mongo:7.0
+    container_name: fluentd-mongo
+    volumes:
+      - ./raccoon-fluentd-mongo:/data/db
+    restart: unless-stopped
+    environment:
+      TZ: Asia/Taipei
+      MONGO_INITDB_ROOT_USERNAME: ${FLUENT_MONGODB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${FLUENT_MONGODB_PASSWORD}
+    networks:
+      - backend
+    logging: *logging
+```
 - 複製後的檔案目錄應該長這樣
 ```bash
 .
