@@ -4,9 +4,8 @@
 
     let host = "{host}";
 
-    let pathname = `${base}/getting-started/installation-debian`;
-    let hashTagOAuthKeycloakSetup = `${pathname}#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD`;
-    let hashTagLoggingSystem = `${pathname}#Logging-System`;
+    let hashTagOAuthKeycloakSetup = `#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD`;
+    let hashTagLoggingSystem = `#Logging-System`;
 </script>
 
 # Installation
