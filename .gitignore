@@ -18,3 +18,5 @@ node_modules
 # Other
 .DS_Store
 **/.sveltepress
+
+**/.env

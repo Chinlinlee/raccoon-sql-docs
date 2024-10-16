@@ -1,7 +1,14 @@
 import { defineConfig } from 'vite'
 import { sveltepress } from '@sveltepress/vite'
 import { defaultTheme } from '@sveltepress/theme-default'
-const base = process.env.NODE_ENV === "production" ? "/raccoon-sql-docs" : "";
+import { config as dotConfig } from 'dotenv';
+dotConfig();
+
+if (!process.env.BASE_URL) {
+  throw new Error('BASE_URL environment variable is not set');
+}
+
+const base = process.env.NODE_ENV === "production" ? process.env.BASE_URL + "/current" : "";
 
 const config = defineConfig({
   plugins: [
