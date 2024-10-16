@@ -7,7 +7,7 @@ node_modules
 /public/build
 
 # SvelteKit
-/.svelte-kit
+**/.svelte-kit
 
 # IDE/Editor specific
 .vscode
@@ -17,4 +17,4 @@ node_modules
 
 # Other
 .DS_Store
-/.sveltepress
+**/.sveltepress

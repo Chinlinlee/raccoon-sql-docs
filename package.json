@@ -3,23 +3,14 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite dev",
-    "build": "vite build"
+    "dev": "pnpm --filter current dev",
+    "build": "pnpm --filter \"@raccoon-docs/*\" run build && pnpm --filter post-build start"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "^3.0.1",
-    "@sveltejs/kit": "^2.5.0",
-    "@sveltepress/theme-default": "^1.22.3",
-    "@sveltepress/vite": "^0.31.3",
     "@types/node": "^20.11.16",
     "svelte": "^4.2.10",
     "vite": "^5.0.12"
   },
   "type": "module",
-  "license": "MIT",
-  "dependencies": {
-    "clsx": "^2.1.0",
-    "medium-zoom": "^1.1.0",
-    "tailwind-merge": "^2.2.2"
-  }
+  "license": "MIT"
 }

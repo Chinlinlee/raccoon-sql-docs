@@ -1,0 +1,23 @@
+{
+  "name": "@raccoon-docs/core",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@sveltejs/kit": "^2.5.0",
+    "@types/node": "^20.11.16",
+    "svelte": "^4.2.10",
+    "vite": "^5.0.12"
+  },
+  "dependencies": {
+    "clsx": "^2.1.0",
+    "medium-zoom": "^1.1.0",
+    "tailwind-merge": "^2.2.2"
+  }
+}
