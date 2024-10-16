@@ -4,7 +4,7 @@ import { defaultTheme } from '@sveltepress/theme-default'
 import { config as dotConfig } from 'dotenv';
 dotConfig();
 
-if (!process.env.BASE_URL) {
+if (process.env.BASE_URL === undefined || process.env.BASE_URL === null) {
   throw new Error('BASE_URL environment variable is not set');
 }
 
