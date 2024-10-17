@@ -21,6 +21,7 @@
     "vite": "^5.0.12"
   },
   "dependencies": {
-    "@raccoon-docs/core": "workspace:*"
+    "@raccoon-docs/core": "workspace:*",
+    "dotenv": "^16.4.5"
   }
 }

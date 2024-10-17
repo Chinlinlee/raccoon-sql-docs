@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
-    "dev": "pnpm --filter current dev",
+    "dev": "pnpm --filter @raccoon-docs/current dev",
     "build": "pnpm --filter \"@raccoon-docs/*\" run build && pnpm --filter post-build start"
   },
   "devDependencies": {

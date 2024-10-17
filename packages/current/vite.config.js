@@ -8,6 +8,10 @@ if (process.env.BASE_URL === undefined || process.env.BASE_URL === null) {
   throw new Error('BASE_URL environment variable is not set');
 }
 
+if (process.env.VERSION_PAGE_BASE_URL === undefined || process.env.VERSION_PAGE_BASE_URL === null) {
+  throw new Error('VERSION_PAGE_BASE_URL environment variable is not set');
+}
+
 const base = process.env.NODE_ENV === "production" ? process.env.BASE_URL + "/current" : "";
 
 const config = defineConfig({
@@ -19,6 +23,19 @@ const config = defineConfig({
           {
             "title": "Guide",
             "to": `${base}/guide/developer/foundation/`
+          },
+          {
+            "title": "Version",
+            "items": [
+              {
+                "title": "v2.2.0 (current)",
+                "to": `${base}/`
+              },
+              {
+                "title": "v2.2.0",
+                "to": `${process.env.VERSION_PAGE_BASE_URL}/v2-2-0/`
+              }
+            ]
           }
         ],
         sidebar: {
