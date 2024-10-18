@@ -28,8 +28,8 @@ const config = defineConfig({
             "title": "Version",
             "items": [
               {
-                "title": "v2.2.0 (current)",
-                "to": `${base}/`
+                "title": "v2.3.0 (current)",
+                "to": `${process.env.VERSION_PAGE_BASE_URL}/current`
               },
               {
                 "title": "v2.2.0",
