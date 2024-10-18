@@ -28,7 +28,7 @@ const config = defineConfig({
             "title": "Version",
             "items": [
               {
-                "title": "v2.2.0 (current)",
+                "title": "v2.3.0 (current)",
                 "to": `${base}/`
               },
               {
@@ -94,6 +94,10 @@ const config = defineConfig({
                 {
                   title: "OAuth 串接",
                   to: "/guide/developer/oauth/"
+                },
+                {
+                  title: "mocha 測試報告",
+                  to: `${process.env.VERSION_PAGE_BASE_URL}/current/mocha-report/mochawesome.html`
                 }
               ]
             }

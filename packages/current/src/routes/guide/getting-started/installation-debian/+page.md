@@ -139,8 +139,22 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 - env file
     
     ```ini
+    DB_TYPE="sql"
+    FLUENT_MONGODB_USER=root
+    FLUENT_MONGODB_PASSWORD=root
+    
+    # MongoDB
+    MONGODB_NAME="raccoon"
+    MONGODB_HOSTS=["127.0.0.1"]
+    MONGODB_PORTS=[27017]
+    MONGODB_USER="root"
+    MONGODB_PASSWORD="root"
+    MONGODB_AUTH_SOURCE="admin"
+    MONGODB_OPTIONS=""
+    MONGODB_IS_SHARDING_MODE=false
+    
     # SQL
-    SQL_HOST="127.0.0.1"
+    SQL_HOST="raccoon-postgres"
     SQL_PORT="5432"
     SQL_DB="raccoon"
     SQL_TYPE="postgres"
@@ -148,10 +162,12 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
     SQL_PASSWORD="postgres"
     SQL_LOGGING=false
     SQL_FORCE_SYNC=false
+    SQL_ALTER_SYNC=false
     
     # Server
     SERVER_PORT=8081
     SERVER_SESSION_SECRET_KEY="secret-key"
+    DICOM_DELETE_SCHEDULE="0 */1 * * *"
     
     # DICOM Web
     DICOM_STORE_ROOTPATH="/dicomFiles"
@@ -162,9 +178,14 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
     
     # DICOM DIMSE
     ENABLE_DIMSE=true
+    DIMSE_CHECK_STORE_SCU_AE=false
+    DIMSE_CHECK_FIND_SCU_AE=false
+    DIMSE_CHECK_MOVE_SCU_AE=false
+    RESTART_SCHEDULE="0 3 * * *" # At 03:00
     DIMSE_AE_TITLE="RACCOONQRSCP" # default: RACCOONQRSCP
     DIMSE_HOSTNAME="0.0.0.0" # default: 127.0.0.1
     DIMSE_PORT=11112 # default: 11112
+    DIMSE_FIND_MAX_COUNT=100
     DIMSE_MAX_PDULEN_RCV=16378
     DIMSE_MAX_PDULEN_SND=16378
     DIMSE_NOT_ASYNC=false
@@ -187,19 +208,13 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
     DIMSE_TCP_DELAY=false
     
     # DIMSE TLS
-    DIMSE_TLS=false
-    DIMSE_TLS_NULL=false
-    DIMSE_TLS_3DES=false
-    DIMSE_TLS_AES=false
-    DIMSE_TLS_CIPHER=""
+    DIMSE_ENABLE_TLS=false
     
-    DIMSE_TLS13=false
-    DIMSE_TLS12=false
-    DIMSE_TLS11=false
-    DIMSE_TLS1=false
-    DIMSE_SSL3=false
-    DIMSE_SSL2HELLO=false
-    DIMSE_TLS_PROTOCOL=""
+    # DIMSE Cipher
+    DIMSE_TLS_CIPHER=["SSL_RSA_WITH_NULL_SHA","TLS_RSA_WITH_AES_128_CBC_SHA","SSL_RSA_WITH_3DES_EDE_CBC_SHA"]
+    
+    # DIMSE Protocol
+    DIMSE_TLS_PROTOCOL=["TLSv1.3","TLSv1.2","TLSv1.1","TLSv1"]
     DIMSE_TLS_EIA_HTTPS=false
     DIMSE_TLS_EIA_LDAPS=false
     DIMSE_TLS_NOAUTH=false
@@ -210,21 +225,17 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
     DIMSE_TRUST_STORE="./config/certs/cacerts.p12"
     DIMSE_TRUST_STORE_TYPE="PKCS12"
     DIMSE_TRUST_STORE_PASS="secret"
-    
-    # FHIR
-    SYCN_TO_FHIR_SERVER=false
-    FHIRSERVER_BASE_URL="http://localhost:8088/fhir"
-    
     ```
     
 
 #### 環境變數資訊
 
-<details>
-    <summary>點擊查看更多</summary>
 
 | Field Name | Type of Value | Description |
 | --- | --- | --- |
+| DB_TYPE | string | Raccoon 所使用的資料庫類別，目前支援: sql, mongodb |
+| FLUENT_MONGODB_USER | string | 用於與 Fluentd 的 MongoDB 伺服器認證的使用者名稱，主要用於 docker |
+| FLUENT_MONGODB_PASSWORD | string | 用於與 Fluentd 的 MongoDB 伺服器認證的密碼，主要用於 docker |
 | #SQL |  |  |
 | SQL_HOST | string | SQL 伺服器的主機名稱或 IP 地址 |
 | SQL_PORT | array of strings | SQL 伺服器運行的端口號。正常情況下，PostgreSQL 使用 5432 |
@@ -234,19 +245,34 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 | SQL_PASSWORD | string | 用於與 SQL 伺服器認證的密碼 |
 | SQL_LOGGING | boolean | 啟用或禁用 sequelize 的日誌記錄。false 為禁用，true 為啟用 |
 | SQL_FORCE_SYNC | boolean | 啟動時強制同步資料庫架構 ( 會將資料全部刪除並重建 tables )。false 為禁用，true 為啟用 |
+| #MongoDB |  |  |
+| MONGODB_NAME | string | MongoDB 伺服器的資料庫名稱 |
+| MONGODB_HOSTS | string[] | MongoDB 伺服器的主機名稱或 IP 地址 |
+| MONGODB_PORTS | number[] | MongoDB 伺服器運行的埠(port)號 |
+| MONGODB_USER | string | 用於與 MongoDB 伺服器認證的使用者名稱 |
+| MONGODB_PASSWORD | string | 用於與 MongoDB 伺服器認證的密碼 |
+| MONGODB_OPTIONS | string | MongoDB 連接時的選項 |
+| MONGODB_IS_SHARDING_MODE | boolean | 是否為分片模式 |
 | #Server |  |  |
 | SERVER_PORT | number | 伺服器運行的埠(port)號 |
 | SERVER_SESSION_SECRET_KEY | string | 用於 session 的保密金鑰 |
+| DICOM_DELETE_SCHEDULE | string | 定時刪除 DICOM 檔案的時間，格式使用 crontab |
 | #DICOMweb |  |  |
 | DICOM_STORE_ROOTPATH | string | 存放 DICOM 檔案的根目錄 |
 | DICOMWEB_HOST | string | DICOM Web 伺服器的主機名稱。用於組合 00081190 (Retrieve URL)。您可以在字串中使用 \{host\}，它將替換為 request.headers.host |
 | DICOMWEB_PORT | number | DICOM Web 伺服器運行的埠(port)號。用於組合 00081190 (Retrieve URL)e.g. 8088，將會產生 http://example.com:8088/dicom-web/studies |
+| DICOMWEB_API  | string | DICOM Web API 路徑。用於組合 00081190 (Retrieve URL)，e.g. /dicom-web，將會產生 http://example.com:8088/dicom-web/studies |
 | DICOMWEB_AE | string | 設定要回傳的 Retrieve AE Title (0008,0054)，若 DIMSE 服務為開啟狀態，將優先使用 DIMSE 的 AE Title |
 | #DIMSE |  |  |
 | ENABLE_DIMSE | boolean | 是否啟用 DICOM DIMSE 服務 |
+| DIMSE_CHECK_STORE_SCU_AE | boolean | 是否啟用檢查 DIMSE C-STORE SCU AE 功能 |
+| DIMSE_CHECK_FIND_SCU_AE | boolean | 是否啟用檢查 DIMSE C-FIND SCU AE 功能 |
+| DIMSE_CHECK_MOVE_SCU_AE | boolean | 是否啟用檢查 DIMSE C-MOVE SCU AE 功能 |
+| RESTART_SCHEDULE | string | 定時重啟 DICOM DIMSE 服務的時間，格式使用 crontab |
 | DIMSE_AE_TITLE | string | DICOM DIMSE 的 Application Entity title (AETitle). |
 | DIMSE_HOSTNAME | string | DICOM DIMSE 的 Hostname |
 | DIMSE_PORT | number | DICOM DIMSE 的 port 號 |
+| DIMSE_FIND_MAX_COUNT | number | DIMSE C-FIND 的最大回傳筆數 (Default 為 100) |
 | DIMSE_MAX_PDULEN_RCV | number | specifies maximal length of received P-DATA TF PDUs communicated during association establishment. 0 indicates that no maximum length is specified. 16378 by default |
 | DIMSE_MAX_PDULEN_SND | number | specifies maximal length of sent P-DATA-TF PDUs by this AE. The actual maximum length of sent P-DATA-TF PDUs is also limited by the maximal length of received P-DATA-TF PDUs of the peer AE communicated during association establishment. 16378 by default |
 | DIMSE_NOT_ASYNC | boolean | do not use asynchronous mode; equivalent to --max-ops-invoked=1 and --max-ops-performed=1 |
@@ -267,18 +293,9 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 | DIMSE_SOSND_BUFFER | number | set SO_SNDBUF socket option to specified value |
 | DIMSE_SORCV_BUFFER | number | set SO_RCVBUF socket option to specified value |
 | DIMSE_TCP_DELAY | boolean | set TCP_NODELAY socket option to false, true by default |
-| DIMSE_TLS | boolean | enable TLS connection without encryption or with AES or 3DES encryption; equivalent to --tls-cipher SSL_RSA_WITH_NULL_SHA --tls-cipher TLS_RSA_WITH_AES_128_CBC_SHA --tls-cipher SSL_RSA_WITH_3DES_EDE_CBC_SHA |
-| DIMSE_TLS_NULL | boolean | enable TLS connection without encryption; equivalent to --tls-cipher SSL_RSA_WITH_NULL_SHA |
-| DIMSE_TLS_3DES | boolean | enable TLS connection with 3DES encryption; equivalent to --tls-cipher SSL_RSA_WITH_3DES_EDE_CBC_SHA |
-| DIMSE_TLS_AES | boolean | enable TLS connection with AES or 3DES encryption; equivalent to --tls-cipher TLS_RSA_WITH_AES_128_CBC_SHA --tls-cipher SSL_RSA_WITH_3DES_EDE_CBC_SHA |
-| DIMSE_TLS_CIPHER | string | enable TLS connection with specified Cipher Suite. Multiple Cipher Suites may be enabled by multiple --tls-cipher options |
-| DIMSE_TLS13 | boolean | enable only TLS/SSL protocol TLSv1.3; equivalent to --tls-protocol TLSv1.3 |
-| DIMSE_TLS12 | boolean | enable only TLS/SSL protocol TLSv1.2; equivalent to --tls-protocol TLSv1.2 |
-| DIMSE_TLS11 | boolean | enable only TLS/SSL protocol TLSv1.1; equivalent to --tls-protocol TLSv1.1 |
-| DIMSE_TLS1 | boolean | enable only TLS/SSL protocol TLSv1; equivalent to --tls-protocol TLSv1 |
-| DIMSE_SSL3 | boolean | enable only TLS/SSL protocol SSLv3; equivalent to --tls-protocol SSLv3 |
-| DIMSE_SSL2HELLO | boolean | send/accept SSLv3/TLS ClientHellos encapsulated in a SSLv2 ClientHello packet; equivalent to --tls-protocol SSLv2Hello --tls-protocol SSLv3 --tls-protocol TLSv1 --tls-protocol TLSv1.1 --tls-protocol TLSv1.2 |
-| DIMSE_TLS_PROTOCOL | string | TLS/SSL protocol to use. Multiple TLS/SSL protocols may be enabled by multiple --tls-protocol options. Supported values by Java 11: TLSv1, TLSv1.1, TLSv1.2, TLSv1.3, SSLv3, SSLv2Hello. By default, only TLSv1.2 is enabled. |
+| DIMSE_ENABLE_TLS | boolean | 是否啟用 TLS |
+| DIMSE_TLS_CIPHER | string[] | TLS 所使用的 Cipher Suite，e.g. ["SSL_RSA_WITH_NULL_SHA","TLS_RSA_WITH_AES_128_CBC_SHA","SSL_RSA_WITH_3DES_EDE_CBC_SHA"] |
+| DIMSE_TLS_PROTOCOL | string[] | TLS 所支援的 Protocol，e.g. ["TLSv1.3","TLSv1.2","TLSv1.1","TLSv1"] |
 | DIMSE_TLS_EIA_HTTPS | boolean | enable server endpoint identification according RFC 2818: HTTP Over TLS |
 | DIMSE_TLS_EIA_LDAPS | boolean | enable server endpoint identification according RFC 2830: LDAP Extension for TLS |
 | DIMSE_TLS_NOAUTH | boolean | disable client authentication for TLS |
@@ -289,9 +306,6 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 | DIMSE_TRUST_STORE | string | file path of key store containing trusted certificates, config/certs/cacerts.p12 by default |
 | DIMSE_TRUST_STORE_TYPE | string | type of key store with trusted certificates, PKCS12 by default |
 | DIMSE_TRUST_STORE_PASS | string | password for key store with trusted certificates, 'secret' by default |
-
-</details>
-
 
 ## Plugin 設定
 
