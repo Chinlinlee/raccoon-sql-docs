@@ -104,6 +104,10 @@ const config = defineConfig({
                 {
                   title: "getStudyFhir - 獲取 Study 的 FHIR 資料",
                   to: "/guide/plugin-list/get-study-fhir/"
+                },
+                {
+                  title: "statistics",
+                  to: "/guide/plugin-list/statistics"
                 }
               ]
             }
