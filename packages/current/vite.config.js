@@ -101,6 +101,16 @@ const config = defineConfig({
                   to: `${process.env.VERSION_PAGE_BASE_URL}/current/mocha-report/mochawesome.html`
                 }
               ]
+            },
+            {
+              title: "插件列表",
+              collapsible: true,
+              items: [
+                {
+                  title: "getStudyFhir - 獲取 Study 的 FHIR 資料",
+                  to: "/guide/plugin-list/get-study-fhir/"
+                }
+              ]
             }
           ]
         },
