@@ -1,8 +1,8 @@
 import adapter from '@sveltejs/adapter-static'
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte'
-import { config as dotConfig } from 'dotenv'
+import myDotenvConfig from "@raccoon-docs/core/src/libs/dotenv.js";
 
-dotConfig();
+myDotenvConfig();
 
 /**
  * @type {import('@sveltejs/kit').Config}

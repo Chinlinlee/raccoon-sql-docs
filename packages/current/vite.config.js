@@ -1,8 +1,9 @@
 import { defineConfig } from 'vite'
 import { sveltepress } from '@sveltepress/vite'
 import { defaultTheme } from '@sveltepress/theme-default'
-import { config as dotConfig } from 'dotenv';
-dotConfig();
+import myDotenvConfig from "@raccoon-docs/core/src/libs/dotenv.js";
+
+myDotenvConfig();
 
 if (process.env.BASE_URL === undefined || process.env.BASE_URL === null) {
   throw new Error('BASE_URL environment variable is not set');

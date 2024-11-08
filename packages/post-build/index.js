@@ -1,10 +1,13 @@
 import fs from "fs-extra";
 
-const DOCS = [
-    "../current"
+const VERSIONS = [
+    "current",
+    "v2-2-0",
+    "v2-3-0"
 ];
 
-await fs.move("../current/docs", "../../docs/current", { overwrite: true, directoryMode: 0o755 });
-await fs.move("../v2-2-0/docs", "../../docs/v2-2-0", { overwrite: true, directoryMode: 0o755 });
+for (const version of VERSIONS) {
+    await fs.move(`../${version}/docs`, `../../docs/${version}`, { overwrite: true, directoryMode: 0o755 });
+}
 
 fs.copySync("../../mocha-report/current", "../../docs/current/mocha-report", { overwrite: true, directoryMode: 0o755 });
