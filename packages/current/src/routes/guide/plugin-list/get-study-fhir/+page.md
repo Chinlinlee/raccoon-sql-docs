@@ -9,7 +9,7 @@
 此插件會為 Raccoon 加入一個新的 API: GET /dicom-web/studies/:studyUID/fhir，用於取得 Study 的 Patient, Endpoint 以及 ImagingStudy Resources。
 
 ## 設定檔
-- 請修改 `config/plugins/config.js`
+- 請修改 `plugins/config.js`
 ```js
 module.exports.pluginsConfig = {
     // 省略...
