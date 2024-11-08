@@ -2,6 +2,7 @@ import { defineConfig } from 'vite'
 import { sveltepress } from '@sveltepress/vite'
 import { defaultTheme } from '@sveltepress/theme-default'
 import myDotenvConfig from "@raccoon-docs/core/src/libs/dotenv.js";
+import versionNavbar from '@raccoon-docs/core/src/libs/versionNavbar.js';
 
 myDotenvConfig();
 
@@ -26,17 +27,7 @@ const config = defineConfig({
             "to": `${base}/guide/developer/foundation/`
           },
           {
-            "title": "Version",
-            "items": [
-              {
-                "title": "v2.3.0 (current)",
-                "to": `${base}/`
-              },
-              {
-                "title": "v2.2.0",
-                "to": `${process.env.VERSION_PAGE_BASE_URL}/v2-2-0/`
-              }
-            ]
+            ...versionNavbar
           }
         ],
         sidebar: {
@@ -106,6 +97,10 @@ const config = defineConfig({
               title: "插件列表",
               collapsible: true,
               items: [
+                {
+                  title: "OAuth",
+                  to: "/guide/plugin-list/oauth/"
+                },
                 {
                   title: "getStudyFhir - 獲取 Study 的 FHIR 資料",
                   to: "/guide/plugin-list/get-study-fhir/"
