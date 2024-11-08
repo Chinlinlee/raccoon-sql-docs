@@ -41,4 +41,4 @@ alt="postman demo"
 title="postman 測試 demo">
 </CenterImage>
 
-- [查看產生的 json 範例]({pageUrl}/current/plugin-list/get-study-fhir/example.json)
+- [查看產生的 json 範例](/plugin-list/get-study-fhir/example.json)
