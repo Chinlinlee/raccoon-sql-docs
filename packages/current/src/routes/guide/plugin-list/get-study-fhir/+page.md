@@ -3,6 +3,7 @@
     import CenterImage from "@raccoon-docs/core/src/components/CenterImage.svelte";
 
     let host = "{host}";
+    let pageUrl = process.env.VERSION_PAGE_BASE_URL;
 </script>
 
 # getStudyFhir 插件
@@ -40,4 +41,4 @@ alt="postman demo"
 title="postman 測試 demo">
 </CenterImage>
 
-- <Link to="{base}/plugin-list/get-study-fhir/example.json" label="查看產生的 json 範例"></Link>
+- [查看產生的 json 範例]({pageUrl}/current/plugin-list/get-study-fhir/example.json)
