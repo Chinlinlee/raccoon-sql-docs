@@ -327,8 +327,10 @@ OAuth Server 的架設可以參考 <Link to="#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD"
 | `server.realm` | The realm for authentication. |
 | `server.clientId` | The client ID for authentication. |
 | `server.clientSecret` | The client secret for authentication. |
-| `adminRouters[x].path` | The path for the audit log route. |
-| `adminRouters[x].method` | The HTTP method to be used for the audit log route. |
+| `acl.enable`| Enable access control |
+| `acl.roles[x].name` | The name of the role. |
+| `acl.roles[x].routers[x].path` | The path pattern. |
+| `acl.roles[x].routers[x].method` | The HTTP method to be used for the route. can use wildcard |
 
 ```js
 "oauth": {
@@ -346,12 +348,25 @@ OAuth Server 的架設可以參考 <Link to="#OAuth-Keycloak-%E6%9E%B6%E8%A8%AD"
         clientId: "account",
         clientSecret: "clientSecret"
     },
-    adminRouters: [
-        {
-            path: "audit-log",
-            method: "get"
-        }
-    ]
+    acl: {
+        // In best practice, you should setting the acl
+        enable: false,
+        roles: [
+            {
+                name: "admin",
+                routers: [
+                    { path: "/admin/*", method: "GET" },
+                    { path: "/api/*", method: "*" }
+                ]
+            },
+            {
+                name: "user",
+                routers: [
+                    { path: "/api/public/*", method: "GET" }
+                ]
+            }
+        ]
+    }
 }
 ```
 

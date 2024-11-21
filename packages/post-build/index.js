@@ -3,7 +3,8 @@ import fs from "fs-extra";
 const VERSIONS = [
     "current",
     "v2-2-0",
-    "v2-3-0"
+    "v2-3-0",
+    "v2-4-x",
 ];
 
 for (const version of VERSIONS) {

@@ -106,10 +106,10 @@ importers:
         version: 2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
       '@sveltepress/theme-default':
         specifier: 3.1.0
-        version: 3.1.0(@algolia/client-search@4.24.0)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltepress/vite@0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@2.79.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@2.79.2)(search-insights@2.17.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))(workbox-build@7.1.1)(workbox-window@7.1.0)
+        version: 3.1.0(@algolia/client-search@4.24.0)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltepress/vite@0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@4.24.0)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@4.24.0)(search-insights@2.17.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))(workbox-build@7.1.1)(workbox-window@7.1.0)
       '@sveltepress/vite':
         specifier: 0.35.0
-        version: 0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@2.79.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
+        version: 0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@4.24.0)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
       '@types/node':
         specifier: ^20.11.16
         version: 20.16.11
@@ -141,6 +141,37 @@ importers:
       '@sveltepress/vite':
         specifier: 0.35.0
         version: 0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@4.24.0)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
+      '@types/node':
+        specifier: ^20.11.16
+        version: 20.16.11
+      svelte:
+        specifier: ^4.2.10
+        version: 4.2.19
+      vite:
+        specifier: ^5.0.12
+        version: 5.4.9(@types/node@20.16.11)(terser@5.35.0)
+
+  packages/v2-4-x:
+    dependencies:
+      '@raccoon-docs/core':
+        specifier: workspace:*
+        version: link:../core
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+    devDependencies:
+      '@sveltejs/adapter-static':
+        specifier: ^3.0.1
+        version: 3.0.5(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))
+      '@sveltejs/kit':
+        specifier: ^2.5.0
+        version: 2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
+      '@sveltepress/theme-default':
+        specifier: 3.1.0
+        version: 3.1.0(@algolia/client-search@4.24.0)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltepress/vite@0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@2.79.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@2.79.2)(search-insights@2.17.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))(workbox-build@7.1.1)(workbox-window@7.1.0)
+      '@sveltepress/vite':
+        specifier: 0.35.0
+        version: 0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@2.79.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
       '@types/node':
         specifier: ^20.11.16
         version: 20.16.11
@@ -4920,9 +4951,9 @@ snapshots:
     dependencies:
       run-applescript: 7.0.0
 
-  bundle-require@5.0.0(esbuild@0.21.5):
+  bundle-require@5.0.0(esbuild@0.23.1):
     dependencies:
-      esbuild: 0.21.5
+      esbuild: 0.23.1
       load-tsconfig: 0.2.5
 
   cac@6.7.14: {}
@@ -5427,9 +5458,9 @@ snapshots:
 
   importx@0.4.4:
     dependencies:
-      bundle-require: 5.0.0(esbuild@0.21.5)
+      bundle-require: 5.0.0(esbuild@0.23.1)
       debug: 4.3.7
-      esbuild: 0.21.5
+      esbuild: 0.23.1
       jiti: 2.0.0-beta.3
       jiti-v1: jiti@1.21.6
       pathe: 1.1.2

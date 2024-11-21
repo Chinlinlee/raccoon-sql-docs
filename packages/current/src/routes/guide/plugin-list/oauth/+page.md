@@ -9,6 +9,10 @@
 # OAuth 插件
 此插件會為 Raccoon 加入 middleware，在進到主要程序前，會至指定的驗證伺服器驗證使用者提供的 Token 是否有效
 
+:::tip[小知識]
+此功能在 v2.6.0 後針對 role 使用 acl (access control list)設定
+:::
+
 ## 設定檔
 - 請修改 `plugins/config.js`
 ```js
@@ -49,8 +53,10 @@ module.exports.pluginsConfig = {
 | `server.realm` | The realm for authentication. |
 | `server.clientId` | The client ID for authentication. |
 | `server.clientSecret` | The client secret for authentication. |
-| `adminRouters[x].path` | The path for the audit log route. |
-| `adminRouters[x].method` | The HTTP method to be used for the audit log route. |
+| `acl.enable`| Enable access control |
+| `acl.roles[x].name` | The name of the role. |
+| `acl.roles[x].routers[x].path` | The path pattern. |
+| `acl.roles[x].routers[x].method` | The HTTP method to be used for the route. can use wildcard |
 
 ## 測試案例
 - 使用 postman 呼叫 GET http://127.0.0.1:8081/dicom-web/studies/，若設定成功，會出現 401 Unauthorized 的錯誤
