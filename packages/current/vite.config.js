@@ -3,6 +3,7 @@ import { sveltepress } from '@sveltepress/vite'
 import { defaultTheme } from '@sveltepress/theme-default'
 import myDotenvConfig from "@raccoon-docs/core/src/libs/dotenv.js";
 import versionNavbar from '@raccoon-docs/core/src/libs/versionNavbar.js';
+import { title } from 'process';
 
 myDotenvConfig();
 
@@ -50,6 +51,10 @@ const config = defineConfig({
                 {
                   title: "基礎觀念",
                   to: "/guide/developer/foundation/"
+                },
+                {
+                  title: "如何測試",
+                  to: "/guide/developer/how-to-test/"
                 },
                 {
                   title: "影像處理相關",

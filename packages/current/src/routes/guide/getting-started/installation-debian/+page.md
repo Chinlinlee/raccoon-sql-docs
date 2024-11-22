@@ -790,7 +790,7 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
 ### Keycloak 常用的 API endpoint
 - 來源: https://www.keycloak.org/docs/latest/securing_apps/#available-endpoints
 
-# 部署
+## 部署
 
 運行以下指令開啟 raccoon
 
@@ -798,7 +798,7 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
 node server.js
 ```
 
-# 使用 docker-compose
+## 使用 docker-compose
 :::important[注意事項]
 以下使用的 compose file 並無 keycloak，請自行上網參閱
 :::
@@ -904,7 +904,8 @@ services:
 └───raccoon-dicom
 ```
 
-## 創建 .env 檔案
+
+### 創建 .env 檔案
 - 在目錄下創建`.env`檔案，此檔案是給 docker-compose 使用的
 - 創建後，檔案目錄如下
 ```bash
@@ -924,7 +925,7 @@ POSTGRES_PASSWORD=postgres
 FLUENT_MONGODB_USER=root
 FLUENT_MONGODB_PASSWORD=root
 ```
-## 設定 raccoon.env
+### 設定 raccoon.env
 - 複製 `raccoon-dicom` 內的 `.env.template` 檔案至當前目錄且命名為 `raccoon.env`
 - 複製後，檔案目錄如下
 ```sh
@@ -943,7 +944,7 @@ FLUENT_MONGODB_PASSWORD=root
 # ...省略
 ```
 
-## 設定 raccoon-plugins.config.js
+### 設定 raccoon-plugins.config.js
 - 複製`raccoon-dicom/plugins/config.example.js` 到當前目錄，並命名為`raccoon-plugins.config.js`
 - 複製後，檔案目錄如下
 ```sh
@@ -957,20 +958,20 @@ FLUENT_MONGODB_PASSWORD=root
 ```
 - 請依照自己的需求修改 `raccoon-plugins.config.js` 檔案
 
-## docker compose 部屬
+### docker compose 部屬
 - 上面的檔案都設定完之後，請執行以下指令以 docker compose 啟動 raccoon
 ```sh
 sudo docker compose up
 ```
 
 
-# 額外閱讀
+## 額外閱讀
 
-## 允許 postgresql 接受外部 ip 連接
+### 允許 postgresql 接受外部 ip 連接
 
 postgresql 預設只允許 127.0.0.1 以及 [localhost](http://localhost) 連接，若要允許外部的 ip 連接則需要更改 `postgresql.conf` 以及 `pg_hba.conf` 檔案
 
-### 更改 postgresql.conf
+#### 更改 postgresql.conf
 
 請將 `listen_addresses`更改為以下設定
 
@@ -978,7 +979,7 @@ postgresql 預設只允許 127.0.0.1 以及 [localhost](http://localhost) 連接
 listen_addresses = '*'
 ```
 
-### 更改 pg_hba.conf
+#### 更改 pg_hba.conf
 
 在 `pg_hba.conf` 檔案當中的最下面，加入以下設定，其中 `0.0.0.0/0` 的 ip 位置你可以自行替代想要允許的 ip 範圍
 
@@ -986,7 +987,7 @@ listen_addresses = '*'
 host all all 0.0.0.0/0 scarm-sha-256
 ```
 
-## DIMSE APP
+### DIMSE APP
 
 - Raccoon-DICOM 參考了 [DCM4CHE QRSCP Tool](https://github.com/dcm4che/dcm4che/blob/master/dcm4che-tool/dcm4che-tool-dcmqrscp/README.md) 實踐 node-java 的功能，以提供 DIMSE 服務
 - 您可以設定 `ENABLE_DIMSE=true` 以啟動 DICOM DIMSE 服務
