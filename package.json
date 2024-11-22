@@ -13,5 +13,11 @@
     "vite": "^5.0.12"
   },
   "type": "module",
-  "license": "MIT"
+  "license": "MIT",
+  "pnpm": {
+    "overrides": {
+      "cookie@<0.7.0": ">=0.7.0",
+      "cross-spawn@>=7.0.0 <7.0.5": ">=7.0.5"
+    }
+  }
 }
