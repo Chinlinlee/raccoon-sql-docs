@@ -1086,7 +1086,9 @@ DICOM 擁有許多下載影像之 API，接下來會測試單張影像(WADO-URI)
 ```
 [Service URL]/wado?studyUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170&seriesUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442&objectUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943&contentType=application/dicom&requestType=WADO
 ```
-> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081，若你想要的是 jpeg 影像，你可以將 contentType 更改為 contentType=image/jpge
+> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081
+> 若你想要的是 jpeg 影像，你可以將 contentType 更改為 contentType=image/jpge
+
 4. 點擊<img src="{base}/getting-started/installation/postman-send-button.png" alt="post send button" />下載影像
 5. Status Code 為 200，且有資料回傳代表成功
 
@@ -1113,7 +1115,8 @@ DICOM 擁有許多下載影像之 API，接下來會測試單張影像(WADO-URI)
 [Service URL]/wado?studyUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170&seriesUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442&objectUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943&contentType=image/jpeg&requestType=WADO
 ```
 
-> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081，可以發現 jpeg 影像差別為 contentType 更改為 contentType=image/jpge
+> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081
+> 可以發現 jpeg 影像差別為 contentType 更改為 contentType=image/jpge
 
 4. 點擊<img src="{base}/getting-started/installation/postman-send-button.png" alt="post send button" />下載影像
 5. Status Code 為 200，且有jpeg影像回傳代表成功
