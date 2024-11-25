@@ -964,6 +964,204 @@ FLUENT_MONGODB_PASSWORD=root
 sudo docker compose up
 ```
 
+## 測試案例
+
+### 上傳影像
+
+#### 使用 curl
+
+1. 使用 cmd (終端機)進到擁有測試 DICOM 檔案的資料夾
+2. 輸入以下指令執行上傳影像動作
+```bash
+curl --location --request POST "[Service URL]/dicom-web/studies" --header "Accept: application/dicom+json" --header "Content-Type: multipart/related; type=\"application/dicom\"" --form "file=@[path-to-dicoms]/test.dcm;type=application/dicom"
+```
+
+:::note[注意事項]
+- 請務必將 [Service URL] 更改為 Raccoon 的網址，例如：http://127.0.0.1:8081
+- 請務必將 [path-to-dicoms] 更改為擁有測試 DICOM 檔案的資料夾的路徑
+- 請務必將 test.dcm 更改為測試 DICOM 檔案的檔案名稱
+:::
+
+3. 成功上傳後，Raccoon會回傳 json 資料，如下圖所示，請注意 00081198 的 Value 必須為空陣列，且00081199的陣列必須有 1 筆資料才算上傳成功
+
+<CenterImage
+  src="{base}/getting-started/installation/test-upload-curl.png"
+  title="測試上傳影像"
+  alt="測試上傳影像"
+/>
+
+#### 使用 Postman
+
+:::info[小知識]
+請注意，使用 Postman上傳影像是不符合 DICOM 標準的，但你依然可以使用 Postman 測試 Raccoon 的上傳影像功能
+:::
+
+1.	開啟 Postman
+2.	網址輸入 [Service URL]/dicom-web/studies，其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081
+3.	Postman 切換至 Body 頁面
+
+<CenterImage
+    src="{base}/getting-started/installation/test-upload-postman-to-body.png"
+    title="Postman 切換至 Body 頁面"
+    alt="Postman 切換至 Body 頁面"
+/>
+
+4.	型態選擇 form-data
+
+<CenterImage
+    src="{base}/getting-started/installation/test-upload-postman-to-form-data.png"
+    title="Postman 型態選擇 form-data"
+    alt="Postman 型態選擇 form-data"
+/>
+
+5.	Key 輸入 file
+
+<CenterImage
+    src="{base}/getting-started/installation/test-upload-postman-type-key.png"
+    title="Postman Key 輸入 file"
+    alt="Postman Key 輸入 file"
+/>
+
+6.	型態選擇 File
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-upload-postman-choose-file-type.png"
+    title="Postman 型態選擇 File"
+    alt="Postman 型態選擇 File"
+/>
+
+7.	選擇測試的檔案
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-upload-postman-choose-file.png"
+    title="Postman 選擇測試的檔案"
+    alt="Postman 選擇測試的檔案"
+/>
+
+8.	Method 選擇 POST
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-upload-postman-method-post.png"
+    title="Postman Method 選擇 POST"
+    alt="Postman Method 選擇 POST"
+/>
+
+9.	點擊<img src="{base}/getting-started/installation/postman-send-button.png" alt="post send button"/>上傳
+10.	若上傳成功，Status Code 為 200，請注意 00081198 的 Value 必須為空陣列，且00081199的陣列必須有 1 筆資料才算上傳成功
+
+<CenterImage
+    src="{base}/getting-started/installation/test-upload-postman-200-result.png"
+    title="Postman 測試上傳影像結果"
+    alt="Postman 測試上傳影像結果"
+/>
+
+### 查詢影像
+#### 使用 Postman
+1. 開啟 Postman
+2. Method 使用 GET
+3. 網址輸入 [Service URL]/dicom-web/studies，其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081
+4. 點擊<img src="{base}/getting-started/installation/postman-send-button.png" alt="post send button" />查詢影像
+5. Status Code 為 200，且資料為陣列大於等於 1 筆則成功
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-query-200-result.png"
+    title="Postman 測試查詢影像結果"
+    alt="Postman 測試查詢影像結果"
+/>
+
+### 下載影像
+
+DICOM 擁有許多下載影像之 API，接下來會測試單張影像(WADO-URI)、影像集(WADO-RS)以及單張渲染影像(WADO-RS Rendered)。
+以下所使用之影像為附檔的 `image-000001.dcm` 檔案，UID 資訊如下
+1. StudyInstanceUID (0020000D): 1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170
+2. SeriesInstanceUID (0020000E): 1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442
+3. SOPInstanceUID (00080018): 1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943
+
+#### 使用 Postman 測試單張影像 (WADO-URI)
+##### 下載 DICOM 檔案
+1. 開啟 Postman
+2. Method 使用 GET
+3. 網址輸入 
+
+```
+[Service URL]/wado?studyUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170&seriesUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442&objectUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943&contentType=application/dicom&requestType=WADO
+```
+> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081，若你想要的是 jpeg 影像，你可以將 contentType 更改為 contentType=image/jpge
+4. 點擊<img src="{base}/getting-started/installation/postman-send-button.png" alt="post send button" />下載影像
+5. Status Code 為 200，且有資料回傳代表成功
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-retrieve-wado-uri-result.png"
+    title="Postman 測試下載單張影像 (WADO-URI)結果"
+    alt="Postman 測試下載單張影像 (WADO-URI)結果"
+/>
+
+6.	你也可以將檔案另存，並使用 DICOM 瀏覽器打開測試
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-retrieve-wado-uri-save.png"
+    title="Postman 測試下載單張影像 (WADO-URI) - 另存檔案"
+    alt="Postman 測試下載單張影像 (WADO-URI) - 另存檔案"
+/>
+
+##### 下載 jpeg影像
+
+1. 開啟 Postman
+2. Method 使用 GET
+3. 網址輸入 
+```
+[Service URL]/wado?studyUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170&seriesUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442&objectUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943&contentType=image/jpeg&requestType=WADO
+```
+
+> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081，可以發現 jpeg 影像差別為 contentType 更改為 contentType=image/jpge
+
+4. 點擊<img src="{base}/getting-started/installation/postman-send-button.png" alt="post send button" />下載影像
+5. Status Code 為 200，且有jpeg影像回傳代表成功
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-retrieve-wado-uri-jpeg-result.png"
+    title="Postman 測試下載單張影像 (WADO-URI)結果 - jpeg"
+    alt="Postman 測試下載單張影像 (WADO-URI)結果 - jpeg"
+/>
+
+#### 使用 Postman 測試影像集 (WADO-RS)
+1. 開啟 Postman
+2. Method 使用 GET
+3. 網址輸入 
+```
+[Service URL]/dicom-web/studies/1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170
+```
+> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081
+
+4. Status Code 為 200，且有資料則代表下載成功
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-retrieve-wado-rs-result.png"
+    title="Postman 測試下載影像集 (WADO-RS)結果"
+    alt="Postman 測試下載影像集 (WADO-RS)結果"
+/>
+
+:::note[注意事項]
+請注意，WADO-RS 影像集所下載的資料型態為 Multipart/related，另存檔案是無法直接開啟的，需要自行解析，此文件僅測試服務正常與否。
+:::
+
+#### 使用 Postman 測試單張渲染影像 (WADO-RS Rendered)
+
+1. 開啟 Postman
+2. Method 使用 GET
+3. 網址輸入 
+```
+[Service URL]/dicom-web/studies/1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170/series/1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442/instances/1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943/frames/1/rendered
+```
+> 其中[Service URL]請替換成 Raccoon的網址，例如：http://127.0.0.1:8081
+
+4. Status Code 為 200，且有jpeg影像則代表下載成功
+
+<CenterImage 
+    src="{base}/getting-started/installation/test-retrieve-wado-rs-rendered-result.png"
+    title="Postman 測試下載單張渲染影像 (WADO-RS Rendered)結果"
+    alt="Postman 測試下載單張渲染影像 (WADO-RS Rendered)結果"
+/>
 
 ## 額外閱讀
 
