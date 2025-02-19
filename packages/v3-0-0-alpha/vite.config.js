@@ -77,7 +77,7 @@ const config = defineConfig({
                   to: "/guide/developer/swagger/"
                 },
                 {
-                  title: "SQL",
+                  title: "SQL & Migration",
                   to: "/guide/developer/sql/"
                 },
                 {
