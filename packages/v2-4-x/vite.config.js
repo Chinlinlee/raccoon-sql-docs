@@ -89,7 +89,7 @@ const config = defineConfig({
                 },
                 {
                   title: "mocha 測試報告",
-                  to: `${process.env.VERSION_PAGE_BASE_URL}/current/mocha-report/mochawesome.html`
+                  to: `${process.env.VERSION_PAGE_BASE_URL}/mocha-report/current/mochawesome.html`
                 }
               ]
             },

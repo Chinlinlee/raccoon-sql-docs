@@ -11,5 +11,3 @@ const VERSIONS = [
 for (const version of VERSIONS) {
     await fs.move(`../${version}/docs`, `../../docs/${version}`, { overwrite: true, directoryMode: 0o755 });
 }
-
-fs.copySync("../../mocha-report/current", "../../docs/current/mocha-report", { overwrite: true, directoryMode: 0o755 });
