@@ -1,0 +1,749 @@
+<?xml version="1.0" encoding="UTF-8"?><database name="raccoon_umzug" schema="public" type="PostgreSQL - 15.6 (Debian 15.6-0+deb12u1)">
+   <sequences>
+      <sequence increment="1" name="dicom_bulk_data_id_seq" startValue="1"/>
+      <sequence increment="1" name="dicom_code_id_seq" startValue="1"/>
+      <sequence increment="1" name="dicom_content_sq_id_seq" startValue="1"/>
+      <sequence increment="1" name="dicom_instance_delete_reason_id_seq" startValue="1"/>
+      <sequence increment="1" name="instance_id_seq" startValue="1"/>
+      <sequence increment="1" name="labels_id_seq" startValue="1"/>
+      <sequence increment="1" name="mwl_item_id_seq" startValue="1"/>
+      <sequence increment="1" name="patient_id_seq" startValue="1"/>
+      <sequence increment="1" name="person_name_id_seq" startValue="1"/>
+      <sequence increment="1" name="series_id_seq" startValue="1"/>
+      <sequence increment="1" name="series_request_attributes_id_seq" startValue="1"/>
+      <sequence increment="1" name="store_error_instances_id_seq" startValue="1"/>
+      <sequence increment="1" name="study_id_seq" startValue="1"/>
+      <sequence increment="1" name="study_label_id_seq" startValue="1"/>
+      <sequence increment="1" name="ups_global_subscription_id_seq" startValue="1"/>
+      <sequence increment="1" name="ups_request_attributes_id_seq" startValue="1"/>
+      <sequence increment="1" name="ups_subscription_id_seq" startValue="1"/>
+      <sequence increment="1" name="ups_work_item_id_seq" startValue="1"/>
+      <sequence increment="1" name="user_config_id_seq" startValue="1"/>
+      <sequence increment="1" name="verifying_observer_sq_id_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table catalog="raccoon_umzug" name="dicom_bulk_data" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('dicom_bulk_data_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="studyUID" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="seriesUID" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="instanceUID" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="filename" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="binaryValuePath" nullable="true" remarks="" size="1024" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="dicom_bulk_data_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="8" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="dicom_bulk_data_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="dicom_bulk_data_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="dicom_code" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('dicom_code_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="x0040A043" foreignKey="dicom_content_sq_x0040A043_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_content_sq"/>
+            <child catalog="raccoon_umzug" column="x0040A168" foreignKey="dicom_content_sq_x0040A168_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_content_sq"/>
+            <child catalog="raccoon_umzug" column="institution_code" foreignKey="mwl_item_institution_code_fkey" implied="false" onDeleteCascade="false" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="institution_department_type_code" foreignKey="mwl_item_institution_department_type_code_fkey" implied="false" onDeleteCascade="false" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="protocol_code" foreignKey="mwl_item_protocol_code_fkey" implied="false" onDeleteCascade="false" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="x00404018" foreignKey="ups_work_item_x00404018_fkey" implied="false" onDeleteCascade="false" schema="public" table="ups_work_item"/>
+            <child catalog="raccoon_umzug" column="x00404025" foreignKey="ups_work_item_x00404025_fkey" implied="false" onDeleteCascade="false" schema="public" table="ups_work_item"/>
+            <child catalog="raccoon_umzug" column="x00404026" foreignKey="ups_work_item_x00404026_fkey" implied="false" onDeleteCascade="false" schema="public" table="ups_work_item"/>
+            <child catalog="raccoon_umzug" column="x00404027" foreignKey="ups_work_item_x00404027_fkey" implied="false" onDeleteCascade="false" schema="public" table="ups_work_item"/>
+            <child catalog="raccoon_umzug" column="x00404034" foreignKey="ups_work_item_x00404034_fkey" implied="false" onDeleteCascade="false" schema="public" table="ups_work_item"/>
+            <child catalog="raccoon_umzug" column="x0040A088" foreignKey="verifying_observer_sq_x0040A088_fkey" implied="false" onDeleteCascade="false" schema="public" table="verifying_observer_sq"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="x00080100" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x00080102" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x00080103" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x00080104" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="SOPInstanceUID" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="dicom_code_SOPInstanceUID_fkey" implied="false" onDeleteCascade="false" schema="public" table="instance"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="dicom_code_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="dicom_code_x00080100" unique="false">
+            <column ascending="true" name="x00080100"/>
+         </index>
+         <index name="dicom_code_x00080102" unique="false">
+            <column ascending="true" name="x00080102"/>
+         </index>
+         <index name="dicom_code_x00080103" unique="false">
+            <column ascending="true" name="x00080103"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="dicom_content_sq" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('dicom_content_sq_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="x0040A010" nullable="true" remarks="Relationship Type" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x0040A040" nullable="true" remarks="Value Type" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x0040A160" nullable="true" remarks="Text Value" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="SOPInstanceUID" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="dicom_content_sq_SOPInstanceUID_fkey" implied="false" onDeleteCascade="false" schema="public" table="instance"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="x0040A043" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="dicom_content_sq_x0040A043_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="x0040A168" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="dicom_content_sq_x0040A168_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="8" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="dicom_content_sq_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="dicom_instance_delete_reason" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('dicom_instance_delete_reason_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="uid" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="reason" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="'NONE'::character varying" digits="0" id="3" name="delete_by" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="dicom_instance_delete_reason_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="dicom_instance_delete_reason_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="dicom_instance_delete_reason_uid" unique="false">
+            <column ascending="true" name="uid"/>
+         </index>
+         <index name="dicom_instance_delete_reason_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="instance" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('instance_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="SOPInstanceUID" foreignKey="dicom_code_SOPInstanceUID_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+            <child catalog="raccoon_umzug" column="SOPInstanceUID" foreignKey="dicom_content_sq_SOPInstanceUID_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_content_sq"/>
+            <child catalog="raccoon_umzug" column="SOPInstanceUID" foreignKey="verifying_observer_sq_SOPInstanceUID_fkey" implied="false" onDeleteCascade="true" schema="public" table="verifying_observer_sq"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="instancePath" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x00020010" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x0020000D" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x0020000E" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="x00080018" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="x00080016" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="x00080022" nullable="true" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="x00080023" nullable="true" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="9" name="x0008002A" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="10" name="x00080033" nullable="true" remarks="" size="12" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="x00200013" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="x00280008" nullable="true" remarks="Number of Frames" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="x00281050" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="x00281051" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="x0040A491" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="16" name="x0040A493" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="17" name="json" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="18" name="deleteStatus" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="19" name="md5" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="20" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="instance_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="21" name="series_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="instance_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="22" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="23" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="instance_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="instance_delete_status_idx" unique="false">
+            <column ascending="true" name="deleteStatus"/>
+         </index>
+         <index name="instance_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="instance_x00080016_idx" unique="false">
+            <column ascending="true" name="x00080016"/>
+         </index>
+         <index name="instance_x00080018_idx" unique="false">
+            <column ascending="true" name="x00080018"/>
+         </index>
+         <index name="instance_x00080023_idx" unique="false">
+            <column ascending="true" name="x00080023"/>
+         </index>
+         <index name="instance_x00080033_idx" unique="false">
+            <column ascending="true" name="x00080033"/>
+         </index>
+         <index name="instance_x0020000D_idx" unique="false">
+            <column ascending="true" name="x0020000D"/>
+         </index>
+         <index name="instance_x0020000E_idx" unique="false">
+            <column ascending="true" name="x0020000E"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="labels" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('labels_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="label_id" foreignKey="study_label_label_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="study_label"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
+            <parent catalog="raccoon_umzug" column="name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="SequelizeMeta"/>
+         </column>
+         <column autoUpdated="false" defaultValue="'default'::character varying" digits="0" id="2" name="color" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="labels_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="mwl_item" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('mwl_item_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="study_instance_uid" nullable="false" remarks="0020000D" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="patient_id" nullable="false" remarks="00100010" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="mwl_item_patient_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="patient"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="study_date" nullable="true" remarks="00080020" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="accession_number" nullable="true" remarks="00800050" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="accno_local_id" nullable="true" remarks="00800051.00400031" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="accno_universal_id" nullable="true" remarks="00800051.00400032" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="accno_universal_id_type" nullable="true" remarks="00800051.00400033" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="requested_procedure_id" nullable="true" remarks="00401001" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="admission_id" nullable="true" remarks="00380010" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="issuer_admission_local_id" nullable="true" remarks="00380014.00400031" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="issuer_admission_universal_id" nullable="true" remarks="00380014.00400032" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="issuer_admission_universal_id_type" nullable="true" remarks="00380014.00400033" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="station_ae_title" nullable="true" remarks="00400100.00400001" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="station_name" nullable="true" remarks="00400100.00400010" size="255" type="varchar" typeCode="12">
+            <parent catalog="raccoon_umzug" column="name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="SequelizeMeta"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="start_date" nullable="true" remarks="00400100.00400002" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="16" name="end_date" nullable="true" remarks="00400100.00400004" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="17" name="start_time" nullable="true" remarks="00400100.00400003" size="12" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="18" name="end_time" nullable="true" remarks="00400100.00400005" size="12" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="19" name="physician_name" nullable="true" remarks="00400100.00400006" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="mwl_item_physician_name_fkey" implied="false" onDeleteCascade="false" schema="public" table="person_name"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="20" name="procedure_step_location" nullable="true" remarks="00400100.00400011" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="21" name="description" nullable="true" remarks="00400100.00400007" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="22" name="protocol_code" nullable="true" remarks="00400100.00400008" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="mwl_item_protocol_code_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="23" name="institution_name" nullable="true" remarks="00080080" size="255" type="varchar" typeCode="12">
+            <parent catalog="raccoon_umzug" column="name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="SequelizeMeta"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="24" name="institution_department_name" nullable="true" remarks="00081040" size="255" type="varchar" typeCode="12">
+            <parent catalog="raccoon_umzug" column="name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="SequelizeMeta"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="25" name="institution_department_type_code" nullable="true" remarks="00081041" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="mwl_item_institution_department_type_code_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="26" name="institution_code" nullable="true" remarks="00080082" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="mwl_item_institution_code_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="27" name="sps_id" nullable="true" remarks="00400100.00400009" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="28" name="sps_status" nullable="true" remarks="00400100.00400020" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="29" name="modality" nullable="true" remarks="00400100.00080060" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="30" name="json" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="31" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="mwl_item_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="32" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="33" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="mwl_item_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="idx_mwl_item_modality" unique="false">
+            <column ascending="true" name="modality"/>
+         </index>
+         <index name="idx_mwl_item_patient_id" unique="false">
+            <column ascending="true" name="patient_id"/>
+         </index>
+         <index name="idx_mwl_item_sps_id" unique="false">
+            <column ascending="true" name="sps_id"/>
+         </index>
+         <index name="idx_mwl_item_start_date" unique="false">
+            <column ascending="true" name="start_date"/>
+         </index>
+         <index name="idx_mwl_item_study_date" unique="false">
+            <column ascending="true" name="study_date"/>
+         </index>
+         <index name="idx_mwl_item_user_id" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="operators_name" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="series_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="operators_name_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="PersonNameId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="operators_name_PersonNameId_fkey" implied="false" onDeleteCascade="true" schema="public" table="person_name"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="series_id" sequenceNumberInPK="1"/>
+         <primaryKey column="PersonNameId" sequenceNumberInPK="2"/>
+         <index name="operators_name_pkey" unique="true">
+            <column ascending="true" name="series_id"/>
+            <column ascending="true" name="PersonNameId"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="patient" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('patient_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="patient_id" foreignKey="mwl_item_patient_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="patient_id" foreignKey="study_patient_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="study"/>
+            <child catalog="raccoon_umzug" column="patient_id" foreignKey="ups_work_item_patient_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_work_item"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="x00100010" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="patient_x00100010_fk" implied="false" onDeleteCascade="false" schema="public" table="person_name"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x00100020" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x00100021" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x00100030" nullable="true" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="x00100032" nullable="true" remarks="" size="12" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="x00100040" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="x00101010" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="x00102160" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="x00104000" nullable="true" remarks="" size="10241" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="x00880130" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="x00880140" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="json" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="13" name="deleteStatus" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="patient_user_id_fk" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="15" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="16" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="patient_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="patient_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="patient_x00100010_idx" unique="false">
+            <column ascending="true" name="x00100010"/>
+         </index>
+         <index name="patient_x00100020_idx" unique="false">
+            <column ascending="true" name="x00100020"/>
+         </index>
+         <index name="patient_x00100030_idx" unique="false">
+            <column ascending="true" name="x00100030"/>
+         </index>
+         <index name="patient_x00100032_idx" unique="false">
+            <column ascending="true" name="x00100032"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="performing_physician_name" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="series_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="performing_physician_name_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="PersonNameId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="performing_physician_name_PersonNameId_fkey" implied="false" onDeleteCascade="true" schema="public" table="person_name"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="series_id" sequenceNumberInPK="1"/>
+         <primaryKey column="PersonNameId" sequenceNumberInPK="2"/>
+         <index name="performing_physician_name_pkey" unique="true">
+            <column ascending="true" name="series_id"/>
+            <column ascending="true" name="PersonNameId"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="person_name" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('person_name_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="physician_name" foreignKey="mwl_item_physician_name_fkey" implied="false" onDeleteCascade="false" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="PersonNameId" foreignKey="operators_name_PersonNameId_fkey" implied="false" onDeleteCascade="true" schema="public" table="operators_name"/>
+            <child catalog="raccoon_umzug" column="x00100010" foreignKey="patient_x00100010_fk" implied="false" onDeleteCascade="false" schema="public" table="patient"/>
+            <child catalog="raccoon_umzug" column="PersonNameId" foreignKey="performing_physician_name_PersonNameId_fkey" implied="false" onDeleteCascade="true" schema="public" table="performing_physician_name"/>
+            <child catalog="raccoon_umzug" column="x00080090" foreignKey="study_x00080090_fkey" implied="false" onDeleteCascade="false" schema="public" table="study"/>
+            <child catalog="raccoon_umzug" column="x00404037" foreignKey="ups_work_item_x00404037_fkey" implied="false" onDeleteCascade="false" schema="public" table="ups_work_item"/>
+            <child catalog="raccoon_umzug" column="x0040A075" foreignKey="verifying_observer_sq_x0040A075_fkey" implied="false" onDeleteCascade="false" schema="public" table="verifying_observer_sq"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="alphabetic" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="ideographic" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="phonetic" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="person_name_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="SequelizeMeta" numRows="20" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="name" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
+            <child catalog="raccoon_umzug" column="name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="labels"/>
+            <child catalog="raccoon_umzug" column="institution_department_name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="institution_name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="station_name" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="mwl_item"/>
+         </column>
+         <primaryKey column="name" sequenceNumberInPK="1"/>
+         <index name="SequelizeMeta_pkey" unique="true">
+            <column ascending="true" name="name"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="series" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('series_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="series_id" foreignKey="instance_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="instance"/>
+            <child catalog="raccoon_umzug" column="series_id" foreignKey="operators_name_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="operators_name"/>
+            <child catalog="raccoon_umzug" column="series_id" foreignKey="performing_physician_name_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="performing_physician_name"/>
+            <child catalog="raccoon_umzug" column="series_id" foreignKey="series_request_attributes_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="series_request_attributes"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="seriesPath" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x0020000D" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x0020000E" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x00080021" nullable="true" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="x00080060" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="x0008103E" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="x0008103F" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="x00081052" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="x00081072" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="x00081250" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="x00200011" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="x00400244" nullable="true" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="13" name="x00400245" nullable="true" remarks="" size="12" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="14" name="x00080031" nullable="true" remarks="" size="12" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="json" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="16" name="deleteStatus" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="17" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="series_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="18" name="study_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="series_study_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="study"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="19" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="20" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="series_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="series_delete_status_idx" unique="false">
+            <column ascending="true" name="deleteStatus"/>
+         </index>
+         <index name="series_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="series_x00080021_idx" unique="false">
+            <column ascending="true" name="x00080021"/>
+         </index>
+         <index name="series_x00080060_idx" unique="false">
+            <column ascending="true" name="x00080060"/>
+         </index>
+         <index name="series_x0020000D_idx" unique="false">
+            <column ascending="true" name="x0020000D"/>
+         </index>
+         <index name="series_x0020000E_idx" unique="false">
+            <column ascending="true" name="x0020000E"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="series_request_attributes" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('series_request_attributes_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="x0020000E" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x00080050" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x00080051_x00400031" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x00080051_x00400032" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="x00080051_x00400033" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="x00400009" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="x00401001" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="x0020000D" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="series_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="series_request_attributes_series_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="10" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="11" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="series_request_attributes_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="sessions" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="sid" nullable="false" remarks="" size="36" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="1" name="expires" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="data" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="sid" sequenceNumberInPK="1"/>
+         <index name="sessions_pkey" unique="true">
+            <column ascending="true" name="sid"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="store_error_instances" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('store_error_instances_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="filename" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="store_error_instances_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="study" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('study_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="study_id" foreignKey="series_study_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="series"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="studyPath" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x00100020" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x00080005" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x00080020" nullable="true" remarks="" size="13" type="date" typeCode="91"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="x00080030" nullable="true" remarks="" size="12" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="x00080050" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="x00080056" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="x00080090" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="study_x00080090_fkey" implied="false" onDeleteCascade="false" schema="public" table="person_name"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="x00080201" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="x0020000D" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="x00200010" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="x00201206" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="x00201208" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="14" name="x00081030" nullable="true" remarks="Study Description" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="json" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="16" name="deleteStatus" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="17" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="study_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="18" name="patient_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="study_patient_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="patient"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="19" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="20" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="study_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="study_delete_status_idx" unique="false">
+            <column ascending="true" name="deleteStatus"/>
+         </index>
+         <index name="study_patient_id_idx" unique="false">
+            <column ascending="true" name="patient_id"/>
+         </index>
+         <index name="study_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+         <index name="study_x0020000D_idx" unique="false">
+            <column ascending="true" name="x0020000D"/>
+         </index>
+         <index name="study_x00200010_idx" unique="false">
+            <column ascending="true" name="x00200010"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="study_label" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('study_label_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="uid" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="label_id" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="study_label_label_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="labels"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="study_label_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="study_label_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="study_label_uid" unique="false">
+            <column ascending="true" name="uid"/>
+         </index>
+         <index name="study_label_user_id" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="tenant_user" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="dicom_bulk_data_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="dicom_bulk_data"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="dicom_instance_delete_reason_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="dicom_instance_delete_reason"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="instance_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="instance"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="mwl_item_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="mwl_item"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="patient_user_id_fk" implied="false" onDeleteCascade="true" schema="public" table="patient"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="series_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="series"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="study_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="study"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="study_label_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="study_label"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="ups_global_subscription_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_global_subscription"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="ups_subscription_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_subscription"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="ups_work_item_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_work_item"/>
+            <child catalog="raccoon_umzug" column="user_id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="user_config"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="tenant_user_id" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="tenant_group_id" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="email" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="tenant_user_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="tenant_user_tenant_user_id" unique="true">
+            <column ascending="true" name="tenant_user_id"/>
+         </index>
+         <index name="tenant_user_tenant_user_id_tenant_group_id" unique="true">
+            <column ascending="true" name="tenant_user_id"/>
+            <column ascending="true" name="tenant_group_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="ups_global_subscription" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('ups_global_subscription_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="aeTitle" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="subscribed" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="queryKeys" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="4" name="isDeletionLock" nullable="true" remarks="" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_global_subscription_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="ups_global_subscription_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="ups_global_subscription_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="ups_request_attributes" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('ups_request_attributes_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="upsInstanceUID" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="x00080050" nullable="true" remarks="Accession Number" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x00080051_x00400031" nullable="true" remarks="Issuer of Accession Number Sequence -&gt; Local NameSpace Entity ID" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x00080051_x00400032" nullable="true" remarks="Issuer of Accession Number Sequence -&gt; Universal Entity ID" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="x00080051_x00400033" nullable="true" remarks="Issuer of Accession Number Sequence -&gt; Universal Entity ID Type" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="x00321033" nullable="true" remarks="Requesting Service Attribute" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="x00401001" nullable="true" remarks="Requested Procedure ID Attribute" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="x0020000D" nullable="true" remarks="Study Instance UID" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="ups_id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_request_attributes_ups_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_work_item"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="10" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="11" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="ups_request_attributes_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="ups_subscription" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('ups_subscription_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="UpsSubscriptionId" foreignKey="workitems_subscriptions_UpsSubscriptionId_fkey" implied="false" onDeleteCascade="true" schema="public" table="workitems_subscriptions"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="aeTitle" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="2" name="subscribed" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="false" digits="0" id="3" name="isDeletionLock" nullable="true" remarks="" size="1" type="bool" typeCode="-7"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_subscription_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="ups_subscription_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="ups_subscription_user_id_idx" unique="false">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="ups_work_item" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('ups_work_item_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="ID" size="10" type="serial" typeCode="4">
+            <child catalog="raccoon_umzug" column="ups_id" foreignKey="ups_request_attributes_ups_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_request_attributes"/>
+            <child catalog="raccoon_umzug" column="UPSWorkItemId" foreignKey="workitems_subscriptions_UPSWorkItemId_fkey" implied="false" onDeleteCascade="true" schema="public" table="workitems_subscriptions"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="upsInstanceUID" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="transactionUID" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="0" digits="0" id="3" name="subscribed" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x00100020" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="x00741200" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="x00404010" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="x00741204" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="x00741202" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="x00404025" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_x00404025_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="x00404026" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_x00404026_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="x00404027" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_x00404027_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="x00404034" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_x00404034_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="13" name="x00404005" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="14" name="x00404011" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="15" name="x00404018" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_x00404018_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="16" name="x00380010" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="17" name="x00380014_x00400031" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="18" name="x00380014_x00400032" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="19" name="x00380014_x00400033" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="20" name="x00741000" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="21" name="x00080082" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="22" name="x00404008" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="23" name="x00404009" nullable="true" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="24" name="x00404036" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="25" name="x00404037" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_x00404037_fkey" implied="false" onDeleteCascade="false" schema="public" table="person_name"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="26" name="x00404041" nullable="true" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="27" name="json" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="28" name="user_id" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_user_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="29" name="patient_id" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="ups_work_item_patient_id_fkey" implied="false" onDeleteCascade="true" schema="public" table="patient"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="30" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="31" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="ups_work_item_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="user_config" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('user_config_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="user_id" nullable="false" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="Implied Constraint" implied="true" onDeleteCascade="false" schema="public" table="tenant_user"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="config" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="user_config_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="user_config_user_id" unique="true">
+            <column ascending="true" name="user_id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="verifying_observer_sq" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('verifying_observer_sq_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="x0040A027" nullable="true" remarks="Verifying Organization" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="x0040A030" nullable="true" remarks="Verification DateTime" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="x0040A075" nullable="true" remarks="Verifying Observer Name" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="verifying_observer_sq_x0040A075_fkey" implied="false" onDeleteCascade="false" schema="public" table="person_name"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="x0040A088" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="verifying_observer_sq_x0040A088_fkey" implied="false" onDeleteCascade="false" schema="public" table="dicom_code"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="SOPInstanceUID" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="verifying_observer_sq_SOPInstanceUID_fkey" implied="false" onDeleteCascade="true" schema="public" table="instance"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="verifying_observer_sq_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table catalog="raccoon_umzug" name="workitems_subscriptions" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="UPSWorkItemId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="workitems_subscriptions_UPSWorkItemId_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_work_item"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="UpsSubscriptionId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent catalog="raccoon_umzug" column="id" foreignKey="workitems_subscriptions_UpsSubscriptionId_fkey" implied="false" onDeleteCascade="true" schema="public" table="ups_subscription"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+      </table>
+   </tables>
+</database>
