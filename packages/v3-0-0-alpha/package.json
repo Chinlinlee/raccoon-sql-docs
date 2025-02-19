@@ -1,0 +1,27 @@
+{
+  "name": "@raccoon-docs/v3-0-0-alpha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build"
+  },
+  "type": "module",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.1",
+    "@sveltejs/kit": "^2.5.0",
+    "@sveltepress/theme-default": "3.1.0",
+    "@sveltepress/vite": "0.35.0",
+    "@types/node": "^20.11.16",
+    "svelte": "^4.2.10",
+    "vite": "^5.0.12"
+  },
+  "dependencies": {
+    "@raccoon-docs/core": "workspace:*",
+    "dotenv": "^16.4.5"
+  }
+}

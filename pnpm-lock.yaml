@@ -186,6 +186,37 @@ importers:
         specifier: ^5.0.12
         version: 5.4.9(@types/node@20.16.11)(terser@5.35.0)
 
+  packages/v3.0.0-alpha:
+    dependencies:
+      '@raccoon-docs/core':
+        specifier: workspace:*
+        version: link:../core
+      dotenv:
+        specifier: ^16.4.5
+        version: 16.4.5
+    devDependencies:
+      '@sveltejs/adapter-static':
+        specifier: ^3.0.1
+        version: 3.0.5(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))
+      '@sveltejs/kit':
+        specifier: ^2.5.0
+        version: 2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
+      '@sveltepress/theme-default':
+        specifier: 3.1.0
+        version: 3.1.0(@algolia/client-search@4.24.0)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltepress/vite@0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@4.24.0)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@4.24.0)(search-insights@2.17.2)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))(workbox-build@7.1.1)(workbox-window@7.1.0)
+      '@sveltepress/vite':
+        specifier: 0.35.0
+        version: 0.35.0(@babel/core@7.25.8)(@sveltejs/kit@2.7.1(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0)))(postcss@8.4.47)(rollup@4.24.0)(svelte@4.2.19)(typescript@5.6.3)(vite@5.4.9(@types/node@20.16.11)(terser@5.35.0))
+      '@types/node':
+        specifier: ^20.11.16
+        version: 20.16.11
+      svelte:
+        specifier: ^4.2.10
+        version: 4.2.19
+      vite:
+        specifier: ^5.0.12
+        version: 5.4.9(@types/node@20.16.11)(terser@5.35.0)
+
 packages:
 
   '@algolia/autocomplete-core@1.9.3':
