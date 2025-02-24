@@ -186,7 +186,7 @@ importers:
         specifier: ^5.0.12
         version: 5.4.9(@types/node@20.16.11)(terser@5.35.0)
 
-  packages/v3.0.0-alpha:
+  packages/v3-0-0-alpha:
     dependencies:
       '@raccoon-docs/core':
         specifier: workspace:*

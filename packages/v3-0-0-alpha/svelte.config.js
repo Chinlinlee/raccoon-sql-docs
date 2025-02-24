@@ -15,7 +15,7 @@ const config = {
       pages: 'docs',
     }),
     paths: {
-      base: process.env.NODE_ENV === "production" ? process.env.BASE_URL + "/3-0-0-alpha" : ""
+      base: process.env.NODE_ENV === "production" ? process.env.BASE_URL + "/v3-0-0-alpha" : ""
     },
     alias: {
       $components: "src/components",
