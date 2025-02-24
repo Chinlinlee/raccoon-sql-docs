@@ -15,7 +15,7 @@ if (process.env.VERSION_PAGE_BASE_URL === undefined || process.env.VERSION_PAGE_
   throw new Error('VERSION_PAGE_BASE_URL environment variable is not set');
 }
 
-const base = process.env.NODE_ENV === "production" ? process.env.BASE_URL + "/current" : "";
+const base = process.env.NODE_ENV === "production" ? process.env.BASE_URL + "/v3-0-0-alpha" : "";
 
 const config = defineConfig({
   plugins: [
