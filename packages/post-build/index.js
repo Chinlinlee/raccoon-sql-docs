@@ -9,5 +9,7 @@ const VERSIONS = [
 ];
 
 for (const version of VERSIONS) {
-    await fs.move(`../${version}/docs`, `../../docs/${version}`, { overwrite: true, directoryMode: 0o755 });
+    if (await fs.pathExists(`../${version}/docs`)) {
+        await fs.move(`../${version}/docs`, `../../docs/${version}`, { overwrite: true });
+    }
 }
