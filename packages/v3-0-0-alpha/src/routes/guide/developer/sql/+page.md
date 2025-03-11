@@ -189,3 +189,47 @@ INSERT INTO "SequelizeMeta"
 ("name")
 VALUES('00020-user-config-table.js');
 ```
+
+## 資料庫備份與還原
+### 備份
+:::info
+以下步驟都是使用 docker 唷，不過移除掉 docker 相關的指令，後面連接的指令也是 postgres 本身的，沒有使用 docker 一樣可以參考
+:::
+
+- 輸入以下指令輸出備份檔
+
+```bash
+docker exec -i <container_name> pg_dump -U <db_username> <database_name> --format=c --encoding=UTF-8 --no-privileges --no-owner > <database_name>_dump_$(date +%Y-%m-%d_%H_%M_%S).sql
+```
+
+:::important[重要事項]
+- `<container_name>` 請替換成你的 container 名稱
+- `<db_username>` 請替換成你的 postgres 使用者名稱
+- `<database_name>` 請替換成你要備份的資料庫名稱
+:::
+
+- 範例：
+
+```bash
+docker exec -i postgres pg_dump -U postgres raccoon --format=c --encoding=UTF-8 --no-privileges --no-owner > raccoon_dump_$(date +%Y-%m-%d_%H_%M_%S).sql
+```
+
+### 還原
+
+- 將 dump 的 sql 複製到 postgres container 內 (**請將 `<your_dump>` 更改成上面備份出來的備份檔名稱以及 `CONTAINER_ID` 更改成 container 名稱或 id**)
+
+```bash
+docker cp <your_dump>.sql CONTAINER_ID:/db.dump
+```
+
+- 進入 postgres container 當中 (**請將 `CONTAINER_ID` 更改成 container 名稱或 id**)
+
+```bash
+docker exec -it CONTAINER_ID bash
+```
+
+- 使用 pg_restore 還原剛剛複製進來的 sql 檔案 (**請將 `DB_NAME` 改成你要還原的資料庫名稱**)
+
+```bash
+pg_restore -U postgres -d DB_NAME –-clean –-if-exists /db.dump
+```
