@@ -57,6 +57,10 @@ const config = defineConfig({
                   to: "/guide/developer/how-to-test/"
                 },
                 {
+                  title: "如何發布新版本",
+                  to: "/guide/developer/how-to-release/"
+                },
+                {
                   title: "影像處理相關",
                   to: "/guide/developer/image-processing/"
                 },
