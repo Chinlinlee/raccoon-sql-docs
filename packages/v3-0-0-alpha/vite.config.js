@@ -115,6 +115,16 @@ const config = defineConfig({
                   to: "/guide/plugin-list/statistics"
                 }
               ]
+            },
+            {
+              title: "其他",
+              collapsible: true,
+              items: [
+                {
+                  title: "v2 to v3 資料庫遷移",
+                  to: "/guide/other/v2-to-v3-database-migration/"
+                }
+              ]
             }
           ]
         },
