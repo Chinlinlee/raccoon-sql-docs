@@ -48,6 +48,9 @@ sudo chmod u+x ./node_modules/7zip-bin/linux/x64/7za
 
 
 ### 運行測試
+:::warning[注意事項]
+在測試前，務必將 plugins 的 config 內所有 enable 改為 false，避免出現測試失敗的問題，尤其是驗證相關的 plugin
+:::
 - 輸入以下指令運行測試
 ```
 npm run test

@@ -120,7 +120,7 @@ const generator = new TypescriptBulkDefinitionGenerator();
 - 產生結果
 <div class="duration-300 hover:-translate-y-1 bg-transparent">
     <figure>
-        <img src="{base}/node-java-bridge/generate-result.png" alt="Test Original Image" class="rounded-t h-16 w-auto object-cover">
+        <img src="{base}/node-java-bridge/generate-result.png" alt="Test Original" class="rounded-t h-16 w-auto object-cover">
     </figure>
 </div>
 
@@ -140,7 +140,7 @@ tsc --build
 - 編譯後得到的 js 檔案
 <div class="duration-300 hover:-translate-y-1 bg-transparent">
     <figure>
-        <img src="{base}/node-java-bridge/ts-to-js.png" alt="Test Original Image" class="rounded-t h-16 w-auto object-contain">
+        <img src="{base}/node-java-bridge/ts-to-js.png" alt="Test Original" class="rounded-t h-16 w-auto object-contain">
     </figure>
 </div>
 
