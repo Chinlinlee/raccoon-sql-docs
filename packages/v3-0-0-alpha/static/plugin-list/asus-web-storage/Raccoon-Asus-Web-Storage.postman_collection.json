@@ -1,0 +1,1465 @@
+{
+	"info": {
+		"_postman_id": "414762d8-1b02-451e-af30-e3de4812ccac",
+		"name": "Raccoon Asus Web Storage",
+		"description": "Raccoon 串接 Asus Web Storage 的主要 API 測試\n\n- Collection Pre Script 會進行登入，所以在任何的 request 進行前都會先執行登入的動作",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "9039362"
+	},
+	"item": [
+		{
+			"name": "Asus Web Storage",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"{{awsUsername}}\",\r\n    \"password\": \"{{awsPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/asus-web-storage/api/login",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"asus-web-storage",
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Account Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/asus-web-storage/api/account-info",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"asus-web-storage",
+								"api",
+								"account-info"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Init aws",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/asus-web-storage/api/init",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"asus-web-storage",
+								"api",
+								"init"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "STOW-RS",
+			"item": [
+				{
+					"name": "Store Instance",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{ASUS_AWS_TOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": [
+										"postman-cloud:///1efffda9-a3da-47a0-823f-193abbd7b64e",
+										"postman-cloud:///1efcd095-97d7-4a50-8101-43530d079aa0",
+										"postman-cloud:///1efd1820-2894-4940-a015-54a0c6579223",
+										"postman-cloud:///1efd1820-275c-4140-b6bf-afab55b6085c",
+										"postman-cloud:///1efd1820-2721-47c0-92ce-3b928b650bb8",
+										"postman-cloud:///1efd1820-26eb-4c60-8bea-d6d652aaa848",
+										"postman-cloud:///1efd1bc4-2047-4560-9188-2fdc4c99a336"
+									]
+								}
+							]
+						},
+						"url": {
+							"raw": "{{baseURL}}/dicom-web/studies",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dicom-web",
+								"studies"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "WADO-RS",
+			"item": [
+				{
+					"name": "Retrieve Instances",
+					"item": [
+						{
+							"name": "Retrieve Study's Series' Instance DICOM Multipart",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Study's Series' Instance DICOM Multipart PNG",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "multipart/related; type=\"image/png\"",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Zip Study's Instances",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/zip",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Retrieve Rendered",
+					"item": [
+						{
+							"name": "Retrieve Rendered Frames",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/instances/{{renderedInstanceUID}}/frames/1/rendered",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{renderedStudyUID}}",
+										"series",
+										"{{renderedSeriesUID}}",
+										"instances",
+										"{{renderedInstanceUID}}",
+										"frames",
+										"1",
+										"rendered"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Rendered Study",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/rendered",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{renderedStudyUID}}",
+										"rendered"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Rendered Series",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/rendered",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{renderedStudyUID}}",
+										"series",
+										"{{renderedSeriesUID}}",
+										"rendered"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Rendered Instance",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/instances/{{renderedInstanceUID}}/rendered",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{renderedStudyUID}}",
+										"series",
+										"{{renderedSeriesUID}}",
+										"instances",
+										"{{renderedInstanceUID}}",
+										"rendered"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Rendered Frame List",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/instances/{{renderedInstanceUID}}/frames/1,5,8/rendered",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{renderedStudyUID}}",
+										"series",
+										"{{renderedSeriesUID}}",
+										"instances",
+										"{{renderedInstanceUID}}",
+										"frames",
+										"1,5,8",
+										"rendered"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Retrieve Metadata",
+					"item": [
+						{
+							"name": "Retrieve Metadata of Study's Series' Instance",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}/metadata",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}",
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Metadata of Study's Series",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/metadata",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Metadata of Study",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/metadata",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"metadata"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Retrieve Pixel Data",
+					"item": [
+						{
+							"name": "Retrieve Study's Series' Instance's frames' pixel data",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170/series/1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442/instances/1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943/frames/1",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170",
+										"series",
+										"1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442",
+										"instances",
+										"1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943",
+										"frames",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Retrieve Tumbnail",
+					"item": [
+						{
+							"name": "Retrieve Thumbnail of Study",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/thumbnail",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"thumbnail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Thumbnail of Series",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/thumbnail",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"thumbnail"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Retrieve Thumbnail of Instance",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}/thumbnail",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}",
+										"thumbnail"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Retrieve Bulkdata",
+					"item": [
+						{
+							"name": "Retrieve Bulkdata of Study",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/bulkdata",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"bulkdata"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Delete Instances",
+					"item": [
+						{
+							"name": "Sync Delete Status to Parent",
+							"item": [
+								{
+									"name": "Delete Only 1 Instance in Only 1 Series With Reason",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"reason\": \"test\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/instances/{{renderedInstanceUID}}/delete-with-reason",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"dicom-web",
+												"studies",
+												"{{renderedStudyUID}}",
+												"series",
+												"{{renderedSeriesUID}}",
+												"instances",
+												"{{renderedInstanceUID}}",
+												"delete-with-reason"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Study",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"dicom-web",
+												"studies",
+												"{{renderedStudyUID}}",
+												"series"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get Study With deleteStatus=1",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series?deleteStatus=1",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"dicom-web",
+												"studies",
+												"{{renderedStudyUID}}",
+												"series"
+											],
+											"query": [
+												{
+													"key": "deleteStatus",
+													"value": "1",
+													"description": "刪除狀態"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Undo Delete Instance",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"reason\": \"test\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/instances/{{renderedInstanceUID}}/undoDelete",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"dicom-web",
+												"studies",
+												"{{renderedStudyUID}}",
+												"series",
+												"{{renderedSeriesUID}}",
+												"instances",
+												"{{renderedInstanceUID}}",
+												"undoDelete"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Should get study's series and return status 200",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {\r",
+													"    pm.response.to.have.status(204);\r",
+													"});"
+												],
+												"type": "text/javascript",
+												"packages": {}
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series",
+											"host": [
+												"{{baseURL}}"
+											],
+											"path": [
+												"dicom-web",
+												"studies",
+												"{{renderedStudyUID}}",
+												"series"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Delete Study With Reason",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reason\": \"fk\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/delete-with-reason",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"delete-with-reason"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Study",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Undo Delete Study",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/undoDelete",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"undoDelete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Series With Reason",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reason\": \"fk\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/delete-with-reason",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"delete-with-reason"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Series",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Undo Delete Series",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/undoDelete",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"undoDelete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Instance With Reason",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"reason\": \"fk\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}/delete-with-reason",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}",
+										"delete-with-reason"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Delete Instance",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Undo Delete Instance",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}/undoDelete",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}",
+										"undoDelete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Convert Image",
+					"item": [
+						{
+							"name": "Convert DICOM Instance to JPG",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "image/jpeg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/instances/{{renderedInstanceUID}}/convert-image",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{renderedStudyUID}}",
+										"series",
+										"{{renderedSeriesUID}}",
+										"instances",
+										"{{renderedInstanceUID}}",
+										"convert-image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Convert DICOM Instance to Video",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "video/mp4",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{renderedStudyUID}}/series/{{renderedSeriesUID}}/instances/{{renderedInstanceUID}}/convert-image",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{renderedStudyUID}}",
+										"series",
+										"{{renderedSeriesUID}}",
+										"instances",
+										"{{renderedInstanceUID}}",
+										"convert-image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Convert DICOM Instance to JPG Copy",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "image/jpeg",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series/{{normalSeriesUID}}/instances/{{normalInstanceUID}}/convert-image",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{normalStudyUID}}",
+										"series",
+										"{{normalSeriesUID}}",
+										"instances",
+										"{{normalInstanceUID}}",
+										"convert-image"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Convert to PDF",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/pdf",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{baseURL}}/dicom-web/studies/{{pdfStudyUID}}/series/{{pdfSeriesUID}}/instances/{{pdfInstanceUID}}/convert-image",
+									"host": [
+										"{{baseURL}}"
+									],
+									"path": [
+										"dicom-web",
+										"studies",
+										"{{pdfStudyUID}}",
+										"series",
+										"{{pdfSeriesUID}}",
+										"instances",
+										"{{pdfInstanceUID}}",
+										"convert-image"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "WADO-URI",
+			"item": [
+				{
+					"name": "Retrieve DICOM Instance",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/wado?requestType=WADO&studyUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170&seriesUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442&objectUID=1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943&contentType=application/dicom",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"wado"
+							],
+							"query": [
+								{
+									"key": "requestType",
+									"value": "WADO"
+								},
+								{
+									"key": "studyUID",
+									"value": "1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170"
+								},
+								{
+									"key": "seriesUID",
+									"value": "1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442"
+								},
+								{
+									"key": "objectUID",
+									"value": "1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943"
+								},
+								{
+									"key": "contentType",
+									"value": "application/dicom"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "QIDO-RS",
+			"item": [
+				{
+					"name": "Search Studies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/dicom-web/studies",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dicom-web",
+								"studies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Series",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/dicom-web/studies",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dicom-web",
+								"studies"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Search Study's Series",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/dicom-web/studies/{{normalStudyUID}}/series",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dicom-web",
+								"studies",
+								"{{normalStudyUID}}",
+								"series"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Audit Log",
+			"item": [
+				{
+					"name": "GET Audit Log",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseURL}}/audit-log",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"audit-log"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User Config",
+			"item": [
+				{
+					"name": "Create User Config",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"enabledModalityWorkList\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/config",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Config Copy",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"enabledModalityWorkList\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/user/config",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"user",
+								"config"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get User Config",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "MWL-RS",
+			"item": [
+				{
+					"name": "MWL Create or Update",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n  {\r\n    \"00080050\": {\r\n      \"vr\": \"SH\",\r\n      \"Value\": [\r\n        \"8356811788139727\"\r\n      ]\r\n    },\r\n    \"00080005\": {\r\n      \"vr\": \"CS\",\r\n      \"Value\": [\r\n        \"ISO_IR 192\"\r\n      ]\r\n    },\r\n    \"00100010\": {\r\n      \"vr\": \"PN\",\r\n      \"Value\": [\r\n        \"健保測試卡          \"\r\n      ]\r\n    },\r\n    \"00100020\": {\r\n      \"vr\": \"LO\",\r\n      \"Value\": [\r\n        \"A123456815\"\r\n      ]\r\n    },\r\n    \"00100030\": {\r\n      \"vr\": \"DA\",\r\n      \"Value\": [\r\n        \"19800127\"\r\n      ]\r\n    },\r\n    \"00100040\": {\r\n      \"vr\": \"CS\",\r\n      \"Value\": [\r\n        \"M\"\r\n      ]\r\n    },\r\n    \"00102000\": {\r\n      \"vr\": \"LO\",\r\n      \"Value\": [\r\n        \"\"\r\n      ]\r\n    },\r\n    \"00102110\": {\r\n      \"vr\": \"LO\",\r\n      \"Value\": [\r\n        \"\"\r\n      ]\r\n    },\r\n    \"0020000D\": {\r\n      \"vr\": \"UI\",\r\n      \"Value\": [\r\n        \"1.2.276.0.7230010.3.2.101.1953c748dd60a7c210740e75\"\r\n      ]\r\n    },\r\n    \"00321032\": {\r\n      \"vr\": \"PN\",\r\n      \"Value\": [\r\n        \"Doc.C\"\r\n      ]\r\n    },\r\n    \"00321060\": {\r\n      \"vr\": \"LO\",\r\n      \"Value\": [\r\n        \"Ultrasound AAAAAAAAAAAAAAAAA.\"\r\n      ]\r\n    },\r\n    \"00400100\": {\r\n      \"vr\": \"SQ\",\r\n      \"Value\": [\r\n        {\r\n          \"00080060\": {\r\n            \"vr\": \"CS\",\r\n            \"Value\": [\r\n              \"CT\"\r\n            ]\r\n          },\r\n          \"00400001\": {\r\n            \"vr\": \"AE\",\r\n            \"Value\": [\r\n              \"NHICard2MWL\"\r\n            ]\r\n          },\r\n          \"00400002\": {\r\n            \"vr\": \"DA\",\r\n            \"Value\": [\r\n              \"20250225\"\r\n            ]\r\n          },\r\n          \"00400003\": {\r\n            \"vr\": \"TM\",\r\n            \"Value\": [\r\n              \"173346\"\r\n            ]\r\n          },\r\n          \"00400006\": {\r\n            \"vr\": \"PN\",\r\n            \"Value\": [\r\n              \"Phy.A\"\r\n            ]\r\n          },\r\n          \"00400007\": {\r\n            \"vr\": \"LO\",\r\n            \"Value\": [\r\n              \"AAAAAAAAAAAA\"\r\n            ]\r\n          },\r\n          \"00400009\": {\r\n            \"vr\": \"SH\",\r\n            \"Value\": [\r\n              \"SPS-IUYWQ3\"\r\n            ]\r\n          },\r\n          \"00400010\": {\r\n            \"vr\": \"SH\",\r\n            \"Value\": [\r\n              \"NHICard2MWL\"\r\n            ]\r\n          },\r\n          \"00400011\": {\r\n            \"vr\": \"SH\",\r\n            \"Value\": [\r\n              \"\"\r\n            ]\r\n          },\r\n          \"00400012\": {\r\n            \"vr\": \"LO\",\r\n            \"Value\": [\r\n              \"\"\r\n            ]\r\n          },\r\n          \"00400400\": {\r\n            \"vr\": \"LT\",\r\n            \"Value\": [\r\n              \"\"\r\n            ]\r\n          }\r\n        }\r\n      ]\r\n    },\r\n    \"00401001\": {\r\n      \"vr\": \"SH\",\r\n      \"Value\": [\r\n        \"RP-71N63U\"\r\n      ]\r\n    },\r\n    \"00401003\": {\r\n      \"vr\": \"SH\",\r\n      \"Value\": [\r\n        \"HIGH\"\r\n      ]\r\n    }\r\n  }\r\n]",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseURL}}/dicom-web/mwlitems",
+							"host": [
+								"{{baseURL}}"
+							],
+							"path": [
+								"dicom-web",
+								"mwlitems"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Create Patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"00100010\": {\r\n        \"vr\": \"PN\",\r\n        \"Value\": [\r\n            {\r\n                \"Alphabetic\": \"Philips^Amy\"\r\n            }\r\n        ]\r\n    },\r\n    \"00100020\": {\r\n        \"vr\": \"LO\",\r\n        \"Value\": [\r\n            \"A123456815\"\r\n        ]\r\n    },\r\n    \"00100030\": {\r\n        \"vr\": \"DA\",\r\n        \"Value\": [\r\n            \"20201212\"\r\n        ]\r\n    },\r\n    \"00100040\": {\r\n        \"vr\": \"CS\",\r\n        \"Value\": [\r\n            \"M\"\r\n        ]\r\n    },\r\n    \"00100032\": {\r\n        \"vr\": \"TM\",\r\n        \"Value\": [\r\n            \"080000\"\r\n        ]\r\n    },\r\n    \"00101001\": {\r\n        \"vr\": \"PN\",\r\n        \"Value\": [\r\n            {\r\n                \"Alphabetic\": \"Alternate^Name\"\r\n            }\r\n        ]\r\n    },\r\n    \"00101002\": {\r\n        \"vr\": \"SQ\",\r\n        \"Value\": [\r\n            {\r\n                \"00100020\": {\r\n                    \"vr\": \"LO\",\r\n                    \"Value\": [\r\n                        \"OtherPatientID\"\r\n                    ]\r\n                },\r\n                \"00100022\": {\r\n                    \"vr\": \"CS\",\r\n                    \"Value\": [\r\n                        \"TEXT\"\r\n                    ]\r\n                }\r\n            }\r\n        ]\r\n    },\r\n    \"00102160\": {\r\n        \"vr\": \"SH\",\r\n        \"Value\": [\r\n            \"Asian\"\r\n        ]\r\n    },\r\n    \"00104000\": {\r\n        \"vr\": \"LT\",\r\n        \"Value\": [\r\n            \"Patient comments\"\r\n        ]\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/dicom-web/patients",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"dicom-web",
+						"patients"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"const skipRequestNames = [];\r",
+					"\r",
+					"if (skipRequestNames.indexOf(pm.info.requestName) < 0) {\r",
+					"    if (pm.environment.get(\"ASUS_AWS_TOKEN\") && pm.environment.get(\"ASUS_AWS_TOKEN_EXPIRE\")) {\r",
+					"        const tokenExpire = new Date(pm.environment.get(\"ASUS_AWS_TOKEN_EXPIRE\")).getTime();\r",
+					"        const currentTime = new Date().getTime();\r",
+					"\r",
+					"        if (currentTime < tokenExpire) {\r",
+					"            console.log(\"token not expired, we don't need login again\")\r",
+					"        }\r",
+					"    }\r",
+					"\r",
+					"    const baseURL = pm.collectionVariables.get(\"baseURL\");\r",
+					"    const username = pm.collectionVariables.get(\"awsUsername\");\r",
+					"    const password = pm.collectionVariables.get(\"awsPassword\");\r",
+					"\r",
+					"    const loginRequest = {\r",
+					"        url: `${baseURL}/asus-web-storage/api/login`,\r",
+					"        method: \"POST\",\r",
+					"        header: {\r",
+					"            \"content-type\": \"application/json\"\r",
+					"        },\r",
+					"        body: {\r",
+					"            mode: \"raw\",\r",
+					"            raw: JSON.stringify({\r",
+					"                username: username,\r",
+					"                password: password\r",
+					"            })\r",
+					"        }\r",
+					"    };\r",
+					"\r",
+					"    pm.sendRequest(loginRequest, function (err, response) {\r",
+					"        if (err) {\r",
+					"            console.error(err);\r",
+					"        } else {\r",
+					"            const token = response.json().token;\r",
+					"            const expireTime = new Date();\r",
+					"\r",
+					"            expireTime.setHours(expireTime.getHours() + 1.5);\r",
+					"\r",
+					"            pm.environment.set(\"ASUS_AWS_TOKEN\", token);\r",
+					"            pm.environment.set(\"ASUS_AWS_TOKEN_EXPIRE\", expireTime.toISOString());\r",
+					"\r",
+					"            console.log(\"Token updated, expire time: \" + expireTime.toISOString());\r",
+					"        }\r",
+					"    });\r",
+					"}\r",
+					"\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "awsUsername",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "awsPassword",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "baseURL",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "renderedStudyUID",
+			"value": "1.3.46.670589.45.1.1.4993912214784.1.5436.1538560373543",
+			"type": "string"
+		},
+		{
+			"key": "renderedSeriesUID",
+			"value": "1.3.46.670589.45.1.1.4993912214784.1.5436.1538560606509.3",
+			"type": "string"
+		},
+		{
+			"key": "renderedInstanceUID",
+			"value": "1.3.6.1.4.1.5962.99.1.3002151337.1017604488.1540600476073.6.0",
+			"type": "string"
+		},
+		{
+			"key": "normalStudyUID",
+			"value": "1.2.826.0.1.3680043.8.1055.1.20111102150758591.92402465.76095170",
+			"type": "string"
+		},
+		{
+			"key": "normalSeriesUID",
+			"value": "1.2.826.0.1.3680043.8.1055.1.20111102150758591.96842950.07877442",
+			"type": "string"
+		},
+		{
+			"key": "normalInstanceUID",
+			"value": "1.2.826.0.1.3680043.8.1055.1.20111102150758591.03296050.69180943",
+			"type": "string"
+		},
+		{
+			"key": "pdfStudyUID",
+			"value": "2.25.728938748290356743483784457708439661478",
+			"type": "string"
+		},
+		{
+			"key": "pdfSeriesUID",
+			"value": "2.25.506995495985452791202560106751205657291",
+			"type": "string"
+		},
+		{
+			"key": "pdfInstanceUID",
+			"value": "2.25.703336091023020581997236598619607956597",
+			"type": "string"
+		}
+	]
+}

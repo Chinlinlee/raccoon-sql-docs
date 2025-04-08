@@ -117,6 +117,10 @@ const config = defineConfig({
                 {
                   title: "statistics",
                   to: "/guide/plugin-list/statistics"
+                },
+                {
+                  title: "Asus Web Storage 華碩雲端",
+                  to: "/guide/plugin-list/asus-web-storage/"
                 }
               ]
             },
