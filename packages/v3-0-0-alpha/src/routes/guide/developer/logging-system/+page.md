@@ -7,7 +7,7 @@
 Raccoon 原先使用 [log4js](https://www.npmjs.com/package/log4js) 進行 log，不過 log4js 雖然能輸出漂亮的 log，但是卻無法簡單地進行分析，所以在後續的版本已經更換為 [winston](https://www.npmjs.com/package/winston) 輸出結構化 (json) 的 log。
 
 ## 架構圖
-<CenterImage src="{base}/logging-system/logging-system-arch-diagram.svg" alt="架構圖" title="Logging System 架構圖"></CenterImage>
+<CenterImage src="{base}/logging-system/raccoon-logging-system.drawio.png" alt="架構圖" title="Logging System 架構圖"></CenterImage>
 
 ## Fluentd
 [Fluentd](https://www.fluentd.org/) 是一款開源且高性能的日誌 (log)處理器與轉發器，專為日志收集與統一處理設計。它支持多種數據輸入和輸出插件，可以輕鬆與其他日志系統集成，提供輕量級的日志收集解決方案。
@@ -68,8 +68,8 @@ Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且�
 ```ini
 <source>
   @type tail
-  path /var/log/raccoon/*.log
-  exclude_path ["/var/log/raccoon/raccoon.log", "/var/log/raccoon/raccoon-formatted-audit.log"]
+  path /nodejs/raccoon/pm2log/*.log
+  exclude_path ["/nodejs/raccoon/pm2log/raccoon.log", "/nodejs/raccoon/pm2log/raccoon-formatted-audit.log"]
   pos_file /var/log/raccoon/fluentd.pos
   tag mongo.raccoon
   read_from_head  true
@@ -82,9 +82,9 @@ Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且�
 # for formatted audit log
 <source>
   @type tail
-  path /var/log/raccoon/raccoon-formatted-audit.log
+  path /nodejs/raccoon/pm2log/raccoon-formatted-audit.log
   pos_file /var/log/raccoon/fluentd-audit.pos
-  tag mongo.raccoon-audit
+  tag mongo.raccoon-formatted-audit
   read_from_head true
 
   <parse>
@@ -94,7 +94,7 @@ Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且�
 
 <source>
   @type tail
-  path /var/log/raccoon/raccoon.log
+  path /nodejs/raccoon/pm2log/raccoon.log
   pos_file /var/log/raccoon/fluentd-dcm4che.pos
   tag mongo.raccoon-dcm4che
   read_from_head  true
@@ -102,8 +102,8 @@ Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且�
   
   <parse>
     @type multiline
-    format_firstline /^\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}/
-    format1 /^(?<time>\d{1,2}:\d{1,2}:\d{1,2}\.\d{1,3}) \[(?<thread>.*)\] (?<level>[^\s]+) (?<message>[\s\S]*)$/
+    format_firstline /^\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2},\d{3}/
+    format1 /^(?<time>\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2},\d{3})\s+\[(?<thread>.*)\]\s+(?<level>[^\s]+)\s+(?<message>[\s\S]*)$/
   </parse>
 </source>
 
@@ -111,8 +111,9 @@ Raccoon 目前所有的 log 檔案都存放於 pm2log 資料夾底下，並且�
   @type mongo
   collection ${tag[1]}-log
   
-  connection_string mongodb://root:root@fluentd-mongo:27017/raccoon-logs?authSource=admin
-  
+  connection_string "mongodb://#{ENV['FLUENT_MONGODB_USER']}:#{ENV['FLUENT_MONGODB_PASSWORD']}@fluentd-mongo:27017/raccoon-logs?authSource=admin"
+  date_keys timestamp
+
   <buffer tag,time>
     timekey        1
     timekey_wait   0
@@ -244,8 +245,6 @@ module.exports.pluginsConfig = {
 ### WADO-RS/WADO-URI/C-MOVE
 - 進行 Retrieve 時，會先行產生 [Begin Transferring DICOM Instances](https://dicom.nema.org/medical/dicom/current/output/chtml/part15/sect_A.5.3.3.html) 的 Audit Message
 - Retrieve 完畢後，會產生 [DICOM Instances Transferred](https://dicom.nema.org/medical/dicom/current/output/chtml/part15/sect_A.5.3.7.html) 的 Audit Message
-
-TODO: 列出 Audit message 在各個 Service 中的用法
 
 # 參考資料
 - [Fluent Bit介紹](https://huweicai.com/fluent-bit/)
