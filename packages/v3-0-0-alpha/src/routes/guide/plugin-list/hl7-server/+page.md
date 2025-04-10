@@ -78,6 +78,8 @@ ROL|45^RECORDER^ROLE MASTER LIST|AD|CP|KATE^ELLEN|199505011201
     title="ADT^A04 Result">
 </CenterImage>
 
+6. 在創建後，可以至 SQL 的 `patient` 資料表中，看到剛剛建立的 Patient 資料
+
 ### 使用 HL7 Test panel 傳送建立 MWL 的訊息
 
 步驟與建立 Patient 的訊息相同，只是將訊息改為 OMI^O23 的訊息
@@ -96,6 +98,6 @@ NTE|||RequestedProcedureComments
 IPC|ACC-shi3Ub|RP-chaeF9|1.2.392.200036.9125.0.198811291108.7|SPS-johs4U|CT|10637-7^Microscopic Observation^LN|ScheduledStationName|ScheduledProcStepLocation|ScheduledStationAET1~ScheduledStationAET2
 ```
 
-
+- 在創建後可以在 SQL 的 `mwl_item` 資料表中，看到剛剛建立的 MWL 資料
 
 
