@@ -93,6 +93,13 @@ sudo apt update
 sudo apt-get -y install postgresql
 ```
 
+3. 安裝後，請記得創建給 Raccoon 使用的資料庫
+
+```bash
+sudo -u postgres psql -c "CREATE DATABASE raccoon;"
+```
+
+
 ## 安裝 git
 
 1. 輸入以下指令安裝 git

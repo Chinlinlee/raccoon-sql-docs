@@ -119,6 +119,10 @@ const config = defineConfig({
                   to: "/guide/plugin-list/statistics"
                 },
                 {
+                  title: "HL7 Server",
+                  to: "/guide/plugin-list/hl7-server"
+                },
+                {
                   title: "Asus Web Storage 華碩雲端",
                   to: "/guide/plugin-list/asus-web-storage"
                 }
