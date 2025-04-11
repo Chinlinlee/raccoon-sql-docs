@@ -119,6 +119,10 @@ const config = defineConfig({
                   to: "/guide/plugin-list/statistics"
                 },
                 {
+                  title: "DICOMDIR",
+                  to: "/guide/plugin-list/dicomdir"
+                },
+                {
                   title: "HL7 Server",
                   to: "/guide/plugin-list/hl7-server"
                 },
