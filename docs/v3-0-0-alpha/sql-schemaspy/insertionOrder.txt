@@ -9,14 +9,17 @@ dicom_code
 ups_work_item
 labels
 ups_subscription
+roles
 dicom_bulk_data
 dicom_instance_delete_reason
+mpps
 series_request_attributes
 ups_global_subscription
 ups_request_attributes
 user_config
 operators_name
 performing_physician_name
+role_bindings
 study_label
 workitems_subscriptions
 dicom_content_sq

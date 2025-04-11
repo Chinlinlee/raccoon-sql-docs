@@ -5,14 +5,17 @@ verifying_observer_sq
 dicom_content_sq
 workitems_subscriptions
 study_label
+role_bindings
 performing_physician_name
 operators_name
 user_config
 ups_request_attributes
 ups_global_subscription
 series_request_attributes
+mpps
 dicom_instance_delete_reason
 dicom_bulk_data
+roles
 ups_subscription
 labels
 ups_work_item

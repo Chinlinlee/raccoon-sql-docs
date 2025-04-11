@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>SequelizeMeta - raccoon_umzug.public</title>
+        <title>SequelizeMeta - raccoon.public</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -46,7 +46,7 @@
                 <nav class="navbar navbar-static-top">
                     <div class="container">
                         <div class="navbar-header">
-                            <a href="../index.html" class="navbar-brand"><b>raccoon_umzug</b></a><span class="navbar-brand" style="padding-left: 0">.public</span>
+                            <a href="../index.html" class="navbar-brand"><b>raccoon</b></a><span class="navbar-brand" style="padding-left: 0">.public</span>
                             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse"><i class="fa fa-bars"></i></button>
                         </div>
 
@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>SequelizeMeta</h1><p><span id="recordNumber">20</span> rows</p><br />
+                    <h1>SequelizeMeta</h1><p><span id="recordNumber">23</span> rows</p><br />
                 </section>
                 <!-- Main content -->
                 <section class="content">
@@ -134,6 +134,11 @@
                                             </tr>
                                             <tr>
                                                 <td title="mwl_item.station_name&#39;s name implies that it&#39;s a child of SequelizeMeta.name, but it doesn&#39;t reference that column."><a href='mwl_item.html'>mwl_item</a><span class='relatedKey'>.station_name</span></td>
+                                                <td class="constraint detail">Implied Constraint</td>
+                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td title="roles.name&#39;s name implies that it&#39;s a child of SequelizeMeta.name, but it doesn&#39;t reference that column."><a href='roles.html'>roles</a><span class='relatedKey'>.name</span></td>
                                                 <td class="constraint detail">Implied Constraint</td>
                                                 <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
@@ -212,21 +217,24 @@
                                     <div class="chart tab-pane " id="oneimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagramImplied" name="oneDegreeRelationshipsDiagramImplied">
 <area shape="rect" id="node1" href="labels.html" target="_top" title="labels" alt="" coords="401,5,529,152">
-<area shape="rect" id="node2" href="SequelizeMeta.html" target="_top" title="SequelizeMeta" alt="" coords="5,313,257,412">
+<area shape="rect" id="node2" href="SequelizeMeta.html" target="_top" title="SequelizeMeta" alt="" coords="5,372,257,471">
 <area shape="rect" id="node3" href="mwl_item.html" target="_top" title="mwl_item" alt="" coords="301,169,629,668">
+<area shape="rect" id="node4" href="roles.html" target="_top" title="roles" alt="" coords="398,685,533,861">
 </map>
                                         <a name='diagram'><img id="oneimpliedDegreeImg" src="../diagrams/tables/SequelizeMeta.implied1degrees.png" usemap="#oneDegreeRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twoimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagramImplied" name="twoDegreesRelationshipsDiagramImplied">
-<area shape="rect" id="node1" href="labels.html" target="_top" title="labels" alt="" coords="623,5,751,152">
-<area shape="rect" id="node2" href="SequelizeMeta.html" target="_top" title="SequelizeMeta" alt="" coords="227,296,479,395">
-<area shape="rect" id="node3" href="mwl_item.html" target="_top" title="mwl_item" alt="" coords="523,169,851,668">
-<area shape="rect" id="node4" href="dicom_code.html" target="_top" title="dicom_code" alt="" coords="269,448,436,536">
-<area shape="rect" id="node5" href="patient.html" target="_top" title="patient" alt="" coords="290,191,415,279">
-<area shape="rect" id="node6" href="person_name.html" target="_top" title="person_name" alt="" coords="5,283,183,371">
-<area shape="rect" id="node7" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="12,553,176,641">
-<area shape="rect" id="node8" href="study_label.html" target="_top" title="study_label" alt="" coords="895,328,1056,416">
+<area shape="rect" id="node1" href="labels.html" target="_top" title="labels" alt="" coords="321,443,449,589">
+<area shape="rect" id="node2" href="SequelizeMeta.html" target="_top" title="SequelizeMeta" alt="" coords="5,223,257,321">
+<area shape="rect" id="node3" href="mwl_item.html" target="_top" title="mwl_item" alt="" coords="512,5,840,504">
+<area shape="rect" id="node4" href="dicom_code.html" target="_top" title="dicom_code" alt="" coords="301,301,468,389">
+<area shape="rect" id="node5" href="patient.html" target="_top" title="patient" alt="" coords="322,52,447,140">
+<area shape="rect" id="node6" href="person_name.html" target="_top" title="person_name" alt="" coords="43,85,220,173">
+<area shape="rect" id="node7" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="49,668,213,756">
+<area shape="rect" id="node8" href="role_bindings.html" target="_top" title="role_bindings" alt="" coords="587,713,765,801">
+<area shape="rect" id="node9" href="roles.html" target="_top" title="roles" alt="" coords="317,607,452,783">
+<area shape="rect" id="node10" href="study_label.html" target="_top" title="study_label" alt="" coords="595,564,757,652">
 </map>
                                         <a name='diagram'><img id="twoimpliedDegreeImg" src="../diagrams/tables/SequelizeMeta.implied2degrees.png" usemap="#twoDegreesRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>

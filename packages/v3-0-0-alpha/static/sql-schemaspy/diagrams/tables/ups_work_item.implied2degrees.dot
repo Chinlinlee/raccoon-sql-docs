@@ -8,6 +8,7 @@ digraph "twoDegreesRelationshipsDiagramImplied" {
   "dicom_instance_delete_reason":"elipses":w -> "tenant_user":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "instance":"elipses":w -> "series":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "instance":"elipses":w -> "tenant_user":"id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "mpps":"elipses":w -> "tenant_user":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "mwl_item":"elipses":w -> "dicom_code":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "mwl_item":"elipses":w -> "dicom_code":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "mwl_item":"elipses":w -> "patient":"id":e [arrowhead=none dir=back arrowtail=crowodot];
@@ -20,6 +21,9 @@ digraph "twoDegreesRelationshipsDiagramImplied" {
   "patient":"x00100010":w -> "person_name":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "performing_physician_name":"elipses":w -> "person_name":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "performing_physician_name":"elipses":w -> "series":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
+  "role_bindings":"elipses":w -> "roles":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
+  "role_bindings":"elipses":w -> "tenant_user":"id":e [arrowhead=none dir=back arrowtail=crowodot];
+  "roles":"elipses":w -> "tenant_user":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "series":"elipses":w -> "study":"elipses":e [arrowhead=none dir=back arrowtail=crowodot];
   "series":"elipses":w -> "tenant_user":"id":e [arrowhead=none dir=back arrowtail=crowodot];
   "study":"elipses":w -> "patient":"id":e [arrowhead=none dir=back arrowtail=crowodot];
@@ -103,6 +107,17 @@ digraph "twoDegreesRelationshipsDiagramImplied" {
     target="_top"
     tooltip="instance"
   ];
+  "mpps" [
+   label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3"  BGCOLOR="#f5f5f5"><TABLE BORDER="0" CELLSPACING="0"><TR><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="32" HEIGHT="16"><B>mpps</B></TD><TD ALIGN="RIGHT">[table]</TD></TR></TABLE></TD></TR>
+      <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#ffffff">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">  </TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">  </TD></TR>
+    </TABLE>>
+    URL="mpps.html"
+    target="_top"
+    tooltip="mpps"
+  ];
   "mwl_item" [
    label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
@@ -158,6 +173,28 @@ digraph "twoDegreesRelationshipsDiagramImplied" {
     target="_top"
     tooltip="person_name"
   ];
+  "role_bindings" [
+   label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3"  BGCOLOR="#f5f5f5"><TABLE BORDER="0" CELLSPACING="0"><TR><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="78" HEIGHT="16"><B>role_bindings</B></TD><TD ALIGN="RIGHT">[table]</TD></TR></TABLE></TD></TR>
+      <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#ffffff">&lt; 2</TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">  </TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">  </TD></TR>
+    </TABLE>>
+    URL="role_bindings.html"
+    target="_top"
+    tooltip="role_bindings"
+  ];
+  "roles" [
+   label=<
+    <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
+      <TR><TD COLSPAN="3"  BGCOLOR="#f5f5f5"><TABLE BORDER="0" CELLSPACING="0"><TR><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="28" HEIGHT="16"><B>roles</B></TD><TD ALIGN="RIGHT">[table]</TD></TR></TABLE></TD></TR>
+      <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#ffffff">&lt; 1</TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">  </TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">1 &gt;</TD></TR>
+    </TABLE>>
+    URL="roles.html"
+    target="_top"
+    tooltip="roles"
+  ];
   "series" [
    label=<
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
@@ -196,7 +233,7 @@ digraph "twoDegreesRelationshipsDiagramImplied" {
     <TABLE BORDER="0" CELLBORDER="1" CELLSPACING="0" BGCOLOR="#ffffff">
       <TR><TD COLSPAN="3"  BGCOLOR="#f5f5f5"><TABLE BORDER="0" CELLSPACING="0"><TR><TD ALIGN="LEFT" FIXEDSIZE="TRUE" WIDTH="68" HEIGHT="16"><B>tenant_user</B></TD><TD ALIGN="RIGHT">[table]</TD></TR></TABLE></TD></TR>
       <TR><TD PORT="elipses" COLSPAN="3" ALIGN="LEFT">...</TD></TR>
-      <TR><TD ALIGN="LEFT" BGCOLOR="#ffffff">  </TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">  </TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">12 &gt;</TD></TR>
+      <TR><TD ALIGN="LEFT" BGCOLOR="#ffffff">  </TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">  </TD><TD ALIGN="RIGHT" BGCOLOR="#ffffff">15 &gt;</TD></TR>
     </TABLE>>
     URL="tenant_user.html"
     target="_top"
