@@ -8,10 +8,13 @@
 
 # HL7 Server 插件
 
-此插件會啟動一個 HL7 Server，可接收 HL7 以下種類的 Message
+此插件會啟動一個 HL7 Server，使用修自行修改版的 [simple-hl7](https://github.com/hitgeek/simple-hl7)，名為[raccoon-simple-hl7-server](https://github.com/Chinlinlee/raccoon-simple-hl7-server)
+
+此插件可接收 HL7 以下種類的 Message
 - `ADT` Type 且 event 為 `A04` (Register a patient) 和 `A08` (Update patient information) 
 - `ORM` Type 且 event 為 `O01` (Order message)
 - `OMI` Type 且 event 為 `O23` (Imaging order)
+
 
 ## 設定檔
 - 請修改 `plugins/config.js`
