@@ -24,7 +24,7 @@ const config = defineConfig({
           // Add your navbar configs here
           {
             "title": "Guide",
-            "to": `${base}/guide/developer/foundation`
+            "to": `${base}/guide/developer/foundation/`
           },
           {
             ...versionNavbar
@@ -39,7 +39,7 @@ const config = defineConfig({
               items: [
                 {
                   title: "Installation - Debian Linux",
-                  to: `/guide/getting-started/installation-debian`
+                  to: `/guide/getting-started/installation-debian/`
                 }
               ]
             },
@@ -49,43 +49,43 @@ const config = defineConfig({
               items: [
                 {
                   title: "基礎觀念",
-                  to: "/guide/developer/foundation"
+                  to: "/guide/developer/foundation/"
                 },
                 {
                   title: "影像處理相關",
-                  to: "/guide/developer/image-processing"
+                  to: "/guide/developer/image-processing/"
                 },
                 {
                   title: "node-java-bridge",
-                  to: "/guide/developer/node-java-bridge"
+                  to: "/guide/developer/node-java-bridge/"
                 },
                 {
                   title: "Mongoose Schema",
-                  to: "/guide/developer/mongoose-schema"
+                  to: "/guide/developer/mongoose-schema/"
                 },
                 {
                   title: "相依專案",
-                  to: "/guide/developer/deps-projects"
+                  to: "/guide/developer/deps-projects/"
                 },
                 {
                   title: "Swagger API Docs",
-                  to: "/guide/developer/swagger"
+                  to: "/guide/developer/swagger/"
                 },
                 {
                   title: "SQL",
-                  to: "/guide/developer/sql"
+                  to: "/guide/developer/sql/"
                 },
                 {
                   title: "DIMSE 服務",
-                  to: "/guide/developer/dimse"
+                  to: "/guide/developer/dimse/"
                 },
                 {
                   title: "Logging System",
-                  to: "/guide/developer/logging-system"
+                  to: "/guide/developer/logging-system/"
                 },
                 {
                   title: "OAuth 串接",
-                  to: "/guide/developer/oauth"
+                  to: "/guide/developer/oauth/"
                 }
               ]
             }

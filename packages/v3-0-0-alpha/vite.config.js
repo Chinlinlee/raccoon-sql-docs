@@ -25,7 +25,7 @@ const config = defineConfig({
           // Add your navbar configs here
           {
             "title": "Guide",
-            "to": `${base}/guide/developer/foundation`
+            "to": `${base}/guide/developer/foundation/`
           },
           {
             ...versionNavbar
@@ -40,7 +40,7 @@ const config = defineConfig({
               items: [
                 {
                   title: "Installation - Debian Linux",
-                  to: `/guide/getting-started/installation-debian`
+                  to: `/guide/getting-started/installation-debian/`
                 }
               ]
             },
@@ -50,51 +50,51 @@ const config = defineConfig({
               items: [
                 {
                   title: "基礎觀念",
-                  to: "/guide/developer/foundation"
+                  to: "/guide/developer/foundation/"
                 },
                 {
                   title: "如何測試",
-                  to: "/guide/developer/how-to-test"
+                  to: "/guide/developer/how-to-test/"
                 },
                 {
                   title: "如何發布新版本",
-                  to: "/guide/developer/how-to-release"
+                  to: "/guide/developer/how-to-release/"
                 },
                 {
                   title: "影像處理相關",
-                  to: "/guide/developer/image-processing"
+                  to: "/guide/developer/image-processing/"
                 },
                 {
                   title: "node-java-bridge",
-                  to: "/guide/developer/node-java-bridge"
+                  to: "/guide/developer/node-java-bridge/"
                 },
                 {
                   title: "Mongoose Schema",
-                  to: "/guide/developer/mongoose-schema"
+                  to: "/guide/developer/mongoose-schema/"
                 },
                 {
                   title: "相依專案",
-                  to: "/guide/developer/deps-projects"
+                  to: "/guide/developer/deps-projects/"
                 },
                 {
                   title: "Swagger API Docs",
-                  to: "/guide/developer/swagger"
+                  to: "/guide/developer/swagger/"
                 },
                 {
                   title: "SQL & Migration",
-                  to: "/guide/developer/sql"
+                  to: "/guide/developer/sql/"
                 },
                 {
                   title: "DIMSE 服務",
-                  to: "/guide/developer/dimse"
+                  to: "/guide/developer/dimse/"
                 },
                 {
                   title: "Logging System",
-                  to: "/guide/developer/logging-system"
+                  to: "/guide/developer/logging-system/"
                 },
                 {
                   title: "OAuth 串接",
-                  to: "/guide/developer/oauth"
+                  to: "/guide/developer/oauth/"
                 },
                 {
                   title: "mocha 測試報告",
@@ -108,27 +108,27 @@ const config = defineConfig({
               items: [
                 {
                   title: "OAuth",
-                  to: "/guide/plugin-list/oauth"
+                  to: "/guide/plugin-list/oauth/"
                 },
                 {
                   title: "getStudyFhir - 獲取 Study 的 FHIR 資料",
-                  to: "/guide/plugin-list/get-study-fhir"
+                  to: "/guide/plugin-list/get-study-fhir/"
                 },
                 {
                   title: "statistics",
-                  to: "/guide/plugin-list/statistics"
+                  to: "/guide/plugin-list/statistics/"
                 },
                 {
                   title: "DICOMDIR",
-                  to: "/guide/plugin-list/dicomdir"
+                  to: "/guide/plugin-list/dicomdir/"
                 },
                 {
                   title: "HL7 Server",
-                  to: "/guide/plugin-list/hl7-server"
+                  to: "/guide/plugin-list/hl7-server/"
                 },
                 {
                   title: "Asus Web Storage 華碩雲端",
-                  to: "/guide/plugin-list/asus-web-storage"
+                  to: "/guide/plugin-list/asus-web-storage/"
                 }
               ]
             },
@@ -138,7 +138,7 @@ const config = defineConfig({
               items: [
                 {
                   title: "v2 to v3 資料庫遷移",
-                  to: "/guide/other/v2-to-v3-database-migration"
+                  to: "/guide/other/v2-to-v3-database-migration/"
                 }
               ]
             }
