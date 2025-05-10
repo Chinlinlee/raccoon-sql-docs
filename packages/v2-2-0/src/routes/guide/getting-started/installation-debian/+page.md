@@ -778,7 +778,7 @@ node server.js
 以下使用的 compose file 並無 keycloak，請自行上網參閱
 :::
 
-- 請確保一開始的檔案目錄結構長這樣
+- 請確保一開始的檔案目錄結構長這樣，也就是在raccoon專案的上一層
 ```bash
 .
 └───raccoon-dicom
