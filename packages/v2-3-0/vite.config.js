@@ -24,7 +24,7 @@ const config = defineConfig({
           // Add your navbar configs here
           {
             "title": "Guide",
-            "to": `${base}/guide/developer/foundation/`
+            "to": `${base}/guide/getting-started/installation-debian/`
           },
           {
             ...versionNavbar
