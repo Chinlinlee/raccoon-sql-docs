@@ -9,6 +9,10 @@
 
 以下安裝步驟所使用的環境為 `debian 12`
 
+:::tip[小技巧]
+如果你使用 docker compose 進行安裝，可以直接跳到 <Link to="#使用-docker-compose" label="使用 docker-compose 章節" withBase={false} />
+:::
+
 ## 環境所需
 - [Node.js](https://nodejs.org/en/download/current) >= 18
 - [Java JDK](https://adoptium.net/temurin/releases/) >= 11
