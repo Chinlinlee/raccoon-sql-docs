@@ -860,9 +860,9 @@ services:
       dockerfile : Dockerfile-fluent
     container_name: raccoon
     # 若你擁有 gitlab.dicom.tw 的權限
-    # 可以更改把 image 成 gitlab-registry.dicom.tw/a5566qq123/raccoon-dicom:2.2.0
+    # 可以更改把 image 成 gitlab-registry.dicom.tw/a5566qq123/raccoon-dicom:2.9.1
     # 也請記得將 build 區塊刪除
-    image: raccoon:2.2.0
+    image: raccoon:2.9.1
     env_file:
       - ./raccoon.env
     configs:
