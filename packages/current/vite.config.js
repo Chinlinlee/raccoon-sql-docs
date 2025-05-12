@@ -115,6 +115,16 @@ const config = defineConfig({
                   to: "/guide/plugin-list/statistics"
                 }
               ]
+            },
+            {
+              title: "其他",
+              collapsible: true,
+              items: [
+                {
+                  title: "nginx 相關設定",
+                  to: "/guide/other/nginx/"
+                }
+              ]
             }
           ]
         },

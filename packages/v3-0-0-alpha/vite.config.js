@@ -139,6 +139,10 @@ const config = defineConfig({
                 {
                   title: "v2 to v3 資料庫遷移",
                   to: "/guide/other/v2-to-v3-database-migration/"
+                },
+                {
+                  title: "nginx 相關設定",
+                  to: "/guide/other/nginx/"
                 }
               ]
             }
