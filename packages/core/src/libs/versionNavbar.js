@@ -6,12 +6,12 @@ export default {
     "title": "Version",
     "items": [
         {
-            "title": "v3.0.0 (alpha)",
-            "to": `${process.env.VERSION_PAGE_BASE_URL}/v3-0-0-alpha/`
+            "title": "v3.2.x (current)",
+            "to": `${process.env.VERSION_PAGE_BASE_URL}/current/`
         },
         {
-            "title": "v2.6.x (current)",
-            "to": `${process.env.VERSION_PAGE_BASE_URL}/current/`
+            "title": "v2.6.0-v2.9.x",
+            "to": `${process.env.VERSION_PAGE_BASE_URL}/v2-6-0-v2-9-x/`
         },
         {
             "title": "v2.4.x",
