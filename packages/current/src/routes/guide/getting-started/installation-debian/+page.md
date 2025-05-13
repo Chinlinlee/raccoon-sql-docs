@@ -97,6 +97,13 @@ sudo apt update
 sudo apt-get -y install postgresql
 ```
 
+3. 安裝後，請記得創建給 Raccoon 使用的資料庫
+
+```bash
+sudo -u postgres psql -c "CREATE DATABASE raccoon;"
+```
+
+
 ## 安裝 git
 
 1. 輸入以下指令安裝 git
@@ -261,6 +268,9 @@ dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv �
 | SERVER_PORT | number | 伺服器運行的埠(port)號 |
 | SERVER_SESSION_SECRET_KEY | string | 用於 session 的保密金鑰 |
 | DICOM_DELETE_SCHEDULE | string | 定時刪除 DICOM 檔案的時間，格式使用 crontab |
+| DICOM_CACHE_TTL | number | DICOM 緩存過期時間 (秒)，目前主要用於 ASUS Web Storage，預設為 7200 |
+| DICOM_CACHE_DISK_THRESHOLD | number | 這是 FIFO DICOM 緩存磁碟使用量門檻，數值為 0~100，單位使用百分比%，若要使用啟用此模式`DICOM_CACHE_TTL`設為0，請將，目前主要用於 ASUS Web Storage，預設為 10 |
+| DICOM_THUMBNAIL_CACHE_TTL | number | DICOM 縮圖緩存過期時間 (秒)，預設為 86400 |
 | #DICOMweb |  |  |
 | DICOM_STORE_ROOTPATH | string | 存放 DICOM 檔案的根目錄 |
 | DICOMWEB_HOST | string | DICOM Web 伺服器的主機名稱。用於組合 00081190 (Retrieve URL)。您可以在字串中使用 \{host\}，它將替換為 request.headers.host |
@@ -860,9 +870,9 @@ services:
       dockerfile : Dockerfile-fluent
     container_name: raccoon
     # 若你擁有 gitlab.dicom.tw 的權限
-    # 可以更改把 image 成 gitlab-registry.dicom.tw/a5566qq123/raccoon-dicom:2.9.1
+    # 可以更改把 image 成 gitlab-registry.dicom.tw/a5566qq123/raccoon-dicom:3.2.6
     # 也請記得將 build 區塊刪除
-    image: raccoon:2.9.1
+    image: raccoon:3.2.6
     env_file:
       - ./raccoon.env
     configs:

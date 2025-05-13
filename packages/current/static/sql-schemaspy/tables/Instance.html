@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Instance - raccoon.public</title>
+        <title>instance - raccoon.public</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>Instance</h1><p><span id="recordNumber">16</span> rows</p><br />
+                    <h1>instance</h1><p><span id="recordNumber">-1</span> rows</p><br />
                 </section>
                 <!-- Main content -->
                 <section class="content">
@@ -109,6 +109,38 @@
                                 </thead>
                                 <tbody>
                                 <tr>
+                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="id">id</span></td>
+                                    <td>serial</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title='Automatically updated by the database'>√</td>
+                                    <td>nextval(&#39;instance_id_seq&#39;::regclass)</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="dicom_code.SOPInstanceUID references instance.id via dicom_code_SOPInstanceUID_fkey"><a href='dicom_code.html'>dicom_code</a><span class='relatedKey'>.SOPInstanceUID</span></td>
+                                                <td class="constraint detail">dicom_code_SOPInstanceUID_fkey</td>
+                                                <td class="constraint detail"><span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td title="dicom_content_sq.SOPInstanceUID references instance.id via dicom_content_sq_SOPInstanceUID_fkey"><a href='dicom_content_sq.html'>dicom_content_sq</a><span class='relatedKey'>.SOPInstanceUID</span></td>
+                                                <td class="constraint detail">dicom_content_sq_SOPInstanceUID_fkey</td>
+                                                <td class="constraint detail"><span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td title="verifying_observer_sq.SOPInstanceUID references instance.id via verifying_observer_sq_SOPInstanceUID_fkey"><a href='verifying_observer_sq.html'>verifying_observer_sq</a><span class='relatedKey'>.SOPInstanceUID</span></td>
+                                                <td class="constraint detail">verifying_observer_sq_SOPInstanceUID_fkey</td>
+                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
                                     <td><span id="instancePath">instancePath</span></td>
                                     <td>text</td>
                                     <td>2147483647</td>
@@ -128,7 +160,7 @@
                                 <tr>
                                     <td><span id="x00020010">x00020010</span></td>
                                     <td>varchar</td>
-                                    <td>65</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -143,9 +175,9 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="x0020000D">x0020000D</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x0020000D">x0020000D</span></td>
                                     <td>varchar</td>
-                                    <td>65</td>
+                                    <td>255</td>
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -155,19 +187,14 @@
                                     </td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="Instance.x0020000D&#39;s name implies that it&#39;s a child of Study.x0020000D, but it doesn&#39;t reference that column."><a href='Study.html'>Study</a><span class='relatedKey'>.x0020000D</span></td>
-                                                <td class="constraint detail">Implied Constraint</td>
-                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
                                         </table>
                                     </td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="x0020000E">x0020000E</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x0020000E">x0020000E</span></td>
                                     <td>varchar</td>
-                                    <td>65</td>
+                                    <td>255</td>
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -177,39 +204,19 @@
                                     </td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="Instance.x0020000E references Series.x0020000E via Instance_x0020000E_fkey"><a href='Series.html'>Series</a><span class='relatedKey'>.x0020000E</span></td>
-                                                <td class="constraint detail">Instance_x0020000E_fkey</td>
-                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
                                         </table>
                                     </td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="x00080018">x00080018</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x00080018">x00080018</span></td>
                                     <td>varchar</td>
-                                    <td>65</td>
+                                    <td>255</td>
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="DicomCode.SOPInstanceUID references Instance.x00080018 via DicomCode_SOPInstanceUID_fkey"><a href='DicomCode.html'>DicomCode</a><span class='relatedKey'>.SOPInstanceUID</span></td>
-                                                <td class="constraint detail">DicomCode_SOPInstanceUID_fkey</td>
-                                                <td class="constraint detail"><span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td title="DicomContentSQ.SOPInstanceUID references Instance.x00080018 via DicomContentSQ_SOPInstanceUID_fkey"><a href='DicomContentSQ.html'>DicomContentSQ</a><span class='relatedKey'>.SOPInstanceUID</span></td>
-                                                <td class="constraint detail">DicomContentSQ_SOPInstanceUID_fkey</td>
-                                                <td class="constraint detail"><span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td title="VerifyingObserverSQ.SOPInstanceUID references Instance.x00080018 via VerifyingObserverSQ_SOPInstanceUID_fkey"><a href='VerifyingObserverSQ.html'>VerifyingObserverSQ</a><span class='relatedKey'>.SOPInstanceUID</span></td>
-                                                <td class="constraint detail">VerifyingObserverSQ_SOPInstanceUID_fkey</td>
-                                                <td class="constraint detail"><span title='Null on delete:&#10;Foreign key to parent set to NULL when parent deleted'>N</span></td>
-                                            </tr>
                                         </table>
                                     </td>
                                     <td>
@@ -219,9 +226,9 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td><span id="x00080016">x00080016</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x00080016">x00080016</span></td>
                                     <td>varchar</td>
-                                    <td>65</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -236,7 +243,7 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td><span id="x00080023">x00080023</span></td>
+                                    <td><span id="x00080022">x00080022</span></td>
                                     <td>date</td>
                                     <td>13</td>
                                     <td title='nullable'>√</td>
@@ -253,9 +260,43 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td><span id="x00080033">x00080033</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x00080023">x00080023</span></td>
+                                    <td>date</td>
+                                    <td>13</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><span id="x0008002A">x0008002A</span></td>
+                                    <td>timestamptz</td>
+                                    <td>35,6</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x00080033">x00080033</span></td>
                                     <td>numeric</td>
-                                    <td>0</td>
+                                    <td>12,6</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -272,7 +313,7 @@
                                 <tr>
                                     <td><span id="x00200013">x00200013</span></td>
                                     <td>varchar</td>
-                                    <td>13</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -289,7 +330,7 @@
                                 <tr>
                                     <td><span id="x00280008">x00280008</span></td>
                                     <td>varchar</td>
-                                    <td>13</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -301,12 +342,12 @@
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
                                     </td>
-                                    <td></td>
+                                    <td><p>Number of Frames</p></td>
                                 </tr>
                                 <tr>
                                     <td><span id="x00281050">x00281050</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -323,7 +364,7 @@
                                 <tr>
                                     <td><span id="x00281051">x00281051</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -340,7 +381,7 @@
                                 <tr>
                                     <td><span id="x0040A491">x0040A491</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -357,7 +398,7 @@
                                 <tr>
                                     <td><span id="x0040A493">x0040A493</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -373,7 +414,7 @@
                                 </tr>
                                 <tr>
                                     <td><span id="json">json</span></td>
-                                    <td>jsonb</td>
+                                    <td>text</td>
                                     <td>2147483647</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
@@ -384,6 +425,84 @@
                                     </td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="deleteStatus">deleteStatus</span></td>
+                                    <td>int4</td>
+                                    <td>10</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>0</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td><span id="md5">md5</span></td>
+                                    <td>varchar</td>
+                                    <td>255</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="user_id">user_id</span></td>
+                                    <td>uuid</td>
+                                    <td>2147483647</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="instance.user_id references tenant_user.id via instance_user_id_fkey"><a href='tenant_user.html'>tenant_user</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">instance_user_id_fkey</td>
+                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="series_id">series_id</span></td>
+                                    <td>int4</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="instance.series_id references series.id via instance_series_id_fkey"><a href='series.html'>series</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">instance_series_id_fkey</td>
+                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
+                                            </tr>
                                         </table>
                                     </td>
                                     <td></td>
@@ -412,23 +531,6 @@
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><span id="deleteStatus">deleteStatus</span></td>
-                                    <td>int4</td>
-                                    <td>10</td>
-                                    <td title='nullable'>√</td>
-                                    <td title=''></td>
-                                    <td>0</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
@@ -470,10 +572,58 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> Instance_pkey</td>
+                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> instance_pkey</td>
                                     <td>Primary key</td>
                                     <td><span title='Ascending'>Asc</span></td>
+                                    <td>id</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_delete_status_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>deleteStatus</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_user_id_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>user_id</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_x00080016_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>x00080016</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_x00080018_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
                                     <td>x00080018</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_x00080023_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>x00080023</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_x00080033_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>x00080033</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_x0020000D_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>x0020000D</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>instance_x0020000E_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>x0020000E</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -500,55 +650,80 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="DicomCode.html" target="_top" title="DicomCode" alt="" coords="800,5,1011,328">
-<area shape="rect" id="node2" href="DicomContentSQ.html" target="_top" title="DicomContentSQ" alt="" coords="536,277,741,483">
-<area shape="rect" id="node3" href="Instance.html" target="_top" title="Instance" alt="" coords="193,23,477,620">
-<area shape="rect" id="node4" href="VerifyingObserverSQ.html" target="_top" title="VerifyingObserverSQ" alt="" coords="521,84,756,260">
-<area shape="rect" id="node5" href="Series.html" target="_top" title="Series" alt="" coords="5,84,149,231">
+<area shape="rect" id="node1" href="dicom_code.html" target="_top" title="dicom_code" alt="" coords="733,104,908,339">
+<area shape="rect" id="node2" href="instance.html" target="_top" title="instance" alt="" coords="412,219,689,992">
+<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="224,860,368,1183">
+<area shape="rect" id="node5" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="5,911,180,1087">
+<area shape="rect" id="node3" href="dicom_content_sq.html" target="_top" title="dicom_content_sq" alt="" coords="967,5,1181,211">
+<area shape="rect" id="node6" href="verifying_observer_sq.html" target="_top" title="verifying_observer_sq" alt="" coords="952,228,1196,433">
 </map>
-                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/Instance.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/instance.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="DicomCode.html" target="_top" title="DicomCode" alt="" coords="1188,454,1349,542">
-<area shape="rect" id="node2" href="DicomContentSQ.html" target="_top" title="DicomContentSQ" alt="" coords="924,454,1129,542">
-<area shape="rect" id="node3" href="Instance.html" target="_top" title="Instance" alt="" coords="581,364,865,961">
-<area shape="rect" id="node4" href="VerifyingObserverSQ.html" target="_top" title="VerifyingObserverSQ" alt="" coords="909,349,1144,437">
-<area shape="rect" id="node5" href="Series.html" target="_top" title="Series" alt="" coords="393,157,537,304">
-<area shape="rect" id="node7" href="PersonName.html" target="_top" title="PersonName" alt="" coords="5,66,176,154">
-<area shape="rect" id="node9" href="Study.html" target="_top" title="Study" alt="" coords="220,158,349,246">
-<area shape="rect" id="node6" href="OperatorsName.html" target="_top" title="OperatorsName" alt="" coords="627,48,820,136">
-<area shape="rect" id="node8" href="PerformingPhysicianName.html" target="_top" title="PerformingPhysicianName" alt="" coords="585,153,861,241">
-<area shape="rect" id="node10" href="SeriesRequestAttributes.html" target="_top" title="SeriesRequestAttributes" alt="" coords="593,258,853,346">
+<area shape="rect" id="node1" href="dicom_bulk_data.html" target="_top" title="dicom_bulk_data" alt="" coords="280,896,484,984">
+<area shape="rect" id="node2" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="12,1109,176,1197">
+<area shape="rect" id="node3" href="dicom_code.html" target="_top" title="dicom_code" alt="" coords="1300,550,1467,638">
+<area shape="rect" id="node4" href="instance.html" target="_top" title="instance" alt="" coords="972,493,1249,1266">
+<area shape="rect" id="node7" href="series.html" target="_top" title="series" alt="" coords="803,518,921,606">
+<area shape="rect" id="node5" href="dicom_content_sq.html" target="_top" title="dicom_content_sq" alt="" coords="1525,537,1740,625">
+<area shape="rect" id="node6" href="dicom_instance_delete_reason.html" target="_top" title="dicom_instance_delete_reason" alt="" coords="227,790,537,878">
+<area shape="rect" id="node16" href="study.html" target="_top" title="study" alt="" coords="612,681,728,769">
+<area shape="rect" id="node8" href="mpps.html" target="_top" title="mpps" alt="" coords="324,1073,440,1161">
+<area shape="rect" id="node9" href="mwl_item.html" target="_top" title="mwl_item" alt="" coords="1560,432,1705,520">
+<area shape="rect" id="node10" href="patient.html" target="_top" title="patient" alt="" coords="319,577,445,665">
+<area shape="rect" id="node11" href="person_name.html" target="_top" title="person_name" alt="" coords="5,177,183,265">
+<area shape="rect" id="node12" href="operators_name.html" target="_top" title="operators_name" alt="" coords="1012,141,1209,229">
+<area shape="rect" id="node13" href="performing_physician_name.html" target="_top" title="performing_physician_name" alt="" coords="965,246,1256,334">
+<area shape="rect" id="node14" href="role_bindings.html" target="_top" title="role_bindings" alt="" coords="581,1233,759,1321">
+<area shape="rect" id="node15" href="roles.html" target="_top" title="roles" alt="" coords="327,1250,437,1338">
+<area shape="rect" id="node17" href="series_request_attributes.html" target="_top" title="series_request_attributes" alt="" coords="977,352,1245,440">
+<area shape="rect" id="node18" href="study_label.html" target="_top" title="study_label" alt="" coords="301,1392,463,1480">
+<area shape="rect" id="node19" href="ups_global_subscription.html" target="_top" title="ups_global_subscription" alt="" coords="251,1497,513,1585">
+<area shape="rect" id="node20" href="ups_subscription.html" target="_top" title="ups_subscription" alt="" coords="279,1602,485,1690">
+<area shape="rect" id="node21" href="ups_work_item.html" target="_top" title="ups_work_item" alt="" coords="1538,642,1727,730">
+<area shape="rect" id="node22" href="verifying_observer_sq.html" target="_top" title="verifying_observer_sq" alt="" coords="1511,326,1755,414">
 </map>
-                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/Instance.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/instance.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="oneimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagramImplied" name="oneDegreeRelationshipsDiagramImplied">
-<area shape="rect" id="node1" href="DicomCode.html" target="_top" title="DicomCode" alt="" coords="988,5,1199,328">
-<area shape="rect" id="node2" href="DicomContentSQ.html" target="_top" title="DicomContentSQ" alt="" coords="724,277,929,483">
-<area shape="rect" id="node3" href="Instance.html" target="_top" title="Instance" alt="" coords="381,23,665,620">
-<area shape="rect" id="node4" href="VerifyingObserverSQ.html" target="_top" title="VerifyingObserverSQ" alt="" coords="709,84,944,260">
-<area shape="rect" id="node5" href="Study.html" target="_top" title="Study" alt="" coords="5,27,149,203">
-<area shape="rect" id="node6" href="Series.html" target="_top" title="Series" alt="" coords="193,123,337,269">
+<area shape="rect" id="node1" href="dicom_code.html" target="_top" title="dicom_code" alt="" coords="733,104,908,339">
+<area shape="rect" id="node2" href="instance.html" target="_top" title="instance" alt="" coords="412,219,689,992">
+<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="224,860,368,1183">
+<area shape="rect" id="node5" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="5,911,180,1087">
+<area shape="rect" id="node3" href="dicom_content_sq.html" target="_top" title="dicom_content_sq" alt="" coords="967,5,1181,211">
+<area shape="rect" id="node6" href="verifying_observer_sq.html" target="_top" title="verifying_observer_sq" alt="" coords="952,228,1196,433">
 </map>
-                                        <a name='diagram'><img id="oneimpliedDegreeImg" src="../diagrams/tables/Instance.implied1degrees.png" usemap="#oneDegreeRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="oneimpliedDegreeImg" src="../diagrams/tables/instance.implied1degrees.png" usemap="#oneDegreeRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twoimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagramImplied" name="twoDegreesRelationshipsDiagramImplied">
-<area shape="rect" id="node1" href="DicomCode.html" target="_top" title="DicomCode" alt="" coords="1347,124,1508,212">
-<area shape="rect" id="node2" href="DicomContentSQ.html" target="_top" title="DicomContentSQ" alt="" coords="1083,124,1288,212">
-<area shape="rect" id="node3" href="Instance.html" target="_top" title="Instance" alt="" coords="740,34,1024,631">
-<area shape="rect" id="node4" href="VerifyingObserverSQ.html" target="_top" title="VerifyingObserverSQ" alt="" coords="1068,19,1303,107">
-<area shape="rect" id="node5" href="Study.html" target="_top" title="Study" alt="" coords="393,634,523,722">
-<area shape="rect" id="node6" href="Series.html" target="_top" title="Series" alt="" coords="567,686,696,774">
-<area shape="rect" id="node8" href="PersonName.html" target="_top" title="PersonName" alt="" coords="5,699,176,787">
-<area shape="rect" id="node9" href="Patient.html" target="_top" title="Patient" alt="" coords="220,631,349,719">
-<area shape="rect" id="node7" href="OperatorsName.html" target="_top" title="OperatorsName" alt="" coords="785,754,979,842">
-<area shape="rect" id="node10" href="PerformingPhysicianName.html" target="_top" title="PerformingPhysicianName" alt="" coords="744,859,1020,947">
-<area shape="rect" id="node11" href="SeriesRequestAttributes.html" target="_top" title="SeriesRequestAttributes" alt="" coords="752,648,1012,736">
+<area shape="rect" id="node1" href="dicom_bulk_data.html" target="_top" title="dicom_bulk_data" alt="" coords="280,1418,484,1506">
+<area shape="rect" id="node2" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="12,995,176,1083">
+<area shape="rect" id="node3" href="dicom_code.html" target="_top" title="dicom_code" alt="" coords="1300,203,1467,291">
+<area shape="rect" id="node4" href="instance.html" target="_top" title="instance" alt="" coords="972,591,1249,1364">
+<area shape="rect" id="node7" href="series.html" target="_top" title="series" alt="" coords="803,426,921,514">
+<area shape="rect" id="node5" href="dicom_content_sq.html" target="_top" title="dicom_content_sq" alt="" coords="1525,236,1740,324">
+<area shape="rect" id="node6" href="dicom_instance_delete_reason.html" target="_top" title="dicom_instance_delete_reason" alt="" coords="227,1523,537,1611">
+<area shape="rect" id="node16" href="study.html" target="_top" title="study" alt="" coords="612,364,728,452">
+<area shape="rect" id="node8" href="mpps.html" target="_top" title="mpps" alt="" coords="324,1628,440,1716">
+<area shape="rect" id="node9" href="mwl_item.html" target="_top" title="mwl_item" alt="" coords="1560,342,1705,430">
+<area shape="rect" id="node10" href="patient.html" target="_top" title="patient" alt="" coords="319,275,445,363">
+<area shape="rect" id="node11" href="person_name.html" target="_top" title="person_name" alt="" coords="5,94,183,182">
+<area shape="rect" id="node12" href="operators_name.html" target="_top" title="operators_name" alt="" coords="1012,239,1209,327">
+<area shape="rect" id="node13" href="performing_physician_name.html" target="_top" title="performing_physician_name" alt="" coords="965,344,1256,432">
+<area shape="rect" id="node14" href="role_bindings.html" target="_top" title="role_bindings" alt="" coords="581,906,759,994">
+<area shape="rect" id="node15" href="roles.html" target="_top" title="roles" alt="" coords="327,819,437,907">
+<area shape="rect" id="node17" href="series_request_attributes.html" target="_top" title="series_request_attributes" alt="" coords="977,450,1245,538">
+<area shape="rect" id="node18" href="study_label.html" target="_top" title="study_label" alt="" coords="301,924,463,1012">
+<area shape="rect" id="node19" href="ups_global_subscription.html" target="_top" title="ups_global_subscription" alt="" coords="251,1066,513,1154">
+<area shape="rect" id="node20" href="ups_subscription.html" target="_top" title="ups_subscription" alt="" coords="279,1171,485,1259">
+<area shape="rect" id="node21" href="ups_work_item.html" target="_top" title="ups_work_item" alt="" coords="1538,131,1727,219">
+<area shape="rect" id="node22" href="user_config.html" target="_top" title="user_config" alt="" coords="300,1276,464,1364">
+<area shape="rect" id="node23" href="verifying_observer_sq.html" target="_top" title="verifying_observer_sq" alt="" coords="1511,26,1755,114">
 </map>
-                                        <a name='diagram'><img id="twoimpliedDegreeImg" src="../diagrams/tables/Instance.implied2degrees.png" usemap="#twoDegreesRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="twoimpliedDegreeImg" src="../diagrams/tables/instance.implied2degrees.png" usemap="#twoDegreesRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>
                                 </div>
                             </div>

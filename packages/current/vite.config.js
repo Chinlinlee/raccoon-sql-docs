@@ -57,6 +57,10 @@ const config = defineConfig({
                   to: "/guide/developer/how-to-test/"
                 },
                 {
+                  title: "如何發布新版本",
+                  to: "/guide/developer/how-to-release/"
+                },
+                {
                   title: "影像處理相關",
                   to: "/guide/developer/image-processing/"
                 },
@@ -77,7 +81,7 @@ const config = defineConfig({
                   to: "/guide/developer/swagger/"
                 },
                 {
-                  title: "SQL",
+                  title: "SQL & Migration",
                   to: "/guide/developer/sql/"
                 },
                 {
@@ -112,7 +116,19 @@ const config = defineConfig({
                 },
                 {
                   title: "statistics",
-                  to: "/guide/plugin-list/statistics"
+                  to: "/guide/plugin-list/statistics/"
+                },
+                {
+                  title: "DICOMDIR",
+                  to: "/guide/plugin-list/dicomdir/"
+                },
+                {
+                  title: "HL7 Server",
+                  to: "/guide/plugin-list/hl7-server/"
+                },
+                {
+                  title: "Asus Web Storage 華碩雲端",
+                  to: "/guide/plugin-list/asus-web-storage/"
                 }
               ]
             },
@@ -120,6 +136,10 @@ const config = defineConfig({
               title: "其他",
               collapsible: true,
               items: [
+                {
+                  title: "v2 to v3 資料庫遷移",
+                  to: "/guide/other/v2-to-v3-database-migration/"
+                },
                 {
                   title: "nginx 相關設定",
                   to: "/guide/other/nginx/"

@@ -48,7 +48,30 @@ sudo chmod u+x ./node_modules/7zip-bin/linux/x64/7za
 
 
 ### 運行測試
+:::warning[注意事項]
+在測試前，務必將 plugins 的 config 內所有 enable 改為 false，避免出現測試失敗的問題，尤其是驗證相關的 plugin
+:::
 - 輸入以下指令運行測試
 ```
 npm run test
 ```
+
+### 產生 mochawesome
+- raccoon 有使用到 [mochawesome](https://www.npmjs.com/package/mochawesome)，產生測試內容的報告
+- 輸入以下指令運行測試並產生 mochawesome 的報告
+```
+npm run test:report
+```
+
+- 產生的報告會在 `./mochawesome-report` 資料夾
+
+### 產生 coverage
+- raccoon 有使用到 [nyc](https://www.npmjs.com/package/nyc)，產生 coverage 的報告
+- 輸入以下指令產生 coverage
+```
+npm run test:coverage
+```
+
+- 產生的報告會在 `./coverage` 資料夾
+
+

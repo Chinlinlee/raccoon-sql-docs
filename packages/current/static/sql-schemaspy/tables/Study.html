@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Study - raccoon.public</title>
+        <title>study - raccoon.public</title>
         <!-- Tell the browser to be responsive to screen width -->
         <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
         <link rel="icon" type="image/png" sizes="16x16" href="../favicon.png">
@@ -73,7 +73,7 @@
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
                 <section class="content-header">
-                    <h1>Study</h1><p><span id="recordNumber">4</span> rows</p><br />
+                    <h1>study</h1><p><span id="recordNumber">-1</span> rows</p><br />
                 </section>
                 <!-- Main content -->
                 <section class="content">
@@ -109,6 +109,28 @@
                                 </thead>
                                 <tbody>
                                 <tr>
+                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="id">id</span></td>
+                                    <td>serial</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title='Automatically updated by the database'>√</td>
+                                    <td>nextval(&#39;study_id_seq&#39;::regclass)</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="series.study_id references study.id via series_study_id_fkey"><a href='series.html'>series</a><span class='relatedKey'>.study_id</span></td>
+                                                <td class="constraint detail">series_study_id_fkey</td>
+                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
                                     <td><span id="studyPath">studyPath</span></td>
                                     <td>text</td>
                                     <td>2147483647</td>
@@ -126,9 +148,9 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="x00100020">x00100020</span></td>
+                                    <td><span id="x00100020">x00100020</span></td>
                                     <td>varchar</td>
-                                    <td>65</td>
+                                    <td>255</td>
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -138,18 +160,13 @@
                                     </td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="Study.x00100020 references Patient.x00100020 via Study_x00100020_fkey"><a href='Patient.html'>Patient</a><span class='relatedKey'>.x00100020</span></td>
-                                                <td class="constraint detail">Study_x00100020_fkey</td>
-                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
                                         </table>
                                     </td>
                                     <td></td>
                                 </tr>
                                 <tr>
                                     <td><span id="x00080005">x00080005</span></td>
-                                    <td>jsonb</td>
+                                    <td>text</td>
                                     <td>2147483647</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
@@ -184,7 +201,7 @@
                                 <tr>
                                     <td><span id="x00080030">x00080030</span></td>
                                     <td>numeric</td>
-                                    <td>0</td>
+                                    <td>12,6</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -201,7 +218,7 @@
                                 <tr>
                                     <td><span id="x00080050">x00080050</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -218,7 +235,7 @@
                                 <tr>
                                     <td><span id="x00080056">x00080056</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -246,8 +263,8 @@
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                             <tr>
-                                                <td title="Study.x00080090 references PersonName.id via Study_x00080090_fkey"><a href='PersonName.html'>PersonName</a><span class='relatedKey'>.id</span></td>
-                                                <td class="constraint detail">Study_x00080090_fkey</td>
+                                                <td title="study.x00080090 references person_name.id via study_x00080090_fkey"><a href='person_name.html'>person_name</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">study_x00080090_fkey</td>
                                                 <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
                                             </tr>
                                         </table>
@@ -257,7 +274,7 @@
                                 <tr>
                                     <td><span id="x00080201">x00080201</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -272,29 +289,14 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="x0020000D">x0020000D</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x0020000D">x0020000D</span></td>
                                     <td>varchar</td>
-                                    <td>65</td>
+                                    <td>255</td>
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
-                                            <tr>
-                                                <td title="Instance.x0020000D&#39;s name implies that it&#39;s a child of Study.x0020000D, but it doesn&#39;t reference that column."><a href='Instance.html'>Instance</a><span class='relatedKey'>.x0020000D</span></td>
-                                                <td class="constraint detail">Implied Constraint</td>
-                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td title="Series.x0020000D references Study.x0020000D via Series_x0020000D_fkey"><a href='Series.html'>Series</a><span class='relatedKey'>.x0020000D</span></td>
-                                                <td class="constraint detail">Series_x0020000D_fkey</td>
-                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td title="SeriesRequestAttributes.x0020000D&#39;s name implies that it&#39;s a child of Study.x0020000D, but it doesn&#39;t reference that column."><a href='SeriesRequestAttributes.html'>SeriesRequestAttributes</a><span class='relatedKey'>.x0020000D</span></td>
-                                                <td class="constraint detail">Implied Constraint</td>
-                                                <td class="constraint detail"><span title='Restrict delete:&#10;Parent cannot be deleted if children exist'>R</span></td>
-                                            </tr>
                                         </table>
                                     </td>
                                     <td>
@@ -304,9 +306,9 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td><span id="x00200010">x00200010</span></td>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="x00200010">x00200010</span></td>
                                     <td>varchar</td>
-                                    <td>17</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -323,7 +325,7 @@
                                 <tr>
                                     <td><span id="x00201206">x00201206</span></td>
                                     <td>varchar</td>
-                                    <td>13</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -340,7 +342,7 @@
                                 <tr>
                                     <td><span id="x00201208">x00201208</span></td>
                                     <td>varchar</td>
-                                    <td>13</td>
+                                    <td>255</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
                                     <td>null</td>
@@ -355,8 +357,25 @@
                                     <td></td>
                                 </tr>
                                 <tr>
+                                    <td><span id="x00081030">x00081030</span></td>
+                                    <td>varchar</td>
+                                    <td>255</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td><p>Study Description</p></td>
+                                </tr>
+                                <tr>
                                     <td><span id="json">json</span></td>
-                                    <td>jsonb</td>
+                                    <td>text</td>
                                     <td>2147483647</td>
                                     <td title='nullable'>√</td>
                                     <td title=''></td>
@@ -367,6 +386,67 @@
                                     </td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='indexedColumn' title='Indexed'><i class='fa fa-sitemap fa-rotate-120' style='padding-right: 5px;'></i><span id="deleteStatus">deleteStatus</span></td>
+                                    <td>int4</td>
+                                    <td>10</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>0</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="user_id">user_id</span></td>
+                                    <td>uuid</td>
+                                    <td>2147483647</td>
+                                    <td title='nullable'>√</td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="study.user_id references tenant_user.id via study_user_id_fkey"><a href='tenant_user.html'>tenant_user</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">study_user_id_fkey</td>
+                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td class='foreignKey' title='Foreign Key'><i class='icon ion-key iconkey' style='padding-left: 5px;'></i><span id="patient_id">patient_id</span></td>
+                                    <td>int4</td>
+                                    <td>10</td>
+                                    <td title=''></td>
+                                    <td title=''></td>
+                                    <td>null</td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                        </table>
+                                    </td>
+                                    <td>
+                                        <table border='0' cellspacing='0' cellpadding='0'>
+                                            <tr>
+                                                <td title="study.patient_id references patient.id via study_patient_id_fkey"><a href='patient.html'>patient</a><span class='relatedKey'>.id</span></td>
+                                                <td class="constraint detail">study_patient_id_fkey</td>
+                                                <td class="constraint detail"><span title='Cascade on delete:&#10;Deletion of parent deletes child'>C</span></td>
+                                            </tr>
                                         </table>
                                     </td>
                                     <td></td>
@@ -395,23 +475,6 @@
                                     <td title=''></td>
                                     <td title=''></td>
                                     <td>null</td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td>
-                                        <table border='0' cellspacing='0' cellpadding='0'>
-                                        </table>
-                                    </td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td><span id="deleteStatus">deleteStatus</span></td>
-                                    <td>int4</td>
-                                    <td>10</td>
-                                    <td title='nullable'>√</td>
-                                    <td title=''></td>
-                                    <td>0</td>
                                     <td>
                                         <table border='0' cellspacing='0' cellpadding='0'>
                                         </table>
@@ -453,10 +516,40 @@
                                 </thead>
                                 <tbody>
                                 <tr>
-                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> Study_pkey</td>
+                                    <td class='primaryKey' title='Primary Key'><i class='icon ion-key iconkey'></i> study_pkey</td>
                                     <td>Primary key</td>
                                     <td><span title='Ascending'>Asc</span></td>
+                                    <td>id</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>study_delete_status_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>deleteStatus</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>study_patient_id_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>patient_id</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>study_user_id_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>user_id</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>study_x0020000D_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
                                     <td>x0020000D</td>
+                                </tr>
+                                <tr>
+                                    <td title='Indexed'>study_x00200010_idx</td>
+                                    <td>Performance</td>
+                                    <td><span title='Ascending'>Asc</span></td>
+                                    <td>x00200010</td>
                                 </tr>
                                 </tbody>
                             </table>
@@ -483,53 +576,74 @@
                                 <div class="tab-content no-padding">
                                     <div class="chart tab-pane active" id="oneDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagram" name="oneDegreeRelationshipsDiagram">
-<area shape="rect" id="node1" href="Patient.html" target="_top" title="Patient" alt="" coords="220,5,349,181">
-<area shape="rect" id="node2" href="PersonName.html" target="_top" title="PersonName" alt="" coords="5,107,176,224">
-<area shape="rect" id="node3" href="Series.html" target="_top" title="Series" alt="" coords="717,277,861,424">
-<area shape="rect" id="node4" href="Study.html" target="_top" title="Study" alt="" coords="393,11,673,579">
+<area shape="rect" id="node1" href="patient.html" target="_top" title="patient" alt="" coords="227,355,371,619">
+<area shape="rect" id="node2" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="7,596,181,772">
+<area shape="rect" id="node3" href="person_name.html" target="_top" title="person_name" alt="" coords="5,332,183,449">
+<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="732,148,876,471">
+<area shape="rect" id="node5" href="study.html" target="_top" title="study" alt="" coords="415,5,688,691">
 </map>
-                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/Study.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="oneDegreeImg" src="../diagrams/tables/study.1degree.png" usemap="#oneDegreeRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twodegreesDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagram" name="twoDegreesRelationshipsDiagram">
-<area shape="rect" id="node1" href="Instance.html" target="_top" title="Instance" alt="" coords="975,354,1112,442">
-<area shape="rect" id="node2" href="Series.html" target="_top" title="Series" alt="" coords="717,322,861,469">
-<area shape="rect" id="node7" href="Study.html" target="_top" title="Study" alt="" coords="393,87,673,655">
-<area shape="rect" id="node3" href="OperatorsName.html" target="_top" title="OperatorsName" alt="" coords="947,82,1140,170">
-<area shape="rect" id="node4" href="PersonName.html" target="_top" title="PersonName" alt="" coords="5,125,176,213">
-<area shape="rect" id="node5" href="Patient.html" target="_top" title="Patient" alt="" coords="220,125,349,213">
-<area shape="rect" id="node6" href="PerformingPhysicianName.html" target="_top" title="PerformingPhysicianName" alt="" coords="905,593,1181,681">
-<area shape="rect" id="node8" href="SeriesRequestAttributes.html" target="_top" title="SeriesRequestAttributes" alt="" coords="913,249,1173,337">
-<area shape="rect" id="node9" href="VerifyingObserverSQ.html" target="_top" title="VerifyingObserverSQ" alt="" coords="1225,213,1460,301">
+<area shape="rect" id="node1" href="dicom_bulk_data.html" target="_top" title="dicom_bulk_data" alt="" coords="280,1213,484,1301">
+<area shape="rect" id="node2" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="12,1162,176,1250">
+<area shape="rect" id="node3" href="dicom_instance_delete_reason.html" target="_top" title="dicom_instance_delete_reason" alt="" coords="227,1601,537,1689">
+<area shape="rect" id="node4" href="instance.html" target="_top" title="instance" alt="" coords="1138,383,1275,471">
+<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="899,229,1017,317">
+<area shape="rect" id="node14" href="study.html" target="_top" title="study" alt="" coords="581,158,855,843">
+<area shape="rect" id="node6" href="mpps.html" target="_top" title="mpps" alt="" coords="324,930,440,1018">
+<area shape="rect" id="node7" href="mwl_item.html" target="_top" title="mwl_item" alt="" coords="645,966,791,1054">
+<area shape="rect" id="node8" href="patient.html" target="_top" title="patient" alt="" coords="319,753,445,841">
+<area shape="rect" id="node9" href="person_name.html" target="_top" title="person_name" alt="" coords="5,401,183,489">
+<area shape="rect" id="node10" href="operators_name.html" target="_top" title="operators_name" alt="" coords="1108,173,1305,261">
+<area shape="rect" id="node11" href="performing_physician_name.html" target="_top" title="performing_physician_name" alt="" coords="1061,67,1352,155">
+<area shape="rect" id="node12" href="role_bindings.html" target="_top" title="role_bindings" alt="" coords="629,1617,807,1705">
+<area shape="rect" id="node13" href="roles.html" target="_top" title="roles" alt="" coords="327,1706,437,1794">
+<area shape="rect" id="node15" href="series_request_attributes.html" target="_top" title="series_request_attributes" alt="" coords="1073,278,1341,366">
+<area shape="rect" id="node16" href="study_label.html" target="_top" title="study_label" alt="" coords="301,1107,463,1195">
+<area shape="rect" id="node17" href="ups_global_subscription.html" target="_top" title="ups_global_subscription" alt="" coords="251,1459,513,1547">
+<area shape="rect" id="node18" href="ups_subscription.html" target="_top" title="ups_subscription" alt="" coords="279,1354,485,1442">
+<area shape="rect" id="node19" href="ups_work_item.html" target="_top" title="ups_work_item" alt="" coords="623,861,813,949">
+<area shape="rect" id="node20" href="verifying_observer_sq.html" target="_top" title="verifying_observer_sq" alt="" coords="1396,189,1640,277">
 </map>
-                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/Study.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="twodegreesDegreeImg" src="../diagrams/tables/study.2degrees.png" usemap="#twoDegreesRelationshipsDiagram" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="oneimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="oneDegreeRelationshipsDiagramImplied" name="oneDegreeRelationshipsDiagramImplied">
-<area shape="rect" id="node1" href="Instance.html" target="_top" title="Instance" alt="" coords="961,181,1109,357">
-<area shape="rect" id="node2" href="Study.html" target="_top" title="Study" alt="" coords="393,11,673,579">
-<area shape="rect" id="node3" href="Series.html" target="_top" title="Series" alt="" coords="717,277,861,424">
-<area shape="rect" id="node4" href="Patient.html" target="_top" title="Patient" alt="" coords="220,5,349,181">
-<area shape="rect" id="node5" href="PersonName.html" target="_top" title="PersonName" alt="" coords="5,107,176,224">
-<area shape="rect" id="node6" href="SeriesRequestAttributes.html" target="_top" title="SeriesRequestAttributes" alt="" coords="905,375,1165,551">
+<area shape="rect" id="node1" href="patient.html" target="_top" title="patient" alt="" coords="227,355,371,619">
+<area shape="rect" id="node2" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="7,596,181,772">
+<area shape="rect" id="node3" href="person_name.html" target="_top" title="person_name" alt="" coords="5,332,183,449">
+<area shape="rect" id="node4" href="series.html" target="_top" title="series" alt="" coords="732,148,876,471">
+<area shape="rect" id="node5" href="study.html" target="_top" title="study" alt="" coords="415,5,688,691">
 </map>
-                                        <a name='diagram'><img id="oneimpliedDegreeImg" src="../diagrams/tables/Study.implied1degrees.png" usemap="#oneDegreeRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="oneimpliedDegreeImg" src="../diagrams/tables/study.implied1degrees.png" usemap="#oneDegreeRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>
                                     <div class="chart tab-pane " id="twoimpliedDegreeImg-chart" style="position: relative; overflow-x:auto;">
                                         <map id="twoDegreesRelationshipsDiagramImplied" name="twoDegreesRelationshipsDiagramImplied">
-<area shape="rect" id="node1" href="DicomCode.html" target="_top" title="DicomCode" alt="" coords="1489,248,1651,336">
-<area shape="rect" id="node2" href="DicomContentSQ.html" target="_top" title="DicomContentSQ" alt="" coords="1225,248,1431,336">
-<area shape="rect" id="node3" href="Instance.html" target="_top" title="Instance" alt="" coords="960,284,1097,372">
-<area shape="rect" id="node4" href="VerifyingObserverSQ.html" target="_top" title="VerifyingObserverSQ" alt="" coords="1211,143,1445,231">
-<area shape="rect" id="node5" href="Study.html" target="_top" title="Study" alt="" coords="393,32,673,600">
-<area shape="rect" id="node6" href="Series.html" target="_top" title="Series" alt="" coords="717,391,847,479">
-<area shape="rect" id="node8" href="PersonName.html" target="_top" title="PersonName" alt="" coords="5,245,176,333">
-<area shape="rect" id="node9" href="Patient.html" target="_top" title="Patient" alt="" coords="220,121,349,209">
-<area shape="rect" id="node7" href="OperatorsName.html" target="_top" title="OperatorsName" alt="" coords="932,499,1125,587">
-<area shape="rect" id="node10" href="PerformingPhysicianName.html" target="_top" title="PerformingPhysicianName" alt="" coords="891,612,1167,700">
-<area shape="rect" id="node11" href="SeriesRequestAttributes.html" target="_top" title="SeriesRequestAttributes" alt="" coords="899,389,1159,477">
+<area shape="rect" id="node1" href="dicom_bulk_data.html" target="_top" title="dicom_bulk_data" alt="" coords="280,714,484,802">
+<area shape="rect" id="node2" href="tenant_user.html" target="_top" title="tenant_user" alt="" coords="12,1031,176,1119">
+<area shape="rect" id="node3" href="dicom_instance_delete_reason.html" target="_top" title="dicom_instance_delete_reason" alt="" coords="227,819,537,907">
+<area shape="rect" id="node4" href="instance.html" target="_top" title="instance" alt="" coords="1138,383,1275,471">
+<area shape="rect" id="node5" href="series.html" target="_top" title="series" alt="" coords="899,273,1017,361">
+<area shape="rect" id="node14" href="study.html" target="_top" title="study" alt="" coords="581,258,855,943">
+<area shape="rect" id="node6" href="mpps.html" target="_top" title="mpps" alt="" coords="324,1349,440,1437">
+<area shape="rect" id="node7" href="mwl_item.html" target="_top" title="mwl_item" alt="" coords="645,961,791,1049">
+<area shape="rect" id="node8" href="patient.html" target="_top" title="patient" alt="" coords="319,537,445,625">
+<area shape="rect" id="node9" href="person_name.html" target="_top" title="person_name" alt="" coords="5,155,183,243">
+<area shape="rect" id="node10" href="operators_name.html" target="_top" title="operators_name" alt="" coords="1108,67,1305,155">
+<area shape="rect" id="node11" href="performing_physician_name.html" target="_top" title="performing_physician_name" alt="" coords="1061,173,1352,261">
+<area shape="rect" id="node12" href="role_bindings.html" target="_top" title="role_bindings" alt="" coords="629,1119,807,1207">
+<area shape="rect" id="node13" href="roles.html" target="_top" title="roles" alt="" coords="327,1138,437,1226">
+<area shape="rect" id="node15" href="series_request_attributes.html" target="_top" title="series_request_attributes" alt="" coords="1073,278,1341,366">
+<area shape="rect" id="node16" href="study_label.html" target="_top" title="study_label" alt="" coords="301,1595,463,1683">
+<area shape="rect" id="node17" href="ups_global_subscription.html" target="_top" title="ups_global_subscription" alt="" coords="251,1243,513,1331">
+<area shape="rect" id="node18" href="ups_subscription.html" target="_top" title="ups_subscription" alt="" coords="279,925,485,1013">
+<area shape="rect" id="node19" href="ups_work_item.html" target="_top" title="ups_work_item" alt="" coords="623,153,813,241">
+<area shape="rect" id="node20" href="user_config.html" target="_top" title="user_config" alt="" coords="300,1490,464,1578">
+<area shape="rect" id="node21" href="verifying_observer_sq.html" target="_top" title="verifying_observer_sq" alt="" coords="1396,189,1640,277">
 </map>
-                                        <a name='diagram'><img id="twoimpliedDegreeImg" src="../diagrams/tables/Study.implied2degrees.png" usemap="#twoDegreesRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
+                                        <a name='diagram'><img id="twoimpliedDegreeImg" src="../diagrams/tables/study.implied2degrees.png" usemap="#twoDegreesRelationshipsDiagramImplied" class="diagram" border="0" align="left"></a>
                                     </div>
                                 </div>
                             </div>
