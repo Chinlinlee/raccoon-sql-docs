@@ -820,7 +820,7 @@ node server.js
 - 請確保一開始的檔案目錄結構長這樣，也就是在raccoon專案的上一層
 ```bash
 .
-└───raccoon-dicom
+└───📁raccoon-dicom
 ```
 - 複製 raccoon-dicom 裡的`docker-compose.fluent.example.yaml`到當前檔案目錄並命名為`docker-compose.yaml`
 - 其內容如下
@@ -913,9 +913,9 @@ services:
 - 複製後的檔案目錄應該長這樣
 ```bash
 .
-│   docker-compose.yaml
+│   📃docker-compose.yaml
 │
-└───raccoon-dicom
+└───📁raccoon-dicom
 ```
 
 
@@ -924,10 +924,10 @@ services:
 - 創建後，檔案目錄如下
 ```bash
 .
-│   .env
-│   docker-compose.yaml
+│   📃.env
+│   📃docker-compose.yaml
 │
-└───raccoon-dicom
+└───📁raccoon-dicom
 ```
 - 內容輸入如下
 :::important[注意事項]
@@ -944,11 +944,11 @@ FLUENT_MONGODB_PASSWORD=root
 - 複製後，檔案目錄如下
 ```sh
 .
-│   .env
-│   docker-compose.yaml
-│   raccoon.env
+│   📃.env
+│   📃docker-compose.yaml
+│   📃raccoon.env
 │
-└───raccoon-dicom
+└───📁raccoon-dicom
 ```
 - 修改 `raccoon.env` 檔案，原先的檔案沒有`FLUENT_MONGODB_USER`以及`FLUENT_MONGODB_PASSWORD`，請務必自行加入這兩個設定，其餘設定請按照自己的需求修改
 ```sh
@@ -963,12 +963,12 @@ FLUENT_MONGODB_PASSWORD=root
 - 複製後，檔案目錄如下
 ```sh
 .
-│   .env
-│   docker-compose.yaml
-│   raccoon-plugins.config.js
-│   raccoon.env
+│   📃.env
+│   📃docker-compose.yaml
+│   📃raccoon-plugins.config.js
+│   📃raccoon.env
 │
-└───raccoon-dicom
+└───📁raccoon-dicom
 ```
 - 請依照自己的需求修改 `raccoon-plugins.config.js` 檔案
 
