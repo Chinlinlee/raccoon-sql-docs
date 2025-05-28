@@ -919,7 +919,7 @@ FLUENT_MONGODB_PASSWORD=root
 ```
 
 ## 設定 raccoon-plugins.config.js
-- 複製`raccoon-dicom/plugins/config.example.js` 到當前目錄，並命名為`raccoon-plugins.config.js`
+- 複製`raccoon-dicom/plugins/config.template.js` 到當前目錄，並命名為`raccoon-plugins.config.js`
 - 複製後，檔案目錄如下
 ```sh
 .
