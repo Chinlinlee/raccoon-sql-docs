@@ -137,9 +137,13 @@ npm i
 
 dcm4che 使用 opencv 作為影像處理的接口，所以你必須將 opencv 的依賴放入 Java JDK 的 lib 資料夾當中
 
-請複製 `libclib_jiio.so` 以及 `libopencv_java.so` 至 Java JDK 的 lib 資料夾當中，正常路徑為 `/usr/lib/jvm/default-java/lib`
+請複製 `models/dcm4che/lib/linux-x86-64` 資料夾中的 `libclib_jiio.so` 以及 `libopencv_java.so` 至 Java JDK 的 lib 資料夾當中，正常路徑為 `/usr/lib/jvm/default-java/lib`
 
 若你找不到你的 Java JDK lib 的路徑，可以嘗試運行 `readlink -f $(which javac)` 指令來知道 bin 的位置，通常 lib 資料夾會與 bin 在相同目錄下
+
+:::tip[Windows]
+如果你使用 Windows 系統，請複製 `models/dcm4che/lib/windows-x86-64` 資料夾中的 `opencv_java.dll` 至 Java JDK 的 **bin** 資料夾當中，正常路徑為 `C:\Program Files\Java\jdk-17\bin`
+:::
 
 ## 設定
 
