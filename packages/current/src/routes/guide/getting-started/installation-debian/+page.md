@@ -480,6 +480,36 @@ alt="mongodb installation check"
 title="mongodb installation check">
 </CenterImage>
 
+#### 創建使用者
+
+為了後續使用，在 MongoDB 中我們需要創建一個使用者
+
+1. 延續上一節進到 mongosh 中的步驟，輸入以下指令進入 admin 資料庫
+
+```javascript
+use admin;
+```
+
+2. 輸入以下指令創建使用者
+
+```javascript
+db.createUser({
+    user: "root",
+    pwd: "root",
+    roles: [
+        {
+            role: "root",
+            db: "admin"
+        }
+    ]
+});
+```
+
+創建成功你會看到以下訊息
+```javascript
+{ ok: 1 }
+```
+
 ### 安裝 Fluentd
 
 1. 首先，更新你的套件索引：
@@ -574,7 +604,7 @@ sudo fluentd --setup /etc/fluent
       @type mongo
       collection ${tag[1]}-log
       # 請將連接字串改成自己的 mongodb 連接字串
-      connection_string mongodb://root:root@fluentd-mongo:27017/raccoon-logs?authSource=admin
+      connection_string mongodb://root:root@127.0.0.1:27017/raccoon-logs?authSource=admin
       
       <buffer tag,time>
         timekey        1
@@ -659,7 +689,7 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
 ./kcadm.sh update realms/master -s sslRequired=NONE --server http://localhost:8080
 ```
 
-- 若有創建新的 realm，請記得再執行一次，其中 realms/master 的 master，需要替換為你的 realm 的名稱
+- 若有創建新的 realm，請記得再執行一次，其中 `realms/master` 的 `master`，需要替換為你的 realm 的名稱
 
 ### 創建 Realm
 首先，我們必須創建一個 Realm，通常我們不太建議與 `Master` 共用，因為這樣安全性相對較低
@@ -707,7 +737,7 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
     alt="Keycloak User Set Password Page"
 />
 
-### ❗新增 Client scope
+### 新增 Client scope
 - 來源：https://keycloak.discourse.group/t/issue-on-userinfo-endpoint-at-keycloak-20/18461/7
 :::important[注意事項]
 你必須進行此步驟，新版必須要自行加入 openid 的 scope 才能使用
@@ -725,7 +755,45 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
     alt="Keycloak Create Client Scope Step 2"
 />
 
-#### 為 Client 加入 Client scope
+### 新增 Client
+
+- 選擇左邊 `Clients` 並點擊 `Create client`
+
+<CenterImage 
+    src="{base}/getting-started/installation/keycloak-create-client-1.png"
+    title="Keycloak Create Client Step 1"
+    alt="Keycloak Create Client Step 1"
+/>
+
+- Client ID 填入 raccoon -> 點擊 Next
+
+<CenterImage 
+    src="{base}/getting-started/installation/keycloak-create-client-2.png"
+    title="Keycloak Create Client Step 2"
+    alt="Keycloak Create Client Step 2"
+/>
+
+- 將 `Client authentication` 啟用 -> 點擊 Next
+
+<CenterImage 
+    src="{base}/getting-started/installation/keycloak-create-client-3.png"
+    title="Keycloak Create Client Step 3"
+    alt="Keycloak Create Client Step 3"
+/>
+
+- `Valid redirect URIs` 填入 `*` -> `Valid post logout redirect URIs` 填入 `*` -> `Web Origins` 填入 `*` -> 點擊 Save
+
+:::note[筆記]
+這裡的設定填入 `*` 是為了方便測試，在生產環境使用上建議填入自己的 URI
+:::
+
+<CenterImage 
+    src="{base}/getting-started/installation/keycloak-create-client-4.png"
+    title="Keycloak Create Client Step 4"
+    alt="Keycloak Create Client Step 4"
+/>
+
+### 為 Client 加入 Client scope
 - 選擇左邊 `Clients` 並選擇要加入 scope 的 Client 名稱 (這裡以 account 為例)
 <CenterImage
     src="{base}/getting-started/installation/keycloak-add-scope-for-client-step1.png"
@@ -745,68 +813,27 @@ export KEYCLOAK_ADMIN_PASSWORD="test"
     alt="Keycloak Add Scope For Client Step 3"
 />
 
-### 將 realm_access 的資訊暴露到 token
-- 在驗證是否是 admin 時，我們會需要 `realm_access` 這個欄位
-- 我們可以透過開啟 `Full scope allowed` 以便我們可以看到所有欄位
+### 查看 Client Secret
 
-#### 只暴露 realm_access
-:::important[注意事項]
-請使用自己創建的 client，不要使用內建的 client
+- 左邊選擇 `Clients` -> 選擇剛剛創建的 Client (這裡是 `raccoon`)
+
+<CenterImage 
+    src="{base}/getting-started/installation/keycloak-view-client-secret-1.png"
+    title="Keycloak View Client Secret"
+    alt="Keycloak View Client Secret"
+/>
+
+- 上方 Tab 選擇 `Credentials`，即可看到 Client Secret
+
+:::note[筆記]
+若你架設的 keycloak 沒有 https，請先點擊眼睛圖示，手動複製 secret
 :::
-1. 點擊左邊 `Clients` -> 點擊自己創建的 Client (這裡是 `raccoon`)
-<CenterImage
-    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step1.png"
-    title="Keycloak Expose Roles in Token Step 1"
-    alt="Keycloak Expose Roles in Token Step 1"
+
+<CenterImage 
+    src="{base}/getting-started/installation/keycloak-view-client-secret-2.png"
+    title="Keycloak View Client Secret"
+    alt="Keycloak View Client Secret"
 />
-
-2. 點擊 `Client scopes` -> 點擊 `raccoon-dedicated`
-<CenterImage
-    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step2.png"
-    title="Keycloak Expose Roles in Token Step 2"
-    alt="Keycloak Expose Roles in Token Step 2"
-/>
-
-3. 點擊 `Add mapper` 並打勾 -> 點擊 `Add`
-<CenterImage
-    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step3.png"
-    title="Keycloak Expose Roles in Token Step 3"
-    alt="Keycloak Expose Roles in Token Step 3"
-/>
-
-4. 找到 `realm roles` 打勾 -> 點擊 `Add`
-<CenterImage
-    src="{base}/getting-started/installation/keycloak-add-realm-access-client-step4.png"
-    title="Keycloak Expose Roles in Token Step 4"
-    alt="Keycloak Expose Roles in Token Step 4"
-/>
-
-#### 暴力法 (將所有 scope 暴露)
-1. 點擊左邊 `Clients` -> 點擊 `account`
-<CenterImage
-    src="{base}/getting-started/installation/keycloak-token-expose-roles-1.png"
-    title="Keycloak Expose All Scopes in Token Step 1"
-    alt="Keycloak Expose All Scopes in Token Step 1"
-/>
-
-2. 點擊 `Clients scopes` -> 點擊 `account-dedicated`
-<CenterImage
-    src="{base}/getting-started/installation/keycloak-token-expose-roles-2.png"
-    title="Keycloak Expose All Scopes in Token Step 2"
-    alt="Keycloak Expose All Scopes in Token Step 2"
-/>
-
-3. 點擊 `Scope` -> 將 `Full scope allowed` 開啟
-<CenterImage
-    src="{base}/getting-started/installation/keycloak-token-expose-roles-3.png"
-    title="Keycloak Expose All Scopes in Token Step 3"
-    alt="Keycloak Expose All Scopes in Token Step 3"
-/>
-
-
-
-### Keycloak 常用的 API endpoint
-- 來源: https://www.keycloak.org/docs/latest/securing_apps/#available-endpoints
 
 ## 部署
 
@@ -1212,3 +1239,35 @@ host all all 0.0.0.0/0 scarm-sha-256
 - 您可以設定 `ENABLE_DIMSE=true` 以啟動 DICOM DIMSE 服務
 - Raccoon-dicom 將會為 DIMSE 服務自動產生 `logback.xml` 設定檔以進行日誌記錄的動作
 - Raccoon-dicom 的 DIMSE 服務設定除了 `DIMSE_AE_TITLE`、`DIMSE_HOSTNAME` 和 `DIMSE_PORT` 之外，其餘大多與 DCM4CHE 相同，若有需要請參考 [dcm4che-tool-dcmqrscp / README.md](https://github.com/dcm4che/dcm4che/blob/master/dcm4che-tool/dcm4che-tool-dcmqrscp/README.md)
+
+
+### Keycloak
+
+#### 將預設 client 的 realm_access 的資訊暴露到 token
+- 在驗證是否是 admin 時，我們會需要 `realm_access` 這個欄位
+- 我們可以透過開啟 `Full scope allowed` 以便我們可以看到所有欄位
+
+1. 點擊左邊 `Clients` -> 點擊 `account`
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-token-expose-roles-1.png"
+    title="Keycloak Expose All Scopes in Token Step 1"
+    alt="Keycloak Expose All Scopes in Token Step 1"
+/>
+
+2. 點擊 `Clients scopes` -> 點擊 `account-dedicated`
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-token-expose-roles-2.png"
+    title="Keycloak Expose All Scopes in Token Step 2"
+    alt="Keycloak Expose All Scopes in Token Step 2"
+/>
+
+3. 點擊 `Scope` -> 將 `Full scope allowed` 開啟
+<CenterImage
+    src="{base}/getting-started/installation/keycloak-token-expose-roles-3.png"
+    title="Keycloak Expose All Scopes in Token Step 3"
+    alt="Keycloak Expose All Scopes in Token Step 3"
+/>
+
+#### Keycloak 常用的 API endpoint
+
+- 來源: https://www.keycloak.org/docs/latest/securing_apps/#available-endpoints
